@@ -8,10 +8,13 @@ import Signup from './components/signup.component';
 
 function App() {
   return (
-    <div>
-      <Signin />
-      <Signup />
-    </div>
+    <Router>
+      <div>
+        <Route path="/signin" exact component={Signin}/>
+        <Route path="/signup" component={Signup}/>
+        
+      </div>
+    </Router>
   );
 }
 

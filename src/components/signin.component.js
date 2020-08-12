@@ -26,9 +26,21 @@ export default class Signin extends Component {
                 <div className="form">
                     <h1 class="text--bold">Login</h1>
                     <h2 class="text--bold">Welcome back!</h2>
-                    <form action="">
-                        
+                    <form>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"/>
+                      </div>
+                      <div className="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                      </div>
                     </form>
+                    <Link to="/signup">Don't have an account?
+                    </Link>
 
                 </div>
 
