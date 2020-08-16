@@ -22,20 +22,20 @@ export default class Signin extends Component {
   constructor(props) {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
 
     this.state = {
-      username: "",
+      email: "",
       password: "",
       loading: false,
       message: ""
     };
   }
 
-  onChangeUsername(e) {
+  onChangeEmail(e) {
     this.setState({
-      username: e.target.value
+      email: e.target.value
     });
   }
 
@@ -56,7 +56,7 @@ export default class Signin extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
-      AuthService.login(this.state.username, this.state.password).then(
+      AuthService.login(this.state.email, this.state.password).then(
         () => {
           this.props.history.push("/profile");
           window.location.reload();
@@ -108,15 +108,15 @@ export default class Signin extends Component {
                     }}
                     >
                       <div class="form-group">
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="username">Email</label>
                         <Input 
-                          type="username" 
+                          type="email" 
                           class="form-control" 
-                          name="username" 
-                          aria-describedby="usernameHelp" 
-                          placeholder="username"
-                          value={this.state.username}
-                          onChange={this.onChangeUsername}
+                          name="email" 
+                          aria-describedby="emailHelp" 
+                          placeholder="email"
+                          value={this.state.email}
+                          onChange={this.onChangeEmail}
                           validations={[required]}
                         />
                       </div>

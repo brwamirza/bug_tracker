@@ -61,7 +61,8 @@ export default class Signup extends Component {
       email: "",
       password: "",
       successful: false,
-      message: ""
+      message: "",
+      roles: ["admin"]
     };
   }
 
@@ -97,7 +98,8 @@ export default class Signup extends Component {
       AuthService.register(
         this.state.username,
         this.state.email,
-        this.state.password
+        this.state.password,
+        this.state.roles
       ).then(
         response => {
           this.setState({
