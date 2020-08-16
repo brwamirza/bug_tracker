@@ -106,6 +106,8 @@ export default class Signup extends Component {
             message: response.data.message,
             successful: true
           });
+          this.props.history.push("/admin");
+          window.location.reload();
         },
         error => {
           const resMessage =
