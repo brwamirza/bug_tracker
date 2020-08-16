@@ -24,6 +24,25 @@ verifyToken = (req, res, next) => {
 };
 
 //to know if user is admin or not
+isSubmitter = (req, res, next) => {
+  User.findByPk(req.userId).then(user => {
+    user.getRoles().then(roles => {
+      for (let i = 0; i < roles.length; i++) {
+        if (roles[i].name === "submitter") {
+          next();
+          return;
+        }
+      }
+
+      res.status(403).send({
+        message: "Require submitter Role!"
+      });
+      return;
+    });
+  });
+};
+
+//to know if user is admin or not
 isAdmin = (req, res, next) => {
   User.findByPk(req.userId).then(user => {
     user.getRoles().then(roles => {
@@ -43,29 +62,47 @@ isAdmin = (req, res, next) => {
 };
 
 //to know if user is moderator or not
-isModerator = (req, res, next) => {
+isDeveloper = (req, res, next) => {
   User.findByPk(req.userId).then(user => {
     user.getRoles().then(roles => {
       for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "moderator") {
+        if (roles[i].name === "developer") {
           next();
           return;
         }
       }
 
       res.status(403).send({
-        message: "Require Moderator Role!"
+        message: "Require developer Role!"
+      });
+    });
+  });
+};
+
+//to know if user is moderator or not
+isProjectManager = (req, res, next) => {
+  User.findByPk(req.userId).then(user => {
+    user.getRoles().then(roles => {
+      for (let i = 0; i < roles.length; i++) {
+        if (roles[i].name === "projectManager") {
+          next();
+          return;
+        }
+      }
+
+      res.status(403).send({
+        message: "Require projectManager Role!"
       });
     });
   });
 };
 
 //to know if user is moderator or admin 
-isModeratorOrAdmin = (req, res, next) => {
+isProjectManagerOrAdmin = (req, res, next) => {
   User.findByPk(req.userId).then(user => {
     user.getRoles().then(roles => {
       for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "moderator") {
+        if (roles[i].name === "projectManager") {
           next();
           return;
         }
@@ -77,7 +114,7 @@ isModeratorOrAdmin = (req, res, next) => {
       }
 
       res.status(403).send({
-        message: "Require Moderator or Admin Role!"
+        message: "Require projectManager or Admin Role!"
       });
     });
   });
@@ -85,8 +122,10 @@ isModeratorOrAdmin = (req, res, next) => {
 
 const authJwt = {
   verifyToken: verifyToken,
+  isSubmitter: isSubmitter,
   isAdmin: isAdmin,
-  isModerator: isModerator,
-  isModeratorOrAdmin: isModeratorOrAdmin
+  isDeveloper: isDeveloper,
+  isProjectManager: isProjectManager,
+  isProjectManagerOrAdmin: isProjectManagerOrAdmin
 };
 module.exports = authJwt;

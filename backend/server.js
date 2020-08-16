@@ -4,11 +4,11 @@ const cors = require("cors");
 
 const app = express();
 
-var corsOptions = {
-  origin: "http://localhost:8081"
-};
+// var corsOptions = {
+//   origin: "http://localhost:8080"
+// };
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
@@ -45,16 +45,21 @@ app.listen(PORT, () => {
 function initial() {
     Role.create({
       id: 1,
-      name: "user"
+      name: "submitter"
     });
-   
+
     Role.create({
       id: 2,
-      name: "moderator"
+      name: "developer"
     });
    
     Role.create({
       id: 3,
+      name: "projectManager"
+    });
+   
+    Role.create({
+      id: 4,
       name: "admin"
     });
   }
