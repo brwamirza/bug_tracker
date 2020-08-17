@@ -11,8 +11,8 @@ function App() {
   return (
     <Router>
       <div>
-        <Route path={["/","/signin"]} exact component={Signin}/>
-        <Route path="/signup" component={Signup}/>
+        <Route exact path={["/","/signin"]} component={Signin}/>
+        <Route exact path="/signup" component={Signup}/>
         <Route path="/admin" component={Admin}/>
       </div>
     </Router>
