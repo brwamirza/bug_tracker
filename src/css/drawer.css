@@ -1,0 +1,30 @@
+.MuiTypography-h6{
+    font-size: 1.2em!important;
+    font-weight: normal!important;
+}
+
+.MuiAppBar-colorPrimary {
+    color: #000!important;
+    background-color: #fff!important;
+}
+
+.MuiDrawer-paperAnchorDockedLeft {
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 4px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)!important;
+}
+
+.MuiDrawer-paper {
+    top: 0;
+    flex: 1 0 auto;
+    height: 100%;
+    display: flex;
+    outline: 0;
+    z-index: 9!important;
+    position: fixed;
+    overflow-y: auto;
+    flex-direction: column;
+    -webkit-overflow-scrolling: touch;
+}
+#admin .MuiPaper-elevation4 {
+    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 4px 4px 5px 0px rgba(0,0,0,0.14), 10px 1px 10px 0px rgba(0,0,0,0.12);
+}

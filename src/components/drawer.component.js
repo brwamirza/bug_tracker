@@ -15,6 +15,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import  '../css/drawer.css'
 
 const drawerWidth = 240;
 
@@ -51,6 +52,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function ListItemLink(props) {
+  return <ListItem button component="a" {...props} />;
+}
+
 function ResponsiveDrawer(props) {
   const { window } = props;
   const classes = useStyles();
@@ -71,19 +76,12 @@ function ResponsiveDrawer(props) {
       
       <Divider />
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        {['Dashbord Home', 'Manage Role Assignment', 'Manage Project Users', 'My Projects','My Tickets'].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemLink href={"/"+text.replace(/\s+/g,'')}>
+              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemLink>
           </ListItem>
         ))}
       </List>
@@ -106,8 +104,8 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Responsive drawer
+          <Typography variant="h6" noWrap className="nav-text-left">
+            Logged in as: {props.role}
           </Typography>
         </Toolbar>
       </AppBar>

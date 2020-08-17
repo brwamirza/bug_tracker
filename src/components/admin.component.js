@@ -11,16 +11,18 @@ import AuthService from "../services/auth.service";
 export default class Admin extends Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
-      currentUser: AuthService.getCurrentUser()
+      currentUser: AuthService.getCurrentUser(),
+      userRole: AuthService.getCurrentUser().roles
     };
   }
 
   render() {
     return (
      <div id="admin">
-      <Drawer username={this.state.currentUser.username}/>
+      <Drawer username={this.state.currentUser.username} role={this.state.userRole}/>
+      <h1>hello</h1>
     </div>
     );
   }
