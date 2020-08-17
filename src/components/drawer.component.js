@@ -15,7 +15,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import AuthService from "../services/auth.service";
 import  '../css/drawer.css'
+
 
 const drawerWidth = 240;
 
@@ -56,6 +58,10 @@ function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
 }
 
+function logOut() {
+  AuthService.logout();
+}
+
 function ResponsiveDrawer(props) {
   const { window } = props;
   const classes = useStyles();
@@ -65,20 +71,21 @@ function ResponsiveDrawer(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  
 
   const drawer = (
     <div>
       <div className="d-flex align-items-center justify-content-center align-self-center" >
         <div className={classes.toolbar} >
-            <h6 style={{lineHeight: "70px" , marginBottom: "0"}} >WELCOME, {props.username}</h6>  
+            <h6 style={{lineHeight: "70px" , marginBottom: "0", fontWeight: 400}} >WELCOME, {props.username}</h6>  
         </div>
       </div>
       
       <Divider />
       <List>
-        {['Dashbord Home', 'Manage Role Assignment', 'Manage Project Users', 'My Projects','My Tickets'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemLink href={"/"+text.replace(/\s+/g,'')}>
+        {['Dashboard Home', 'Manage Role Assignment', 'Manage Project Users', 'My Projects','My Tickets'].map((text, index) => (
+          <ListItem button key={text} className="list-item">
+            <ListItemLink href={"/"+text.replace(/\s+/g,'')} className={text.replace(/\s+/g,'')} >
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItemLink>
@@ -105,8 +112,19 @@ function ResponsiveDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap className="nav-text-left">
-            Logged in as: {props.role}
+            Logged in as: <strong>{props.role}</strong>
           </Typography>
+           <div class="nav-item dropdown ml-auto">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                User Actions
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Profile</a>
+                <a class="dropdown-item" href="#">Settings</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/signin" onClick={logOut}>Log Out</a>
+              </div>
+            </div>
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">

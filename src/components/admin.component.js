@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import '../css/admin.css';
 import "@material/drawer";
 import "@material/list";
-import {MDCList} from "@material/list";
 import Drawer from "./drawer.component"
 import AuthService from "../services/auth.service";
 

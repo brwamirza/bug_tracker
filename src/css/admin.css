@@ -1,7 +1,9 @@
 #admin{
     margin-top: -52px;
-    margin-left: 238px;
+    margin-left: 240px;
 }
+
+
 
 @media screen and (max-width: 599px){
     #admin{
