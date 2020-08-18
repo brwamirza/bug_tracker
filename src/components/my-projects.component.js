@@ -13,8 +13,15 @@ export default class MyProjects extends Component {
   render() {
     return (
      <div id="my-projects">
-      <h1>My Projects</h1>
-    </div>
+        <button type="button" class="btn btn-primary">CREATE NEW PROJECT</button>
+        <div className="header-1 ">
+            <h5 className=" header-1-text ">Your Projects</h5>
+            <p className=" header-1-p ">All the projects you have in the database</p>            
+        </div>
+        <div className="box-1">
+
+        </div>
+     </div>
     );
   }
 }

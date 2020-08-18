@@ -27,7 +27,9 @@ export default class Admin extends Component {
     return (
       <div>
         <div id="admin">
-           <Drawer username={this.state.currentUser.username} role={this.state.userRole} urlPrefix={this.props.match.url} url={this.props.match.url}/>
+           <Drawer username={this.state.currentUser.username} role={this.state.userRole} 
+           urlPrefix={this.props.match.url} url={this.props.match.url}/>
+           
            <Route exact path={`${this.props.match.url}/DashboardHome`} component={DashboardHome}/>
            <Route exact path={`${this.props.match.url}/ManageRoleAssignment`} component={ManageRoleAssignment}/>
            <Route exact path={`${this.props.match.url}/ManageProjectUsers`} component={ManageProjectUsers}/>
