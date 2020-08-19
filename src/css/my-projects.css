@@ -73,3 +73,14 @@
     border-bottom: 2px solid #000;
     border-top: none;
 }
+
+#my-projects .th-header-1{
+    width: 25vw;
+}
+#my-projects .th-header-2{
+    width: 35vw;
+}
+
+#my-projects .td-3{
+    width: 200px;
+}

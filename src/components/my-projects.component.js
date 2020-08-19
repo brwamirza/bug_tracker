@@ -6,13 +6,15 @@ import "@material/list";
 import Drawer from "./drawer.component"
 import AuthService from "../services/auth.service";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import ProjectService from "../services/project.service";
+import { findAllByTestId } from '@testing-library/react';
 
 
 const Project = props => (
   <tr>
     <td>{props.project.name}</td>
     <td>{props.project.description}</td>
-    <td>
+    <td className="td-3">
       <Link>Manage Users</Link> | <a href="#">Details</a>
     </td>
   </tr>
@@ -22,7 +24,23 @@ export default class MyProjects extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {projects: []};
+    this.state = {
+      currentUser: AuthService.getCurrentUser(),
+      projects: []
+    };
+  }
+
+  componentDidMount(){
+    ProjectService.getAllProjects(this.state.currentUser.email).then(
+      response => {
+        this.setState({
+          projects: response.data
+        });
+      }
+    ).catch((error) => {
+      console.log(error);
+   })
+  
   }
 
   projectList() {
@@ -36,7 +54,7 @@ export default class MyProjects extends Component {
     return (
       <div id="my-projects-body">
          <div id="my-projects">
-            <button type="button" class="btn btn-primary">CREATE NEW PROJECT</button>
+            <button type="button" className="btn btn-primary">CREATE NEW PROJECT</button>
             <div className="header-1 ">
                 <h5 className=" header-1-text ">Your Projects</h5>
                 <p className=" header-1-p ">All the projects you have in the database</p>            
@@ -46,10 +64,9 @@ export default class MyProjects extends Component {
                   <table className="table">
                   <thead>
                     <tr>
-                      <th>Username</th>
-                      <th>Description</th>
-                      <th>Duration</th>
-                      <th>Date</th>
+                      <th className="th-header-1">Project Name</th>
+                      <th className="th-header-2">Description</th>
+                      <th className="th-header-3"></th>
                     </tr>
                   </thead>
                   <tbody>
