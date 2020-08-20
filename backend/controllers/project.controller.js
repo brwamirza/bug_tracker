@@ -19,9 +19,7 @@ exports.addProject = (req, res) => {
         if (req.body.email) {
         User.findAll({
             where: {
-                email: {
-                    [Op.or]: req.body.email
-                }
+                email: req.body.email
             }
         }).then(users => {
             project.setUsers(users).then(() => {
@@ -42,5 +40,9 @@ exports.getAllProject = (req,res) => {
    }
   }).then(project => {
     res.json(project)
-   });
+   })
+
+   .catch(err => {
+    res.status(500).send({ message: err.message });
+  });
 };

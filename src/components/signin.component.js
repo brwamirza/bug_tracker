@@ -86,32 +86,32 @@ export default class Signin extends Component {
   render() {
     return (
      <div id="signin">
-        <img class="home__shape" src={require("../circle_transparent.svg")}/>
+        <img className="home__shape" src={require("../circle_transparent.svg")}/>
         <div className="home__left">
-            <div class="home__text">
-                <h1 class="text--light">Track</h1>
-                <h1 class="text--light">Manage</h1>
-                <h1 class="text--light">& Kill Bugs</h1>
-                <h1 class="text--bold">Effectively</h1>
+            <div className="home__text">
+                <h1 className="text--light">Track</h1>
+                <h1 className="text--light">Manage</h1>
+                <h1 className="text--light">& Kill Bugs</h1>
+                <h1 className="text--bold">Effectively</h1>
             </div>
         </div>
 
         <div className="home__right">
             <div className="signin_wrapper">
                 <div className="form">
-                    <h1 class="text--bold">Login</h1>
-                    <h2 class="text--bold">Welcome back!</h2>
+                    <h1 className="text--bold">Login</h1>
+                    <h2 className="text--bold">Welcome back!</h2>
                     <Form
                     onSubmit={this.handleLogin}
                     ref={c => {
                       this.form = c;
                     }}
                     >
-                      <div class="form-group">
+                      <div className="form-group">
                         <label htmlFor="username">Email</label>
                         <Input 
                           type="email" 
-                          class="form-control" 
+                          className="form-control" 
                           name="email" 
                           aria-describedby="emailHelp" 
                           placeholder="email"
@@ -121,11 +121,11 @@ export default class Signin extends Component {
                         />
                       </div>
                       
-                      <div class="form-group">
+                      <div className="form-group">
                         <label htmlFor="password">Password</label>
                         <Input 
                           type="password" 
-                          class="form-control"  
+                          className="form-control"  
                           placeholder="Password"
                           value={this.state.password}
                           onChange={this.onChangePassword}

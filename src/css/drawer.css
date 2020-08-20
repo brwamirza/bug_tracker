@@ -26,6 +26,11 @@
     -webkit-overflow-scrolling: touch;
 }
 
+.MuiAppBar-root {
+    z-index: 10!important;
+
+}
+
 #admin .MuiPaper-elevation4 {
     box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 4px 4px 5px 0px rgba(0,0,0,0.14), 10px 1px 10px 0px rgba(0,0,0,0.12);
 }

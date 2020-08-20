@@ -101,9 +101,8 @@ export default class Signup extends Component {
         this.state.password,
         this.state.roles
       ).then(
-        response => {
+        () => {
           this.setState({
-            message: response.data.message,
             successful: true
           });
           this.props.history.push("/admin");

@@ -10,6 +10,13 @@ class ProjectService {
      });
   }
 
+  addProject(name,description,email){
+    return axios.post(API_URL + "/add", {
+      name,
+      description,
+      email
+    });
+  }
   getOneProject() {
     return axios.get(API_URL + '/:id');
   }

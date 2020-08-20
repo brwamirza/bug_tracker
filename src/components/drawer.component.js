@@ -114,15 +114,15 @@ function ResponsiveDrawer(props) {
           <Typography variant="h6" noWrap className="nav-text-left">
             Logged in as: <strong>{props.role}</strong>
           </Typography>
-           <div class="nav-item dropdown ml-auto">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           <div className="nav-item dropdown ml-auto">
+              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 User Actions
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Profile</a>
-                <a class="dropdown-item" href="#">Settings</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/signin" onClick={logOut}>Log Out</a>
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a className="dropdown-item" href="#">Profile</a>
+                <a className="dropdown-item" href="#">Settings</a>
+                <div className="dropdown-divider"></div>
+                <a className="dropdown-item" href="/signin" onClick={logOut}>Log Out</a>
               </div>
             </div>
         </Toolbar>
