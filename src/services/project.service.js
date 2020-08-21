@@ -17,8 +17,14 @@ class ProjectService {
       email
     });
   }
+
   getOneProject() {
     return axios.get(API_URL + '/:id');
+  }
+
+  // for deleting a single project
+  deleteProject(id) {
+    axios.delete(API_URL+'/'+id);
   }
 }
 

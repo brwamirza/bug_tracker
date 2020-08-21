@@ -9,14 +9,32 @@ module.exports = function(app) {
       next();
     });
   
+    //adding a single project
     app.post(
       "/api/project/add",
       controller.addProject
     );
 
+    //getting all projects
     app.post(
       "/api/project/all",
       controller.getAllProject
+    );
+
+    //deleting a single project
+    app.delete(
+      "/api/project/:id",
+      controller.delete
+    );
+
+     // Update a Tutorial with id
+    app.put("/api/project/:id",
+    controller.update
+    );
+
+    //getting a single project
+    app.get("/api/project/:id",
+    controller.findOne
     );
   
   };
