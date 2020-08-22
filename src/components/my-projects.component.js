@@ -10,7 +10,7 @@ import projectService from '../services/project.service';
 
 
 const Project = props => (
-  <tr >
+  <tr>
     <td>{props.project.name}</td>
     <td>{props.project.description}</td>
     <td className="td-3">
@@ -146,7 +146,7 @@ export default class MyProjects extends Component {
                 <h5 className=" header-1-text ">Your Projects</h5>
                 <p className=" header-1-p ">All the projects you have in the database</p>            
             </div>
-            <div className="box-1">
+            <div className="box-1" style={{zIndex: "8!important"}}>
               <div className="box-inner">
                   <table className="table">
                   <thead>
@@ -156,7 +156,7 @@ export default class MyProjects extends Component {
                       <th className="th-header-3"></th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="table-items">
                     { this.projectList() }
                   </tbody>
                 </table>

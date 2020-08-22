@@ -1,6 +1,6 @@
 #my-projects{
     padding-top: 40px;
-    margin-left: 24px;
+    padding-left: 24px;
     overflow: auto;
     max-height: 100vh;
     padding-bottom: 70px;
@@ -62,7 +62,6 @@
     margin-top: -75px;
     margin-bottom: 50px;
     border-radius: 3px; 
-    z-index: 10;
 }
 
 #my-projects .box-1 .box-inner{
@@ -86,3 +85,8 @@
 #my-projects .td-3{
     width: 200px;
 }
+
+#my-projects .table-items{
+    border-bottom: #000 2px solid;
+}
+
