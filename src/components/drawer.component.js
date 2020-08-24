@@ -16,6 +16,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 import  '../css/drawer.css'
 
 
@@ -67,11 +68,31 @@ function ResponsiveDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [adminEmail, setAdminEmail] = React.useState("");
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
   
+  const onChangeAdminEmail = (e) => {
+    setAdminEmail(e.target.value);
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let currentUser = AuthService.getCurrentUser();
+    UserService.joinUser(
+      currentUser.id,
+      currentUser.username,
+      currentUser.email,
+      adminEmail
+    )
+    window.location.reload(false);
+  }
+
+  const refreshPage = () => {
+    window.location.reload(false);
+  }
 
   const drawer = (
     <div>
@@ -118,10 +139,18 @@ function ResponsiveDrawer(props) {
            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Join a User
               </a>
-            <form class="dropdown-menu p-4" style={{minWidth: "19rem"}}>
+            <form class="dropdown-menu p-4" style={{minWidth: "19rem"}} onSubmit={handleSubmit}>
               <div class="form-group">
                 <label for="exampleDropdownFormEmail2">Users Email</label>
-                <input type="email" class="form-control" id="exampleDropdownFormEmail2" placeholder="email@example.com" required/>
+                <input 
+                  type="email" 
+                  class="form-control" 
+                  id="exampleDropdownFormEmail2" 
+                  placeholder="email@example.com" 
+                  required 
+                  value={adminEmail}
+                  onChange={onChangeAdminEmail}
+                  />
               </div>
               <button type="submit" class="btn btn-primary">Send a Request</button>
             </form>

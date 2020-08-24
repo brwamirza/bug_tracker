@@ -5,13 +5,13 @@ const Member = db.member;
 exports.joinUser = (req,res) => {
   Member.create({
     id: req.body.id,
-    username: req.body.name,
+    username: req.body.username,
     email: req.body.email
   })
     .then(member => {
       User.findAll({
         where: {
-          email: req.body.resEmail
+          email: req.body.adminEmail
         }
       }).then(users => {
         member.setUsers(users).then(()=> {

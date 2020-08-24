@@ -67,7 +67,6 @@ export default class MyProjects extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log("handle submit worked");
     ProjectService.addProject(
       this.state.projectName,
       this.state.description,
