@@ -12,7 +12,7 @@ export default class MyTickets extends Component {
 
   render() {
     return (
-     <div id="my-projects">
+     <div id="my-tickets">
       <h1>My Tickets</h1>
     </div>
     );
