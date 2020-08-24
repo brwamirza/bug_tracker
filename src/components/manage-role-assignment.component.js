@@ -6,6 +6,8 @@ import "@material/list";
 import Drawer from "./drawer.component"
 import AuthService from "../services/auth.service";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Select, CaretIcon, MultiSelectOptionMarkup, ModalCloseButton } from 'react-responsive-select';
+import 'react-responsive-select/dist/react-responsive-select.css';
 
 
 export default class ManageRoleAssignment extends Component {
@@ -37,20 +39,60 @@ export default class ManageRoleAssignment extends Component {
        <div className="row pt-4">
          <div className="col-xs-12 col-xl-4">
            <p style={{marginBottom: "6px"}}>Select 1 or more Users</p>
-              <div className="card box">
-                  <p className="card-text">test 1</p>
-                  <p className="card-text">test 1</p>
-                  <p className="card-text">test 1</p>
-                  <p className="card-text">test 1</p>
-                  <p className="card-text">test 1</p>
-                  <p className="card-text">test 1</p>
-                  <p className="card-text">test 1</p>
-              </div>
+                  <form>
+                    <Select
+                      multiselect={true}
+                      name="make6"
+                      selectedValues={['fiat']}
+                      modalCloseButton={<ModalCloseButton />}
+                      options={[
+                        {
+                          value: 'N/A',
+                          text: 'None',
+                          markup: <MultiSelectOptionMarkup text="None" />,
+                        },
+                        {
+                          value: 'fiat',
+                          text: 'Fiat',
+                          markup: <MultiSelectOptionMarkup text="Fiat" />,
+                        },
+                        {
+                          value: 'subaru',
+                          text: 'Subaru',
+                          markup: <MultiSelectOptionMarkup text="Subaru" />,
+                        },
+                        {
+                          value: 'suzuki',
+                          text: 'Suzuki',
+                          markup: <MultiSelectOptionMarkup text="Suzuki" />,
+                        },
+                      ]}
+                      caretIcon={<CaretIcon />}
+                      onChange={(...rest) => console.log(rest)}
+                      onSubmit={() => console.log('onSubmit')}
+                    />
+                </form>
 
               <div className="line"></div>
 
               <p className="pt-5">Select the Role to assign</p>
-              <div className="dropdown">
+              <form>
+                <Select
+                  modalCloseButton={<ModalCloseButton />}
+                  options={[
+                    { value: 'N/A', text: 'Select a Role or None' },
+                    { value: 'submitter', text: 'Submitter' },
+                    { value: 'developer', text: 'Developer' },
+                    { value: 'project-manager', text: 'Project Manager' },
+                    { value: 'admin', text: 'Admin' },
+                  ]}
+                  caretIcon={<CaretIcon />}
+                  selectedValue="subaru"
+                  onChange={(newValue) => console.log('onChange', newValue)}
+                  onSubmit={() => console.log('onSubmit')}
+                />
+              </form>
+              {/* <div className="dropdown">
                 <select 
                   value={this.state.selectedRole} 
                   onChange={this.onChangeSelectedRole} 
@@ -61,7 +103,7 @@ export default class ManageRoleAssignment extends Component {
                   <option value="Project-Manager">Project Manager</option>
                   <option value="Admin">Admin</option>
                 </select>
-              </div>
+              </div> */}
 
           </div>
          <div className="col-xs-12 col-xl-8">

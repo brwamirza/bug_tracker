@@ -139,12 +139,12 @@ function ResponsiveDrawer(props) {
            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Join a User
               </a>
-            <form class="dropdown-menu p-4" style={{minWidth: "19rem"}} onSubmit={handleSubmit}>
-              <div class="form-group">
-                <label for="exampleDropdownFormEmail2">Users Email</label>
+            <form className="dropdown-menu p-4" style={{minWidth: "19rem"}} onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="exampleDropdownFormEmail2">Users Email</label>
                 <input 
                   type="email" 
-                  class="form-control" 
+                  className="form-control" 
                   id="exampleDropdownFormEmail2" 
                   placeholder="email@example.com" 
                   required 
@@ -152,7 +152,7 @@ function ResponsiveDrawer(props) {
                   onChange={onChangeAdminEmail}
                   />
               </div>
-              <button type="submit" class="btn btn-primary">Send a Request</button>
+              <button type="submit" className="btn btn-primary">Send a Request</button>
             </form>
            </div>
            <div className=" dropdown">

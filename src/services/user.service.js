@@ -15,6 +15,12 @@ class UserService {
      });
   }
 
+  getAllNewMembers(id) {
+    return axios.post(API_URL + 'getAllNewMembers', { 
+      id
+     });
+  }
+
   getSubmitterBoard() {
     return axios.get(API_URL2 + 'submitter', { headers: authHeader() });
   }
