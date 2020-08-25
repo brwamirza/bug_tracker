@@ -1,12 +1,14 @@
 const db = require("../models");
 const User = db.user;
 const Member = db.member;
+const Role = db.role;
 
 exports.joinUser = (req,res) => {
   Member.create({
     id: req.body.id,
     username: req.body.username,
-    email: req.body.email
+    email: req.body.email,
+    role: req.body.role
   })
     .then(member => {
       User.findAll({

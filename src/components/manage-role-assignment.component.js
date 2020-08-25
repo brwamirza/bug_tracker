@@ -40,37 +40,20 @@ export default class ManageRoleAssignment extends Component {
          <div className="col-xs-12 col-xl-4">
            <p style={{marginBottom: "6px"}}>Select 1 or more Users</p>
                   <form>
-                    <Select
-                      multiselect={true}
-                      name="make6"
-                      selectedValues={['fiat']}
-                      modalCloseButton={<ModalCloseButton />}
-                      options={[
-                        {
-                          value: 'N/A',
-                          text: 'None',
-                          markup: <MultiSelectOptionMarkup text="None" />,
-                        },
-                        {
-                          value: 'fiat',
-                          text: 'Fiat',
-                          markup: <MultiSelectOptionMarkup text="Fiat" />,
-                        },
-                        {
-                          value: 'subaru',
-                          text: 'Subaru',
-                          markup: <MultiSelectOptionMarkup text="Subaru" />,
-                        },
-                        {
-                          value: 'suzuki',
-                          text: 'Suzuki',
-                          markup: <MultiSelectOptionMarkup text="Suzuki" />,
-                        },
-                      ]}
-                      caretIcon={<CaretIcon />}
-                      onChange={(...rest) => console.log(rest)}
-                      onSubmit={() => console.log('onSubmit')}
-                    />
+                  <Select
+                  modalCloseButton={<ModalCloseButton />}
+                  options={[
+                    { value: 'N/A', text: 'Select a Role or None' },
+                    { value: 'submitter', text: 'Submitter' },
+                    { value: 'developer', text: 'Developer' },
+                    { value: 'project-manager', text: 'Project Manager' },
+                    { value: 'admin', text: 'Admin' },
+                  ]}
+                  caretIcon={<CaretIcon />}
+                  selectedValue=""
+                  onChange={(newValue) => console.log('onChange', newValue)}
+                  onSubmit={() => console.log('onSubmit')}
+                />
                 </form>
 
               <div className="line"></div>
