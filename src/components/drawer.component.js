@@ -18,6 +18,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AuthService from "../services/auth.service";
 import UserService from "../services/user.service";
 import  '../css/drawer.css'
+import NotifyMe from 'react-notification-timeline';
 
 
 const drawerWidth = 240;
@@ -85,7 +86,8 @@ function ResponsiveDrawer(props) {
       currentUser.id,
       currentUser.username,
       currentUser.email,
-      adminEmail
+      adminEmail,
+      currentUser.role
     )
     window.location.reload(false);
   }
@@ -138,7 +140,8 @@ function ResponsiveDrawer(props) {
            <div className="dropdown nav-item-right pr-3">
            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Join a User
-              </a>
+            </a>
+
             <form className="dropdown-menu p-4" style={{minWidth: "19rem"}} onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="exampleDropdownFormEmail2">Users Email</label>
@@ -155,6 +158,29 @@ function ResponsiveDrawer(props) {
               <button type="submit" className="btn btn-primary">Send a Request</button>
             </form>
            </div>
+
+            {/* notification feed */}
+            <NotifyMe
+              data={[
+                {
+                  "update":"70 new employees are shifted",
+                  "timestamp":1596119688264
+                },
+                {
+                  "update":"Time to take a Break, TADA!!!",
+                  "timestamp":1596119686811
+                }
+              ]}
+              storageKey='notific_key'
+              notific_key='timestamp'
+              notific_value='update'
+              heading='Notification Alerts'
+              sortedByKey={false}
+              showDate={true}
+              size={22}
+              color="#000"
+            />
+
            <div className=" dropdown">
               <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 User Actions
