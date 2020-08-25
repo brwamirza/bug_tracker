@@ -174,16 +174,23 @@ function ResponsiveDrawer(props) {
               storageKey='notific_key'
               notific_key='timestamp'
               notific_value='update'
-              heading='Notification Alerts'
+              heading='Notifications'
               sortedByKey={false}
-              showDate={true}
+              showDate={false}
               size={22}
               color="#000"
             />
 
            <div className=" dropdown">
-              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                User Actions
+              <a 
+                className="nav-link dropdown-toggle" 
+                href="#" 
+                id="navbarDropdown" 
+                role="button" 
+                data-toggle="dropdown" 
+                aria-haspopup="true" 
+                aria-expanded="false">
+                  User Actions
               </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a className="dropdown-item" href="#">Profile</a>
