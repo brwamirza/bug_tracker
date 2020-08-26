@@ -7,19 +7,32 @@ import Drawer from "./drawer.component"
 import AuthService from "../services/auth.service";
 import UserService from "../services/user.service";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Select, CaretIcon, MultiSelectOptionMarkup, ModalCloseButton } from 'react-responsive-select';
-import 'react-responsive-select/dist/react-responsive-select.css';
+import Select from 'react-select'
 
+
+const arr = [];
+
+const options = [];
+
+const MemberList = props => (
+  <tr>
+    <td>{props.member.username}</td>
+    <td>{props.member.email}</td>
+    <td>{props.member.role}</td>
+  </tr>
+)
 
 export default class ManageRoleAssignment extends Component {
+  
   constructor(props) {
     super(props);
     this.onChangeSelectedRole = this.onChangeSelectedRole.bind(this);
+    this.refreshPage = this.refreshPage.bind(this);
 
     this.state = {
       currentUser: AuthService.getCurrentUser(),
       selectedRole: "",
-      members: ""
+      members: [],
     };
   }
 
@@ -35,12 +48,27 @@ export default class ManageRoleAssignment extends Component {
       this.setState({
         members: response.data
       });
-      console.log(this.state.members)
+      Object.keys(this.state.members).forEach(key => 
+        arr.push({
+          value: this.state.members[key].id, label: this.state.members[key].username
+        }));
+      console.log(this.state.members);
     }
   ).catch((error) => {
     console.log(error);
  })
  }
+
+ MembersList() {
+  return this.state.members.map(newMembers => {
+    return <MemberList member={newMembers} key={newMembers.id}/>;
+  })
+}
+
+ // this will refresh the component
+ refreshPage() {
+  window.location.reload(false);
+}
 
   render() {
     return (
@@ -52,52 +80,30 @@ export default class ManageRoleAssignment extends Component {
            <p style={{marginBottom: "6px"}}>Select a User</p>
                   <form>
                   <Select
-                  modalCloseButton={<ModalCloseButton />}
-                  options={[
-                    { value: 'N/A', text: 'Select a Role or None' },
-                    { value: 'submitter', text: 'Submitter' },
-                    { value: 'developer', text: 'Developer' },
-                    { value: 'project-manager', text: 'Project Manager' },
-                    { value: 'admin', text: 'Admin' },
-                  ]}
-                  caretIcon={<CaretIcon />}
-                  selectedValue=""
+                  options={arr}
                   onChange={(newValue) => console.log('onChange', newValue)}
                   onSubmit={() => console.log('onSubmit')}
                 />
-                </form>
 
-              <div className="line"></div>
+              <div className="line mt-3"></div>
 
               <p className="pt-5">Select the Role to assign</p>
-              <form>
+
                 <Select
-                  modalCloseButton={<ModalCloseButton />}
                   options={[
-                    { value: 'N/A', text: 'Select a Role or None' },
-                    { value: 'submitter', text: 'Submitter' },
-                    { value: 'developer', text: 'Developer' },
-                    { value: 'project-manager', text: 'Project Manager' },
-                    { value: 'admin', text: 'Admin' },
+                    { value: 'N/A', label: 'Select a Role or None' },
+                    { value: 'submitter', label: 'Submitter' },
+                    { value: 'developer', label: 'Developer' },
+                    { value: 'project-manager', label: 'Project Manager' },
+                    { value: 'admin', label: 'Admin' },
                   ]}
-                  caretIcon={<CaretIcon />}
-                  selectedValue="subaru"
+                 
                   onChange={(newValue) => console.log('onChange', newValue)}
                   onSubmit={() => console.log('onSubmit')}
                 />
+
+                <input type="submit" className="btn btn-primary mt-5 w-100" value="Submit" onClick={this.refreshPage}/>
               </form>
-              {/* <div className="dropdown">
-                <select 
-                  value={this.state.selectedRole} 
-                  onChange={this.onChangeSelectedRole} 
-                >
-                  <option value="N/A">Select a Role or None</option>
-                  <option value="Submitter">Submitter</option>
-                  <option value="Developer">Developer</option>
-                  <option value="Project-Manager">Project Manager</option>
-                  <option value="Admin">Admin</option>
-                </select>
-              </div> */}
 
           </div>
          <div className="col-xs-12 col-xl-8">
@@ -116,7 +122,8 @@ export default class ManageRoleAssignment extends Component {
                     </tr>
                   </thead>
                   <tbody className="table-items">
-                    {/* { this.projectList() } */}
+                    {console.log(arr)}
+                    { this.MembersList() }
                   </tbody>
                 </table>
               </div>

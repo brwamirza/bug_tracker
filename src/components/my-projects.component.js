@@ -74,7 +74,7 @@ export default class MyProjects extends Component {
     )
   }
 
-    // this will refresh he component
+    // this will refresh the component
    refreshPage() {
     window.location.reload(false);
   }
