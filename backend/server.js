@@ -29,7 +29,6 @@ db.sequelize.sync().then(() => {
   initial();
 });
 
-// simple route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to brwa application." });
 });

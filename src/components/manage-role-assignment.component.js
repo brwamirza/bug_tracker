@@ -5,6 +5,7 @@ import "@material/drawer";
 import "@material/list";
 import Drawer from "./drawer.component"
 import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Select, CaretIcon, MultiSelectOptionMarkup, ModalCloseButton } from 'react-responsive-select';
 import 'react-responsive-select/dist/react-responsive-select.css';
@@ -17,7 +18,8 @@ export default class ManageRoleAssignment extends Component {
 
     this.state = {
       currentUser: AuthService.getCurrentUser(),
-      selectedRole: ""
+      selectedRole: "",
+      members: ""
     };
   }
 
@@ -27,9 +29,18 @@ export default class ManageRoleAssignment extends Component {
     });
   }
 
-  addRole(){
-
-  }
+ componentDidMount(){
+  UserService.getAllNewMembers(this.state.currentUser.id).then(
+    response => {
+      this.setState({
+        members: response.data
+      });
+      console.log(this.state.members)
+    }
+  ).catch((error) => {
+    console.log(error);
+ })
+ }
 
   render() {
     return (
@@ -38,7 +49,7 @@ export default class ManageRoleAssignment extends Component {
 
        <div className="row pt-4">
          <div className="col-xs-12 col-xl-4">
-           <p style={{marginBottom: "6px"}}>Select 1 or more Users</p>
+           <p style={{marginBottom: "6px"}}>Select a User</p>
                   <form>
                   <Select
                   modalCloseButton={<ModalCloseButton />}

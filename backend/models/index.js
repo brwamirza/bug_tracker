@@ -77,6 +77,7 @@ db.user.belongsToMany(db.member, {
   otherKey: "memberId"
 });
 
+
 db.ROLES = ["submitter","developer", "projectManager", "admin"];
 
 module.exports = db;

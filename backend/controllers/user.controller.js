@@ -26,6 +26,18 @@ exports.joinUser = (req,res) => {
     });
 };
 
+exports.getAllNewMembers = (req,res) => {
+  User.findAll({
+    where: {
+      id: req.body.id
+    },include: Member
+  }).then(user => {
+        res.json(user[0].members)
+  }) .catch(err => {
+    res.status(500).send({ message: err.message });
+  });
+};
+
 
 exports.submitter = (req, res) => {
     res.status(200).send("submitter Content.");

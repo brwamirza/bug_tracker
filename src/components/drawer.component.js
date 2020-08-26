@@ -87,13 +87,8 @@ function ResponsiveDrawer(props) {
       currentUser.username,
       currentUser.email,
       adminEmail,
-      currentUser.role
+      "N/A"
     )
-    window.location.reload(false);
-  }
-
-  const refreshPage = () => {
-    window.location.reload(false);
   }
 
   const drawer = (
@@ -140,7 +135,7 @@ function ResponsiveDrawer(props) {
            <div className="dropdown nav-item-right pr-3">
            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Join a User
-            </a>
+           </a>
 
             <form className="dropdown-menu p-4" style={{minWidth: "19rem"}} onSubmit={handleSubmit}>
               <div className="form-group">

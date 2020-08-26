@@ -38,4 +38,9 @@ module.exports = function(app) {
     "/api/joinUser",
     controller.joinUser
   );
+
+  app.post(
+    "/api/getAllNewMembers",
+    controller.getAllNewMembers
+  );
 };
