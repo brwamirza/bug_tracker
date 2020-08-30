@@ -77,7 +77,19 @@ db.user.belongsToMany(db.member, {
   otherKey: "memberId"
 });
 
+db.member.belongsToMany(db.project, {
+  through: "member_projects",
+  foreignKey: "memberId",
+  otherKey: "projectId"
+});
 
-db.ROLES = ["submitter","developer", "projectManager", "admin"];
+db.project.belongsToMany(db.member, {
+  through: "member_projects",
+  foreignKey: "projectId",
+  otherKey: "memberId"
+});
+
+
+db.ROLES = ["submitter","developer", "project-manager", "admin"];
 
 module.exports = db;

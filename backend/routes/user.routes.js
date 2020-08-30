@@ -43,4 +43,9 @@ module.exports = function(app) {
     "/api/getAllNewMembers",
     controller.getAllNewMembers
   );
+
+  app.put(
+    "/api/updateMember",
+    controller.updateMember
+  );
 };

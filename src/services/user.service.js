@@ -21,6 +21,13 @@ class UserService {
      });
   }
 
+  updateMember(id,role) {
+    return axios.put(API_URL + 'updateMember', { 
+      id,
+      role
+     });
+  }
+
   getSubmitterBoard() {
     return axios.get(API_URL2 + 'submitter', { headers: authHeader() });
   }

@@ -52,7 +52,7 @@ function initial() {
    
     Role.create({
       id: 3,
-      name: "projectManager"
+      name: "project-manager"
     });
    
     Role.create({

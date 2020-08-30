@@ -10,11 +10,11 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Select from 'react-select'
 
 
-const arr = [];
+const newMembersList = [];
 
-const options = [];
+const membersList = [];
 
-const MemberList = props => (
+const Member = props => (
   <tr>
     <td>{props.member.username}</td>
     <td>{props.member.email}</td>
@@ -28,18 +28,16 @@ export default class ManageRoleAssignment extends Component {
     super(props);
     this.onChangeSelectedRole = this.onChangeSelectedRole.bind(this);
     this.refreshPage = this.refreshPage.bind(this);
+    this.onChangeNewMemberList = this.onChangeNewMemberList.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
       currentUser: AuthService.getCurrentUser(),
       selectedRole: "",
       members: [],
+      selectedId: "",
+      membersList
     };
-  }
-
-  onChangeSelectedRole(e) {
-    this.setState({
-      selectedRole: e.target.value
-    });
   }
 
  componentDidMount(){
@@ -48,11 +46,25 @@ export default class ManageRoleAssignment extends Component {
       this.setState({
         members: response.data
       });
-      Object.keys(this.state.members).forEach(key => 
-        arr.push({
-          value: this.state.members[key].id, label: this.state.members[key].username
-        }));
-      console.log(this.state.members);
+    
+        Object.keys(this.state.members).forEach(key => {
+          if (this.state.members[key].role == null){
+            newMembersList.push({
+              value: this.state.members[key].id, label: this.state.members[key].username
+            })
+          }
+          else{
+            membersList.push({
+              id: this.state.members[key].id,
+              username: this.state.members[key].username,
+              email: this.state.members[key].email,
+              role: this.state.members[key].role
+            })
+            this.setState({
+              membersList: membersList
+            });
+          }
+        });
     }
   ).catch((error) => {
     console.log(error);
@@ -60,9 +72,30 @@ export default class ManageRoleAssignment extends Component {
  }
 
  MembersList() {
-  return this.state.members.map(newMembers => {
-    return <MemberList member={newMembers} key={newMembers.id}/>;
+   return this.state.membersList.map(newMembers => {
+    return <Member member={newMembers} key={newMembers.id}/>;
   })
+}
+
+onChangeSelectedRole(role) {
+  this.setState({
+    selectedRole: role
+  });
+  console.log(this.state.selectedRole);
+}
+
+onChangeNewMemberList(id) {
+  this.setState({
+    selectedId: id
+  });
+}
+
+handleSubmit(e) {
+  e.preventDefault();
+  UserService.updateMember(
+    this.state.selectedId,
+    this.state.selectedRole
+  )
 }
 
  // this will refresh the component
@@ -78,12 +111,13 @@ export default class ManageRoleAssignment extends Component {
        <div className="row pt-4">
          <div className="col-xs-12 col-xl-4">
            <p style={{marginBottom: "6px"}}>Select a User</p>
-                  <form>
-                  <Select
-                  options={arr}
-                  onChange={(newValue) => console.log('onChange', newValue)}
-                  onSubmit={() => console.log('onSubmit')}
-                />
+
+              <form onSubmit={this.handleSubmit}>
+              <Select
+              options={newMembersList}
+              onChange={(newValue) => this.onChangeNewMemberList(newValue.value)}
+              onSubmit={() => console.log('onSubmit')}
+              />
 
               <div className="line mt-3"></div>
 
@@ -91,14 +125,14 @@ export default class ManageRoleAssignment extends Component {
 
                 <Select
                   options={[
-                    { value: 'N/A', label: 'Select a Role or None' },
+                    { value: null, label: 'Select a Role or None' },
                     { value: 'submitter', label: 'Submitter' },
                     { value: 'developer', label: 'Developer' },
                     { value: 'project-manager', label: 'Project Manager' },
                     { value: 'admin', label: 'Admin' },
                   ]}
                  
-                  onChange={(newValue) => console.log('onChange', newValue)}
+                  onChange={(newValue) => this.onChangeSelectedRole(newValue.value)}
                   onSubmit={() => console.log('onSubmit')}
                 />
 
@@ -122,7 +156,6 @@ export default class ManageRoleAssignment extends Component {
                     </tr>
                   </thead>
                   <tbody className="table-items">
-                    {console.log(arr)}
                     { this.MembersList() }
                   </tbody>
                 </table>

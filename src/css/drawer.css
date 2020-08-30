@@ -136,3 +136,7 @@ a:hover {
     transform: scale(0.8)!important;
     opacity: 1;
 }
+
+#admin .list-item:hover{
+    background-color: lightgray;
+}

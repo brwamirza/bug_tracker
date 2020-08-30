@@ -1,7 +1,10 @@
 const db = require("../models");
+const { user } = require("../models");
 const User = db.user;
 const Member = db.member;
 const Role = db.role;
+
+const Op = db.Sequelize.Op;
 
 exports.joinUser = (req,res) => {
   Member.create({
@@ -37,6 +40,45 @@ exports.getAllNewMembers = (req,res) => {
     res.status(500).send({ message: err.message });
   });
 };
+
+exports.updateMember = (req,res) => {
+  Member.update({
+    role: req.body.role
+   },
+   {
+    where: {
+      id: req.body.id
+    }
+  }).then(() => {
+    User.findOne({
+      where: {
+        id: req.body.id
+      }
+    }).then(user => {
+        Role.findAll({
+          where: {
+            name: req.body.role
+          }
+        }).then(roles => {
+          user.setRoles(roles);
+      });
+    });
+    if (num == 1) {
+      res.send({
+        message: "Member role was updated successfully."
+      });
+    } else {
+      res.send({
+        message: `Cannot update member role with id=${req.body.id}. Maybe member was not found or req.body is empty!`
+      });
+    }
+  })
+  .catch(err => {
+    res.status(500).send({
+      message: "Error updating Member role with id=" + req.body.id
+    });
+  });
+}
 
 
 exports.submitter = (req, res) => {

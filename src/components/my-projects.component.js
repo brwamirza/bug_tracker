@@ -46,7 +46,6 @@ export default class MyProjects extends Component {
       console.log(error);
    })}
 
-
   projectList() {
     return this.state.projects.map(currentproject => {
       return <Project project={currentproject} key={currentproject.id} deleteProject={projectService.deleteProject} refresh={this.refreshPage}/>;
@@ -78,8 +77,6 @@ export default class MyProjects extends Component {
    refreshPage() {
     window.location.reload(false);
   }
-
-
 
   render() {
     return (

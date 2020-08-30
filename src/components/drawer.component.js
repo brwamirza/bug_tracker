@@ -102,8 +102,8 @@ function ResponsiveDrawer(props) {
       <Divider />
       <List>
         {['Dashboard Home', 'Manage Role Assignment', 'Manage Project Users', 'My Projects','My Tickets'].map((text, index) => (
-          <ListItem button key={text} className="list-item">
-            <ListItemLink href={props.url+"/"+text.replace(/\s+/g,'')} className={text.replace(/\s+/g,'')} >
+          <ListItem >
+            <ListItemLink button href={props.url+"/"+text.replace(/\s+/g,'')} className="list-item" key={text} >
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItemLink>
