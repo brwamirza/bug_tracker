@@ -22,7 +22,6 @@ require('./routes/user.routes')(app);
 require('./routes/project.routes')(app);
 
 const db = require("./models");
-const Role = db.role;
 
 db.sequelize.sync().then(() => {
   console.log('Drop and Resync Db');
@@ -38,27 +37,3 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
-
-function initial() {
-    Role.create({
-      id: 1,
-      name: "submitter"
-    });
-
-    Role.create({
-      id: 2,
-      name: "developer"
-    });
-   
-    Role.create({
-      id: 3,
-      name: "project-manager"
-    });
-   
-    Role.create({
-      id: 4,
-      name: "admin"
-    });
-  }
-
-  

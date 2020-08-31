@@ -84,10 +84,7 @@ function ResponsiveDrawer(props) {
     let currentUser = AuthService.getCurrentUser();
     UserService.joinUser(
       currentUser.id,
-      currentUser.username,
-      currentUser.email,
       adminEmail,
-      "N/A"
     )
   }
 

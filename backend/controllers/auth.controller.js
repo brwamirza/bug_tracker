@@ -14,44 +14,22 @@ exports.signup = (req, res) => {
     username: req.body.username,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8),
+    role: req.body.role,
+    isMember: "false"
   })
     .then(user => {
-      if (req.body.roles) {
-        Role.findAll({
-          where: {
-            name: {
-              [Op.or]: req.body.roles
-            }
-          }
-        }).then(roles => {
-          user.setRoles(roles).then( ()=>{
-            var token = jwt.sign({ id: user.id }, config.secret, {
-              expiresIn: 86400 // 24 hours
-            });
-            var authorities = [];
-            user.getRoles().then(roles => {
-              for (let i = 0; i < roles.length; i++) {
-                authorities.push(roles[i].name.toUpperCase());
-              }
-              res.status(200).send({
-                id: user.id,
-                username: user.username,
-                email: user.email,
-                roles: authorities,
-                accessToken: token
-              });
-            });
-          })
-        });
-      } else {
-        // user role = 1
-        user.setRoles([1]).then(() => {
-          res.send({ message: "User was registered successfully!" });
-        });
-      }
-    
+      var token = jwt.sign({ id: user.id }, config.secret, {
+        expiresIn: 86400 // 24 hours
+      });
+      
+        res.status(200).send({
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          roles: user.role.toString().toUpperCase(),
+          accessToken: token
+      });
     })
-
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
@@ -84,18 +62,12 @@ exports.signin = (req, res) => {
         expiresIn: 86400 // 24 hours
       });
 
-      var authorities = [];
-      user.getRoles().then(roles => {
-        for (let i = 0; i < roles.length; i++) {
-          authorities.push(roles[i].name.toUpperCase());
-        }
         res.status(200).send({
           id: user.id,
           username: user.username,
           email: user.email,
-          roles: authorities,
+          roles: user.role.toString().toUpperCase(),
           accessToken: token
-        });
       });
     })
     .catch(err => {

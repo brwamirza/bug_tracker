@@ -25,12 +25,12 @@ class AuthService {
   }
 
   //register user
-  register(username, email, password, roles) {
+  register(username, email, password, role) {
     return axios.post(API_URL + "signup", {
       username,
       email,
       password,
-      roles
+      role
     }).then(response => {
       if (response.data.accessToken) {
         localStorage.setItem("user", JSON.stringify(response.data));

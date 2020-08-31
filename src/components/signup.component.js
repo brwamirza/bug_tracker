@@ -62,7 +62,7 @@ export default class Signup extends Component {
       password: "",
       successful: false,
       message: "",
-      roles: ["admin"]
+      role: "admin"
     };
   }
 
@@ -99,7 +99,7 @@ export default class Signup extends Component {
         this.state.username,
         this.state.email,
         this.state.password,
-        this.state.roles
+        this.state.role
       ).then(
         () => {
           this.setState({

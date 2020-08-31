@@ -25,33 +25,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
-db.role = require("../models/role.model.js")(sequelize, Sequelize);
 db.project = require("../models/project.model.js")(sequelize, Sequelize);
-db.member = require("../models/member.model.js")(sequelize, Sequelize);
-
-db.role.belongsToMany(db.user, {
-  through: "user_roles",
-  foreignKey: "roleId",
-  otherKey: "userId"
-});
-
-db.user.belongsToMany(db.role, {
-  through: "user_roles",
-  foreignKey: "userId",
-  otherKey: "roleId"
-});
-
-db.role.belongsToMany(db.member, {
-  through: "member_roles",
-  foreignKey: "roleId",
-  otherKey: "memberId"
-});
-
-db.member.belongsToMany(db.role, {
-  through: "member_roles",
-  foreignKey: "memberId",
-  otherKey: "roleId"
-});
 
 db.user.belongsToMany(db.project, {
   through: "user_projects",
@@ -65,31 +39,18 @@ db.project.belongsToMany(db.user, {
   otherKey: "userId"
 });
 
-db.member.belongsToMany(db.user, {
-  through: "user_members",
-  foreignKey: "memberId",
-  otherKey: "userId"
+db.user.belongsToMany(db.user, {
+  through: "following",
+  as:"followers",
+  foreignKey: "followingId",
+  otherKey: "followerId"
 });
 
-db.user.belongsToMany(db.member, {
-  through: "user_members",
-  foreignKey: "userId",
-  otherKey: "memberId"
+db.user.belongsToMany(db.user, {
+  through: "following",
+  as:"followings",
+  foreignKey: "followerId",
+  otherKey: "followingId"
 });
-
-db.member.belongsToMany(db.project, {
-  through: "member_projects",
-  foreignKey: "memberId",
-  otherKey: "projectId"
-});
-
-db.project.belongsToMany(db.member, {
-  through: "member_projects",
-  foreignKey: "projectId",
-  otherKey: "memberId"
-});
-
-
-db.ROLES = ["submitter","developer", "project-manager", "admin"];
 
 module.exports = db;

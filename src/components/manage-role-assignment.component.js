@@ -41,14 +41,15 @@ export default class ManageRoleAssignment extends Component {
   }
 
  componentDidMount(){
-  UserService.getAllNewMembers(this.state.currentUser.id).then(
+  UserService.getAllMembers(this.state.currentUser.id).then(
     response => {
       this.setState({
         members: response.data
       });
+      console.log(this.state.members);
     
         Object.keys(this.state.members).forEach(key => {
-          if (this.state.members[key].role == null){
+          if (this.state.members[key].isMember == "false"){
             newMembersList.push({
               value: this.state.members[key].id, label: this.state.members[key].username
             })
@@ -92,9 +93,10 @@ onChangeNewMemberList(id) {
 
 handleSubmit(e) {
   e.preventDefault();
-  UserService.updateMember(
+  UserService.updateUser(
     this.state.selectedId,
-    this.state.selectedRole
+    this.state.selectedRole,
+    "true"
   )
 }
 

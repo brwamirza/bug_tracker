@@ -40,12 +40,12 @@ module.exports = function(app) {
   );
 
   app.post(
-    "/api/getAllNewMembers",
-    controller.getAllNewMembers
+    "/api/getAllMembers",
+    controller.getAllMembers
   );
 
   app.put(
-    "/api/updateMember",
-    controller.updateMember
+    "/api/updateUser",
+    controller.updateUser
   );
 };

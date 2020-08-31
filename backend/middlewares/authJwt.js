@@ -26,97 +26,77 @@ verifyToken = (req, res, next) => {
 //to know if user is admin or not
 isSubmitter = (req, res, next) => {
   User.findByPk(req.userId).then(user => {
-    user.getRoles().then(roles => {
-      for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "submitter") {
+        if (user.role === "submitter") {
           next();
           return;
         }
-      }
 
       res.status(403).send({
         message: "Require submitter Role!"
       });
       return;
-    });
   });
 };
 
 //to know if user is admin or not
 isAdmin = (req, res, next) => {
   User.findByPk(req.userId).then(user => {
-    user.getRoles().then(roles => {
-      for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "admin") {
+        if (user.role === "admin") {
           next();
           return;
         }
-      }
 
       res.status(403).send({
         message: "Require Admin Role!"
       });
       return;
-    });
   });
 };
 
 //to know if user is moderator or not
 isDeveloper = (req, res, next) => {
   User.findByPk(req.userId).then(user => {
-    user.getRoles().then(roles => {
-      for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "developer") {
+        if (user.role === "developer") {
           next();
           return;
         }
-      }
 
       res.status(403).send({
         message: "Require developer Role!"
       });
-    });
   });
 };
 
 //to know if user is moderator or not
 isProjectManager = (req, res, next) => {
   User.findByPk(req.userId).then(user => {
-    user.getRoles().then(roles => {
-      for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "projectManager") {
+        if (user.role === "project-manager") {
           next();
           return;
         }
-      }
 
       res.status(403).send({
-        message: "Require projectManager Role!"
+        message: "Require project-manager Role!"
       });
-    });
   });
 };
 
 //to know if user is moderator or admin 
 isProjectManagerOrAdmin = (req, res, next) => {
   User.findByPk(req.userId).then(user => {
-    user.getRoles().then(roles => {
-      for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "projectManager") {
+        if (user.role === "projectManager") {
           next();
           return;
         }
 
-        if (roles[i].name === "admin") {
+        if (user.role === "admin") {
           next();
           return;
         }
-      }
 
       res.status(403).send({
-        message: "Require projectManager or Admin Role!"
+        message: "Require project-manager or Admin Role!"
       });
-    });
   });
 };
 

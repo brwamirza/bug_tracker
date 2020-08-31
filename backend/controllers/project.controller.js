@@ -19,12 +19,12 @@ exports.addProject = (req, res) => {
   })
     .then(project => {
         if (req.body.email) {
-        User.findAll({
+        User.findOne({
             where: {
                 email: req.body.email
             }
-        }).then(users => {
-            project.setUsers(users).then(() => {
+        }).then(user => {
+            user.setProjects(project).then(() => {
             res.send({ message: "Project was added successfully!" });
             });
         });

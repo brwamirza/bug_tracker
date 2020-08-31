@@ -6,25 +6,24 @@ const API_URL = 'http://localhost:8080/api/';
 
 //data service
 class UserService {
-  joinUser(id,username,email,adminEmail) {
+  joinUser(id,adminEmail) {
     return axios.post(API_URL + 'joinUser', { 
       id,
-      username,
-      email,
       adminEmail
      });
   }
 
-  getAllNewMembers(id) {
-    return axios.post(API_URL + 'getAllNewMembers', { 
+  getAllMembers(id) {
+    return axios.post(API_URL + 'getAllMembers', { 
       id
      });
   }
 
-  updateMember(id,role) {
-    return axios.put(API_URL + 'updateMember', { 
+  updateUser(id,role,isMember) {
+    return axios.put(API_URL + 'updateUser', { 
       id,
-      role
+      role,
+      isMember
      });
   }
 

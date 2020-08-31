@@ -6,63 +6,75 @@ const Role = db.role;
 
 const Op = db.Sequelize.Op;
 
+// exports.joinUser = (req,res) => {
+//   Member.create({
+//     id: req.body.id,
+//     username: req.body.username,
+//     email: req.body.email,
+//     role: req.body.role
+//   })
+//     .then(member => {
+//       User.findAll({
+//         where: {
+//           email: req.body.adminEmail
+//         }
+//       }).then(users => {
+//         member.setUsers(users).then(()=> {
+//           res.json(member)
+//         });
+//       });
+//     }) 
+//     .catch(err => {
+//       res.status(500).send({ message: err.message });
+//     });
+// };
+
 exports.joinUser = (req,res) => {
-  Member.create({
-    id: req.body.id,
-    username: req.body.username,
-    email: req.body.email,
-    role: req.body.role
-  })
-    .then(member => {
-      User.findAll({
-        where: {
-          email: req.body.adminEmail
+  User.findOne({
+    where: {
+      email: req.body.adminEmail
+    }
+  }).then(admin => {
+      User.findOne({
+        where:{
+          id: req.body.id
         }
-      }).then(users => {
-        member.setUsers(users).then(()=> {
-          res.json(member)
-        });
+      }).then(user => {
+          admin.setFollowers(user).then(() => {
+            res.send(`request sent to ${req.body.adminEmail}`);
+          });
       });
-    }) 
-    .catch(err => {
-      res.status(500).send({ message: err.message });
-    });
+  })
+  .catch(err => {
+          res.status(500).send({ message: err.message });
+        });
 };
 
-exports.getAllNewMembers = (req,res) => {
-  User.findAll({
+exports.getAllMembers = (req,res) => {
+  User.findOne({
     where: {
       id: req.body.id
-    },include: Member
+    }
   }).then(user => {
-        res.json(user[0].members)
-  }) .catch(err => {
-    res.status(500).send({ message: err.message });
-  });
+        user.getFollowers().then(followers => {
+          res.json(followers);
+        })
+  }) 
+  .catch(err => {
+          res.status(500).send({ message: err.message });
+        });
 };
 
-exports.updateMember = (req,res) => {
-  Member.update({
-    role: req.body.role
+exports.updateUser = (req,res) => {
+  User.update({
+    role: req.body.role,
+    isMember: req.body.isMember
    },
    {
     where: {
       id: req.body.id
     }
   }).then(() => {
-    User.findOne({
-      where: {
-        id: req.body.id
-      }
-    }).then(user => {
-        Role.findAll({
-          where: {
-            name: req.body.role
-          }
-        }).then(roles => {
-          user.setRoles(roles);
-      });
-    });
     if (num == 1) {
       res.send({
         message: "Member role was updated successfully."
