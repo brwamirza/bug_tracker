@@ -40,7 +40,7 @@ exports.joinUser = (req,res) => {
           id: req.body.id
         }
       }).then(user => {
-          admin.setFollowers(user).then(() => {
+          admin.addFollowers(user).then(() => {
             res.send(`request sent to ${req.body.adminEmail}`);
           });
       });

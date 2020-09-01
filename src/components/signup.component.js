@@ -128,30 +128,30 @@ export default class Signup extends Component {
   render() {
     return (
       <div id="signup">
-        <img class="home__shape" src={require("../circle_transparent.svg")}/>
+        <img className="home__shape" src={require("../circle_transparent.svg")}/>
         <div className="home__left">
-            <div class="home__text">
-                <h1 class="text--light">Track</h1>
-                <h1 class="text--light">Manage</h1>
-                <h1 class="text--light">& Kill Bugs</h1>
-                <h1 class="text--bold">Effectively</h1>
+            <div className="home__text">
+                <h1 className="text--light">Track</h1>
+                <h1 className="text--light">Manage</h1>
+                <h1 className="text--light">& Kill Bugs</h1>
+                <h1 className="text--bold">Effectively</h1>
             </div>
         </div>
 
         <div className="home__right">
             <div className="signin_wrapper">
                 <div className="form">
-                    <h1 class="text--bold">Signup</h1>
+                    <h1 className="text--bold">Signup</h1>
                     <Form
                       onSubmit={this.handleRegister}
                       ref={c => {
                         this.form = c;
                       }} >
-                      <div class="form-group">
+                      <div className="form-group">
                         <label htmlFor="username">Username</label>
                         <Input 
                           type="text" 
-                          class="form-control" 
+                          className="form-control" 
                           placeholder="Username" 
                           name="username" 
                           value={this.state.username}
@@ -159,11 +159,11 @@ export default class Signup extends Component {
                           validations={[required, vusername]}
                         />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label htmlFor="email">Email address</label>
                         <Input 
                           type="email" 
-                          class="form-control" 
+                          className="form-control" 
                           aria-describedby="emailHelp" 
                           placeholder="Enter email" 
                           name="email"
@@ -172,11 +172,11 @@ export default class Signup extends Component {
                           validations={[required, email]}
                         />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label htmlFor="password">Password</label>
                         <Input 
                           type="password" 
-                          class="form-control" 
+                          className="form-control" 
                           placeholder="Password"
                           name="password"
                           value={this.state.password}
@@ -185,7 +185,7 @@ export default class Signup extends Component {
                         />
                       </div>
                       <div className="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary">Signup</button>
+                        <button type="submit" className="btn btn-primary">Signup</button>
                       </div>
 
                       {this.state.message && (

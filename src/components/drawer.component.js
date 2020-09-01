@@ -68,6 +68,13 @@ function ResponsiveDrawer(props) {
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
+  const user = AuthService.getCurrentUser();
+
+  const [isSubmiitter, setIsSubmitter] = React.useState(user.roles.includes("SUBMITTER"));
+  const [isDeveloper, setIsDeveloper] = React.useState(user.roles.includes("DEVELOPER"));
+  const [isProjectManager, setIsProjectManager] = React.useState(user.roles.includes("PROJECT-MANAGER"));
+  const [isAdmin, setIsAdmin] = React.useState(user.roles.includes("ADMIN"));
+
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [adminEmail, setAdminEmail] = React.useState("");
 
@@ -97,7 +104,7 @@ function ResponsiveDrawer(props) {
       </div>
       
       <Divider />
-      <List>
+      {/* <List>
         {['Dashboard Home', 'Manage Role Assignment', 'Manage Project Users', 'My Projects','My Tickets'].map((text, index) => (
           <ListItem >
             <ListItemLink button href={props.url+"/"+text.replace(/\s+/g,'')} className="list-item" key={text} >
@@ -106,6 +113,46 @@ function ResponsiveDrawer(props) {
             </ListItemLink>
           </ListItem>
         ))}
+      </List> */}
+      <List>
+        <ListItem>
+          <ListItemLink button href={props.url+`/DashboardHome`} className="list-item" key="DashboardHome" >
+            <ListItemIcon><InboxIcon /></ListItemIcon>
+            <ListItemText primary="Dashboard Home" />
+          </ListItemLink>
+        </ListItem>
+
+        {isAdmin && (
+          <ListItem >
+            <ListItemLink button href={props.url+`/ManageRoleAssignment`} className="list-item" key="ManageRoleAssignment" >
+              <ListItemIcon><InboxIcon /></ListItemIcon>
+              <ListItemText primary="Manage Role Assignment" />
+            </ListItemLink>
+          </ListItem>
+        )}
+
+        {(isAdmin || isProjectManager)  && (
+          <ListItem >
+            <ListItemLink button href={props.url+`/ManageProjectUsers`} className="list-item" key="ManageProjectUsers" >
+              <ListItemIcon><InboxIcon /></ListItemIcon>
+              <ListItemText primary="Manage Project Users" />
+            </ListItemLink>
+          </ListItem>
+        )}
+        
+        <ListItem >
+          <ListItemLink button href={props.url+`/MyProjects`} className="list-item" key="MyProjects" >
+            <ListItemIcon><InboxIcon /></ListItemIcon>
+            <ListItemText primary="My Projects" />
+          </ListItemLink>
+        </ListItem>
+
+        <ListItem >
+          <ListItemLink button href={props.url+`/MyTickets`} className="list-item" key="MyTickets" >
+            <ListItemIcon><InboxIcon /></ListItemIcon>
+            <ListItemText primary="My Tickets" />
+          </ListItemLink>
+        </ListItem>
       </List>
     </div>
   );

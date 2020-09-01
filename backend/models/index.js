@@ -53,4 +53,6 @@ db.user.belongsToMany(db.user, {
   otherKey: "followingId"
 });
 
+db.user.hasMany(db.user);
+
 module.exports = db;
