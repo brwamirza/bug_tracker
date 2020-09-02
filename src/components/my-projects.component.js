@@ -6,7 +6,6 @@ import "@material/list";
 import AuthService from "../services/auth.service";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ProjectService from "../services/project.service";
-import projectService from '../services/project.service';
 
 
 const Project = props => (
@@ -14,7 +13,7 @@ const Project = props => (
     <td>{props.project.name}</td>
     <td>{props.project.description}</td>
     <td className="td-3">
-      <Link to="#">Manage Users</Link> | <a href="#" onClick={() => { props.deleteProject(props.project.id); props.refresh() }}>Delete</a>
+      <Link to="#">Manage Users</Link> | <a href="#">Details</a>
     </td>
   </tr>
 )
@@ -48,7 +47,7 @@ export default class MyProjects extends Component {
 
   projectList() {
     return this.state.projects.map(currentproject => {
-      return <Project project={currentproject} key={currentproject.id} deleteProject={projectService.deleteProject} refresh={this.refreshPage}/>;
+      return <Project project={currentproject} key={currentproject.id} deleteProject={ProjectService.deleteProject} refresh={this.refreshPage}/>;
     })
   }
 

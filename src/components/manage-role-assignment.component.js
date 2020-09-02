@@ -49,7 +49,7 @@ export default class ManageRoleAssignment extends Component {
       console.log(this.state.members);
     
         Object.keys(this.state.members).forEach(key => {
-          if (this.state.members[key].isMember == "false"){
+          if (this.state.members[key].isMember === "false"){
             newMembersList.push({
               value: this.state.members[key].id, label: this.state.members[key].username
             })

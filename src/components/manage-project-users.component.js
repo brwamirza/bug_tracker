@@ -6,9 +6,48 @@ import "@material/list";
 import Drawer from "./drawer.component"
 import AuthService from "../services/auth.service";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import ProjectService from "../services/project.service";
 
+const Project = props => (
+  <tr>
+    <td>{props.project.name}</td>
+    <td>{props.project.description}</td>
+    <td>{props.project.description}</td>
+    <td>{props.project.description}</td>
+    <td className="td-3">
+      <Link to="#">Details</Link> | <a href="#" >Edit</a>
+    </td>
+  </tr>
+)
 
 export default class ManageProjectUsers extends Component {
+  constructor(props) {
+    super(props);
+
+
+    this.state = {
+      currentUser: AuthService.getCurrentUser(),
+      projects: []
+    };
+  }
+
+  componentDidMount(){
+    ProjectService.getAllProjects(this.state.currentUser.email).then(
+      response => {
+        this.setState({
+          projects: response.data
+        });
+      }
+    ).catch((error) => {
+      console.log(error);
+   })
+  }
+
+  projectList() {
+    return this.state.projects.map(currentproject => {
+      return <Project project={currentproject} key={currentproject.id}/>;
+    })
+  }
 
   render() {
     return (
@@ -30,7 +69,7 @@ export default class ManageProjectUsers extends Component {
               </tr>
             </thead>
             <tbody className="table-items">
-              {/* { this.projectList() } */}
+              { this.projectList() }
             </tbody>
           </table>
         </div>
