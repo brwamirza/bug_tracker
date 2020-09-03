@@ -11,6 +11,7 @@ import ManageRoleAssignment from './manage-role-assignment.component';
 import ManageProjectUsers from './manage-project-users.component';
 import MyProjects from './my-projects.component';
 import MyTickets from './my-tickets.component';
+import ProjectDetail from './project-detail.component';
 
 
 export default class Admin extends Component {
@@ -35,6 +36,7 @@ export default class Admin extends Component {
             <Route exact path={`${this.props.match.url}/ManageProjectUsers`} component={ManageProjectUsers}/>
             <Route exact path={`${this.props.match.url}/MyProjects`} component={MyProjects}/>
             <Route exact path={`${this.props.match.url}/MyTickets`} component={MyTickets}/>
+            <Route exact path={`${this.props.match.url}/ProjectDetail`} component={ProjectDetail}/>
            </div>
         </div>
       </div>

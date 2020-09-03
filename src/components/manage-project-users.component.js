@@ -15,7 +15,7 @@ const Project = props => (
     <td>{props.project.description}</td>
     <td>{props.project.description}</td>
     <td className="td-3">
-      <Link to="#">Details</Link> | <a href="#" >Edit</a>
+      <Link to="/admin/ProjectDetail">Details</Link> | <a href="#" >Edit</a>
     </td>
   </tr>
 )
