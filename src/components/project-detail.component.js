@@ -8,17 +8,17 @@ import AuthService from "../services/auth.service";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ProjectService from "../services/project.service";
 
-const Project = props => (
-  <tr>
-    <td>{props.project.name}</td>
-    <td>{props.project.description}</td>
-    <td>{props.project.description}</td>
-    <td>{props.project.description}</td>
-    <td className="td-3">
-      <Link to="#">Details</Link> | <a href="#" >Edit</a>
-    </td>
-  </tr>
-)
+// const Project = props => (
+//   <tr>
+//     <td>{props.project.name}</td>
+//     <td>{props.project.description}</td>
+//     <td>{props.project.description}</td>
+//     <td>{props.project.description}</td>
+//     <td className="td-3">
+//       <Link to="#">Details</Link> | <a href="#" >Edit</a>
+//     </td>
+//   </tr>
+// )
 
 export default class ProjectDetail extends Component {
   constructor(props) {
@@ -27,15 +27,15 @@ export default class ProjectDetail extends Component {
 
     this.state = {
       currentUser: AuthService.getCurrentUser(),
-      projects: []
+      project: []
     };
   }
 
   componentDidMount(){
-    ProjectService.getAllProjects(this.state.currentUser.email).then(
+    ProjectService.getOneProject(this.props.match.params.id).then(
       response => {
         this.setState({
-          projects: response.data
+          project: response.data
         });
       }
     ).catch((error) => {
@@ -43,18 +43,22 @@ export default class ProjectDetail extends Component {
    })
   }
 
-  projectList() {
-    return this.state.projects.map(currentproject => {
-      return <Project project={currentproject} key={currentproject.id}/>;
-    })
-  }
+  // projectList() {
+  //   return this.state.project.map(currentproject => {
+  //     return <Project project={currentproject} key={currentproject.id}/>;
+  //   })
+  // }
 
   render() {
     return (
      <div id="project-detail">
       <div className="header-1 ">
-          <h5 className=" header-1-text ">Details for Project #1</h5>
-          <p className=" header-1-p "> All the projects you have in the database</p>            
+          <h5 className=" header-1-text ">Project Details</h5>
+          <p className=" header-1-p ">
+            <Link className="pr-1" style={{color:"#fff"}} to="/admin/MyProjects">Back to List</Link>
+            |
+            <Link className="pl-1" style={{color:"#fff"}} to="#">Edit</Link>
+          </p>            
       </div>
       <div className="box-1" style={{zIndex: "8!important"}}>
         <div className="box-inner">
@@ -62,11 +66,11 @@ export default class ProjectDetail extends Component {
             <div className="pl-4 row">
               <div className="col-sm-6">
                 <p>Project Name</p>
-                <h6 className="pl-2">blog</h6>
+                <h6 className="pl-2">{this.state.project.name}</h6>
               </div>
               <div className="col-sm-6">
                 <p>Project Description</p>
-                <h6 className="pl-2">wfwefwfe</h6>
+                <h6 className="pl-2">{this.state.project.description}</h6>
               </div>
             </div>
           </div>
@@ -79,7 +83,7 @@ export default class ProjectDetail extends Component {
                       <p className=" header-1-p ">Current users on this project</p>            
                   </div>
                   <div className="box-1" style={{zIndex: "8!important"}}>
-                    <div className="box-inner">
+                    <div>
                         <table className="table">
                         <thead>
                           <tr>
@@ -99,10 +103,10 @@ export default class ProjectDetail extends Component {
                 <div>
                   <div className="header-2 ">
                       <h5 className=" header-1-text ">Tickets for this Project</h5>
-                      <p className=" header-1-p ">All the projects you have in the database</p>            
+                      <p className=" header-1-p ">Condensed Ticket Details</p>            
                   </div>
                   <div className="box-1" style={{zIndex: "8!important"}}>
-                    <div className="box-inner">
+                    <div >
                         <table className="table">
                         <thead>
                           <tr>

@@ -12,6 +12,7 @@ import ManageProjectUsers from './manage-project-users.component';
 import MyProjects from './my-projects.component';
 import MyTickets from './my-tickets.component';
 import ProjectDetail from './project-detail.component';
+import EditAssignedUsers from './edit-assigned-users.component';
 
 
 export default class Admin extends Component {
@@ -36,7 +37,8 @@ export default class Admin extends Component {
             <Route exact path={`${this.props.match.url}/ManageProjectUsers`} component={ManageProjectUsers}/>
             <Route exact path={`${this.props.match.url}/MyProjects`} component={MyProjects}/>
             <Route exact path={`${this.props.match.url}/MyTickets`} component={MyTickets}/>
-            <Route exact path={`${this.props.match.url}/ProjectDetail`} component={ProjectDetail}/>
+            <Route exact path={`${this.props.match.url}/ProjectDetail/:id`} component={ProjectDetail}/>
+            <Route exact path={`${this.props.match.url}/EditAssignedUsers/:id`} component={EditAssignedUsers}/>
            </div>
         </div>
       </div>

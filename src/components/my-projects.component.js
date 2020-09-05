@@ -13,7 +13,7 @@ const Project = props => (
     <td>{props.project.name}</td>
     <td>{props.project.description}</td>
     <td className="td-3">
-      <Link to="#">Manage Users</Link> | <a href="#">Details</a>
+      <Link to="#">Manage Users</Link> | <Link to={"/admin/ProjectDetail/"+props.id}>Details</Link>
     </td>
   </tr>
 )
@@ -47,7 +47,7 @@ export default class MyProjects extends Component {
 
   projectList() {
     return this.state.projects.map(currentproject => {
-      return <Project project={currentproject} key={currentproject.id} deleteProject={ProjectService.deleteProject} refresh={this.refreshPage}/>;
+      return <Project project={currentproject} id={currentproject.id} key={currentproject.id} deleteProject={ProjectService.deleteProject} refresh={this.refreshPage}/>;
     })
   }
 

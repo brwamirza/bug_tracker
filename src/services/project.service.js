@@ -18,8 +18,8 @@ class ProjectService {
     });
   }
 
-  getOneProject() {
-    return axios.get(API_URL + '/:id');
+  getOneProject(id) {
+    return axios.get(API_URL + `/${id}`);
   }
 
   // for deleting a single project
