@@ -1,3 +1,5 @@
+import {_} from 'lodash';
+import {zip} from 'lodash';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/manage-project-users.css';
@@ -8,12 +10,13 @@ import AuthService from "../services/auth.service";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ProjectService from "../services/project.service";
 
+
 const Project = props => (
   <tr>
     <td>{props.project.name}</td>
-    <td>{props.project.description}</td>
-    <td>{props.project.description}</td>
-    <td>{props.project.description}</td>
+    <td>{props.projectManager}</td>
+    <td>{props.developer}</td>
+    <td>{props.submitter}</td>
     <td className="td-3">
       <Link to={"/admin/ProjectDetail/"+props.id}>Details</Link> | <Link to={"/admin/EditAssignedUsers/"+props.id}>Edit</Link>
     </td>
@@ -27,25 +30,65 @@ export default class ManageProjectUsers extends Component {
 
     this.state = {
       currentUser: AuthService.getCurrentUser(),
-      projects: []
+      projects: [],
+      submitter:"",
+      developer:"",
+      projectManager:""
     };
   }
 
   componentDidMount(){
-    ProjectService.getAllProjects(this.state.currentUser.email).then(
-      response => {
-        this.setState({
-          projects: response.data
-        });
-      }
-    ).catch((error) => {
-      console.log(error);
-   })
+  //   ProjectService.getAllProjects(this.state.currentUser.email).then(
+  //     response => {
+  //       this.setState({
+  //         projects: response.data
+  //       });
+  //     }
+  //   ).catch((error) => {
+  //     console.log(error);
+  //  })
+
+   ProjectService.getAllProjectsWithUsers(this.state.currentUser.email).then(
+    response => {
+      this.setState({
+        projects: response.data
+      });
+    }
+  ).catch((error) => {
+    console.log(error);
+ });
+
   }
 
   projectList() {
-    return this.state.projects.map(currentproject => {
-      return <Project project={currentproject} id={currentproject.id} key={currentproject.id}/>;
+    return this.state.projects.map((value,index) => {
+      var i = 0;
+      var size = Object.keys(value.users).length;
+      for( i=0;i<size;i++){
+        if(value.users[i].role === "submitter"){
+          this.setState({
+            submitter: value.users[i].username
+          })
+        }
+        if(value.users[i].role === "developer"){
+          this.setState({
+            developer: value.users[i].username
+          })
+        }
+        if(value.users[i].role === "project-manager"){
+          this.setState({
+            projectManager: value.users[i].username
+          })
+        }
+      }
+    
+        return <Project   
+                project={value} 
+                id={value.id} 
+                key={value.id} 
+                submitter={this.state.submitter} 
+                developer={this.state.developer}
+                projectManager={this.state.projectManager}/>
     })
   }
 

@@ -36,5 +36,10 @@ module.exports = function(app) {
     app.get("/api/project/:id",
     controller.findOne
     );
+
+     //getting a single project
+     app.post("/api/project/allUsers",
+     controller.getAllProjectsWithUsers
+     );
   
   };

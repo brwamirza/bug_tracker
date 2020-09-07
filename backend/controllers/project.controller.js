@@ -24,7 +24,7 @@ exports.addProject = (req, res) => {
                 email: req.body.email
             }
         }).then(user => {
-            user.setProjects(project).then(() => {
+            user.addProjects(project).then(() => {
             res.send({ message: "Project was added successfully!" });
             });
         });
@@ -49,6 +49,21 @@ exports.getAllProject = (req,res) => {
     res.status(500).send({ message: err.message });
   });
 };
+
+// getting all project
+exports.getAllProjectsWithUsers = (req,res) => {
+  Project.findAll({
+    where: {
+      email: req.body.email
+    },include: User
+   }).then(project => {
+     res.json(project)
+    })
+ 
+    .catch(err => {
+     res.status(500).send({ message: err.message });
+   });
+ };
 
 // getting one project
 exports.findOne = (req, res) => {

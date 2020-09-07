@@ -10,6 +10,12 @@ class ProjectService {
      });
   }
 
+  getAllProjectsWithUsers(email) {
+    return axios.post(API_URL + "/allUsers", { 
+        email
+     });
+  }
+
   addProject(name,description,email){
     return axios.post(API_URL + "/add", {
       name,

@@ -120,10 +120,11 @@
     border-bottom: 1px solid rgb(233, 230, 230);
 }
 
-#edit-assigned-users .row{
+#edit-assigned-users .row {
     margin-left:0px;
     margin-right:0px;
 }
+
 #edit-assigned-users .input-right { 
     text-align: right; 
 }

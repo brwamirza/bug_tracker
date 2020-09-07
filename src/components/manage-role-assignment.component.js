@@ -69,7 +69,8 @@ export default class ManageRoleAssignment extends Component {
     }
   ).catch((error) => {
     console.log(error);
- })
+ });
+
  }
 
  MembersList() {
