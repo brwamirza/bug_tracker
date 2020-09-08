@@ -28,6 +28,14 @@ class ProjectService {
     return axios.get(API_URL + `/${id}`);
   }
 
+  assignUsers(projectId,newUsers,oldUsers) {
+    return axios.post(API_URL + "/assignUsers", {
+      projectId,
+      newUsers,
+      oldUsers
+    })
+  }
+
   // for deleting a single project
   deleteProject(id) {
     axios.delete(API_URL+'/'+id);

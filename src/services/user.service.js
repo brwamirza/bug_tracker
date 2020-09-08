@@ -13,17 +13,24 @@ class UserService {
      });
   }
 
-  getAllMembers(id) {
+  getAllMembers(email) {
     return axios.post(API_URL + 'getAllMembers', { 
-      id
+      email
      });
   }
 
-  updateUser(id,role,isMember) {
+  getAllMembers(email) {
+    return axios.post(API_URL + 'getAllMembersAsManager', { 
+      email
+     });
+  }
+
+  updateUser(id,role,isMember,adminEmail) {
     return axios.put(API_URL + 'updateUser', { 
       id,
       role,
-      isMember
+      isMember,
+      adminEmail
      });
   }
 

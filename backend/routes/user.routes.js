@@ -48,4 +48,9 @@ module.exports = function(app) {
     "/api/updateUser",
     controller.updateUser
   );
+
+  app.post(
+    "/api/getAllMembersAsManager",
+    controller.getAllMembersAsManager
+  );
 };

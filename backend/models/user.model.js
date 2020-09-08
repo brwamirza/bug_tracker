@@ -14,6 +14,9 @@ module.exports = (sequelize, Sequelize) => {
       },
       isMember: {
         type: Sequelize.STRING
+      },
+      joinedUser: {
+        type: Sequelize.STRING
       }
     });
   

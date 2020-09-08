@@ -7,6 +7,7 @@ const Op = db.Sequelize.Op;
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
+const { project } = require("../models");
 
 
 // adding a project to db
@@ -69,7 +70,11 @@ exports.getAllProjectsWithUsers = (req,res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  Project.findByPk(id)
+  Project.findOne({
+    where: {
+      id:id
+    },include: User
+  }) 
     .then(data => {
       res.send(data);
     })
@@ -79,6 +84,41 @@ exports.findOne = (req, res) => {
       });
     });
 };
+
+//assining new users to project
+exports.assignUsers = (req,res) => {
+  project.findOne({
+    where:{
+      id: req.body.projectId
+    }
+  }).then( project => {
+      User.findAll({
+        where: {
+          id : {
+            [Op.or]: req.body.oldUsers
+          }
+        }
+      }).then( oldUsers => {
+        project.removeUsers(oldUsers)
+      }).then( () => {
+          User.findAll({
+            where: {
+              id : {
+                [Op.or]: req.body.newUsers
+              }
+            }
+          }).then( newUsers => {
+            project.addUsers(newUsers)
+          }).then( () => {
+            res.send({
+              message: "users assigned successfully."
+            });
+          });
+      });
+  }).catch(err => {
+    res.status(500).send({ message: err.message });
+  });
+}
 
 // Update a Tutorial by the id in the request
 exports.update = (req, res) => {

@@ -41,7 +41,7 @@ export default class ManageRoleAssignment extends Component {
   }
 
  componentDidMount(){
-  UserService.getAllMembers(this.state.currentUser.id).then(
+  UserService.getAllMembers(this.state.currentUser.email).then(
     response => {
       this.setState({
         members: response.data
@@ -97,7 +97,8 @@ handleSubmit(e) {
   UserService.updateUser(
     this.state.selectedId,
     this.state.selectedRole,
-    "true"
+    "true",
+    this.state.currentUser.email
   )
 }
 

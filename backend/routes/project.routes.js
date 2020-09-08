@@ -41,5 +41,9 @@ module.exports = function(app) {
      app.post("/api/project/allUsers",
      controller.getAllProjectsWithUsers
      );
+
+     app.post("/api/project/assignUsers",
+     controller.assignUsers
+     );
   
   };

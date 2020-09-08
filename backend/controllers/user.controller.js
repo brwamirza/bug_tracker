@@ -53,7 +53,7 @@ exports.joinUser = (req,res) => {
 exports.getAllMembers = (req,res) => {
   User.findOne({
     where: {
-      id: req.body.id
+      email: req.body.email
     }
   }).then(user => {
         user.getFollowers().then(followers => {
@@ -65,10 +65,32 @@ exports.getAllMembers = (req,res) => {
         });
 };
 
+exports.getAllMembersAsManager = (req,res) => {
+  User.findOne({
+    where: {
+      email: req.body.email
+    }
+  }).then(user => {
+        User.findOne({
+          where: {
+            email: user.joinedUser
+          }
+        }).then(admin => {
+            admin.getFollowers().then(followers => {
+              res.json(followers);
+            });
+        });
+  }) 
+  .catch(err => {
+          res.status(500).send({ message: err.message });
+        });
+};
+
 exports.updateUser = (req,res) => {
   User.update({
     role: req.body.role,
-    isMember: req.body.isMember
+    isMember: req.body.isMember,
+    joinedUser: req.body.adminEmail
    },
    {
     where: {
