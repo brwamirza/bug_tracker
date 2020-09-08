@@ -6,6 +6,7 @@ import "@material/list";
 import AuthService from "../services/auth.service";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ProjectService from "../services/project.service";
+import UserService from "../services/user.service";
 import Select from 'react-select'
 
 
@@ -60,76 +61,77 @@ export default class EditAssignedUsers extends Component {
             })
           }
         }
+
+        const user = AuthService.getCurrentUser();
+
+        // start
+        if(user.roles === "ADMIN"){
+          UserService.getAllMembers(user.email).then(
+            response => {
+              this.setState({
+                members: response.data
+              });
+              
+                Object.keys(this.state.members).forEach(key => {
+                  if (this.state.members[key].isMember === "true"){
+                     if(this.state.members[key].role === "submitter"){
+                       submitterList.push({
+                         value: this.state.members[key].id, label: this.state.members[key].username
+                       })
+                     }  
+                     if(this.state.members[key].role === "developer"){
+                      developerList.push({
+                        value: this.state.members[key].id, label: this.state.members[key].username
+                      })
+                    } 
+                    if(this.state.members[key].role === "project-manager"){
+                      managerList.push({
+                        value: this.state.members[key].id, label: this.state.members[key].username
+                      })
+                    }
+                  }
+                });
+            }
+          ).catch((error) => {
+            console.log(error);
+          });
+         }
+      
+         else {
+          UserService.getAllMembersAsManager(user.email).then(
+            response => {
+              this.setState({
+                members: response.data
+              });
+            
+                Object.keys(this.state.members).forEach(key => {
+                  if (this.state.members[key].isMember === "true"){
+                    if(this.state.members[key].role === "submitter"){
+                      submitterList.push({
+                        value: this.state.members[key].id, label: this.state.members[key].username
+                      })
+                    }
+                    if(this.state.members[key].role === "developer"){
+                     developerList.push({
+                       value: this.state.members[key].id, label: this.state.members[key].username
+                     })
+                   } 
+                   if(this.state.members[key].role === "project-manager"){
+                     managerList.push({
+                       value: this.state.members[key].id, label: this.state.members[key].username
+                     })
+                   }
+                  }
+                });
+            }
+          ).catch((error) => {
+            console.log(error);
+          });
+         }
       }
     ).catch((error) => {
       console.log(error);
    });
-
-   if(this.state.currentUser.role === "admin"){
-    AuthService.getAllMembers(this.state.currentUser.email).then(
-      response => {
-        this.setState({
-          members: response.data
-        });
-        console.log(this.state.members);
-      
-          Object.keys(this.state.members).forEach(key => {
-            if (this.state.members[key].isMember === "true"){
-               if(this.state.members.role === "submitter"){
-                 submitterList.push({
-                   value: this.state.members[key].id, label: this.state.members[key].username
-                 })
-               }
-               if(this.state.members.role === "developer"){
-                developerList.push({
-                  value: this.state.members[key].id, label: this.state.members[key].username
-                })
-              } 
-              if(this.state.members.role === "project-manager"){
-                managerList.push({
-                  value: this.state.members[key].id, label: this.state.members[key].username
-                })
-              }
-            }
-          });
-      }
-    ).catch((error) => {
-      console.log(error);
-    });
-   }
-
-   else {
-    AuthService.getAllMembersAsManager(this.state.currentUser.email).then(
-      response => {
-        this.setState({
-          members: response.data
-        });
-        console.log(this.state.members);
-      
-          Object.keys(this.state.members).forEach(key => {
-            if (this.state.members[key].isMember === "true"){
-              if(this.state.members.role === "submitter"){
-                submitterList.push({
-                  value: this.state.members[key].id, label: this.state.members[key].username
-                })
-              }
-              if(this.state.members.role === "developer"){
-               developerList.push({
-                 value: this.state.members[key].id, label: this.state.members[key].username
-               })
-             } 
-             if(this.state.members.role === "project-manager"){
-               managerList.push({
-                 value: this.state.members[key].id, label: this.state.members[key].username
-               })
-             }
-            }
-          });
-      }
-    ).catch((error) => {
-      console.log(error);
-    });
-   }
   }
 
   onChangeSelectedSubmitter(submitter) {
@@ -151,6 +153,11 @@ export default class EditAssignedUsers extends Component {
     });
   }
 
+  // this will refresh the component
+  refreshPage() {
+   window.location.reload(false);
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     ProjectService.assignUsers(
@@ -159,6 +166,7 @@ export default class EditAssignedUsers extends Component {
       [this.state.submitter,this.state.developer,this.state.manager]
     )
   }
+
 
   render() {
     return (
@@ -187,7 +195,6 @@ export default class EditAssignedUsers extends Component {
                     onChange={(newValue) => this.onChangeSelectedManager(newValue.value)}
                     onSubmit={() => console.log('onSubmit')}
                     />
-
                     <p className="pt-4">Submitter</p>
 
                     <Select

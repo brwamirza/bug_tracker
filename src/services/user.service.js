@@ -19,7 +19,7 @@ class UserService {
      });
   }
 
-  getAllMembers(email) {
+  getAllMembersAsManager(email) {
     return axios.post(API_URL + 'getAllMembersAsManager', { 
       email
      });

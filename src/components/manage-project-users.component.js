@@ -38,33 +38,16 @@ export default class ManageProjectUsers extends Component {
   }
 
   componentDidMount(){
-  //   ProjectService.getAllProjects(this.state.currentUser.email).then(
-  //     response => {
-  //       this.setState({
-  //         projects: response.data
-  //       });
-  //     }
-  //   ).catch((error) => {
-  //     console.log(error);
-  //  })
-
    ProjectService.getAllProjectsWithUsers(this.state.currentUser.email).then(
     response => {
       this.setState({
         projects: response.data
       });
-    }
-  ).catch((error) => {
-    console.log(error);
- });
 
-  }
-
-  projectList() {
-    return this.state.projects.map((value,index) => {
-      var i = 0;
-      var size = Object.keys(value.users).length;
-      for( i=0;i<size;i++){
+      this.state.projects.map((value,index) => {
+        var i = 0;
+        var size = Object.keys(value.users).length;
+        for( i=0;i<size;i++){
         if(value.users[i].role === "submitter"){
           this.setState({
             submitter: value.users[i].username
@@ -81,7 +64,15 @@ export default class ManageProjectUsers extends Component {
           })
         }
       }
-    
+    })
+    }
+  ).catch((error) => {
+    console.log(error);
+   });
+  }
+
+  projectList() {
+    return this.state.projects.map((value,index) => {
         return <Project   
                 project={value} 
                 id={value.id} 
