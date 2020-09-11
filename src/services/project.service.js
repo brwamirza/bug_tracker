@@ -35,7 +35,14 @@ class ProjectService {
       oldUsers
     })
   }
-
+  
+  updateProject(id,submitter,developer,manager) {
+    return axios.put(API_URL + "/"+id, {
+      submitter,
+      developer,
+      manager
+    })
+  }
   // for deleting a single project
   deleteProject(id) {
     axios.delete(API_URL+'/'+id);

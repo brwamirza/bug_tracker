@@ -8,6 +8,15 @@ module.exports = (sequelize, Sequelize) => {
       },
       email: {
         type: Sequelize.STRING,
+      },
+      manager: {
+        type: Sequelize.STRING,
+      },
+      developer: {
+        type: Sequelize.STRING,
+      },
+      submitter: {
+        type: Sequelize.STRING,
       }
     });
   

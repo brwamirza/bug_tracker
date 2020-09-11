@@ -108,7 +108,7 @@ exports.assignUsers = (req,res) => {
               }
             }
           }).then( newUsers => {
-            project.addUsers(newUsers)
+            project.addUsers(newUsers);
           }).then( () => {
             res.send({
               message: "users assigned successfully."

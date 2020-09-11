@@ -11,12 +11,16 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ProjectService from "../services/project.service";
 
 
+// var submitterList = [];
+// var developerList = [];
+// var managerList = [];
+
 const Project = props => (
   <tr>
     <td>{props.project.name}</td>
-    <td>{props.projectManager}</td>
-    <td>{props.developer}</td>
-    <td>{props.submitter}</td>
+    <td>{props.project.manager}</td>
+    <td>{props.project.developer}</td>
+    <td>{props.project.submitter}</td>
     <td className="td-3">
       <Link to={"/admin/ProjectDetail/"+props.id}>Details</Link> | <Link to={"/admin/EditAssignedUsers/"+props.id}>Edit</Link>
     </td>
@@ -30,41 +34,37 @@ export default class ManageProjectUsers extends Component {
 
     this.state = {
       currentUser: AuthService.getCurrentUser(),
-      projects: [],
-      submitter:"",
-      developer:"",
-      projectManager:""
+      projects: []
     };
   }
 
   componentDidMount(){
-   ProjectService.getAllProjectsWithUsers(this.state.currentUser.email).then(
+   ProjectService.getAllProjects(this.state.currentUser.email).then(
     response => {
       this.setState({
         projects: response.data
       });
-
-      this.state.projects.map((value,index) => {
-        var i = 0;
-        var size = Object.keys(value.users).length;
-        for( i=0;i<size;i++){
-        if(value.users[i].role === "submitter"){
-          this.setState({
-            submitter: value.users[i].username
-          })
-        }
-        if(value.users[i].role === "developer"){
-          this.setState({
-            developer: value.users[i].username
-          })
-        }
-        if(value.users[i].role === "project-manager"){
-          this.setState({
-            projectManager: value.users[i].username
-          })
-        }
-      }
-    })
+    //   this.state.projects.map((value,index) => {
+    //     var i = 0;
+    //     var size = Object.keys(value.users).length;
+    //     for( i=0;i<size;i++){
+    //     if(value.users[i].role === "submitter"){
+    //       submitterList.push({
+    //        username: value.users[i].username
+    //       })
+    //     }
+    //     if(value.users[i].role === "developer"){
+    //       developerList.push(
+    //         value.users[i].username
+    //       )
+    //     }
+    //     if(value.users[i].role === "project-manager"){
+    //       managerList.push(
+    //         value.users[i].username
+    //       )
+    //     }
+    //   }
+    // })
     }
   ).catch((error) => {
     console.log(error);
@@ -72,14 +72,12 @@ export default class ManageProjectUsers extends Component {
   }
 
   projectList() {
-    return this.state.projects.map((value,index) => {
+    return this.state.projects.map((currentProject,index) => {
         return <Project   
-                project={value} 
-                id={value.id} 
-                key={value.id} 
-                submitter={this.state.submitter} 
-                developer={this.state.developer}
-                projectManager={this.state.projectManager}/>
+                project={currentProject} 
+                id={currentProject.id} 
+                key={currentProject.id} 
+                />
     })
   }
 
