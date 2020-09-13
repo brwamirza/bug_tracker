@@ -26,6 +26,7 @@ db.sequelize = sequelize;
 
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.project = require("../models/project.model.js")(sequelize, Sequelize);
+db.ticket = require("../models/ticket.model.js")(sequelize, Sequelize);
 
 db.user.belongsToMany(db.project, {
   through: "user_projects",
@@ -54,5 +55,17 @@ db.user.belongsToMany(db.user, {
 });
 
 db.user.hasMany(db.user);
+
+db.ticket.belongsToMany(db.project, {
+  through: "project_tickets",
+  foreignKey: "tickettId",
+  otherKey: "projectId"
+});
+
+db.project.belongsToMany(db.ticket, {
+  through: "project_tickets",
+  foreignKey: "projectId",
+  otherKey: "ticketId"
+});
 
 module.exports = db;

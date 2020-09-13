@@ -30,6 +30,9 @@ export default class EditAssignedUsers extends Component {
       developer:"",
       manager:"",
       members: [],
+      submitterList: [],
+      developerList: [],
+      managerList: [],
       selectedSubmitter:"",
       selectedDeveloper:"",
       selectedManager:""
@@ -67,14 +70,12 @@ export default class EditAssignedUsers extends Component {
 
         const user = AuthService.getCurrentUser();
 
-        // start
         if(user.roles === "ADMIN"){
           UserService.getAllMembers(user.email).then(
             response => {
               this.setState({
                 members: response.data
               });
-              
                 Object.keys(this.state.members).forEach(key => {
                   if (this.state.members[key].isMember === "true"){
                      if(this.state.members[key].role === "submitter"){
@@ -93,6 +94,11 @@ export default class EditAssignedUsers extends Component {
                       })
                     }
                   }
+                });
+                this.setState({
+                  submitterList: submitterList,
+                  developerList: developerList,
+                  managerList: managerList
                 });
             }
           ).catch((error) => {
@@ -125,6 +131,11 @@ export default class EditAssignedUsers extends Component {
                      })
                    }
                   }
+                });
+                this.setState({
+                  submitterList: submitterList,
+                  developerList: developerList,
+                  managerList: managerList
                 });
             }
           ).catch((error) => {
@@ -190,7 +201,7 @@ export default class EditAssignedUsers extends Component {
             <div className="header-1 ">
             <h5 className=" header-1-text ">Edit Assigned Users</h5>
             <p className=" header-1-p ">
-                <Link className="pr-1" style={{color:"#fff"}} to="/admin/ManageProjectUsers">Back to List</Link>
+                <a className="pr-1" style={{color:"#fff"}} href="/admin/ManageProjectUsers">Back to List</a>
             </p>            
             </div>
             <div className="box-1" style={{zIndex: "8!important"}}>
@@ -205,8 +216,7 @@ export default class EditAssignedUsers extends Component {
 
                     <p className="pt-4">Project Manager</p>
                     <Select
-                    options={managerList}
-                    displayEmpty={true}
+                    options={this.state.managerList}
                     // renderValue={() => this.renderValue(this.state.selectedSubmitter)}
                     // defaultValue={this.state.manager.username}
                     // value={{label: this.state.selectedManager.username , value: this.state.selectedManager.id}}
@@ -216,7 +226,7 @@ export default class EditAssignedUsers extends Component {
 
                     <p className="pt-4">Submitter</p>
                     <Select
-                    options={submitterList}
+                    options={this.state.submitterList}
                     // renderValue={() => this.renderValue(this.state.selectedSubmitter)}
                     // defaultValue={{ label:`${this.state.selectedSubmitter.username}`}}
                     // value={{label: this.state.selectedSubmitter.username , value: this.state.selectedSubmitter.id}}
@@ -232,7 +242,7 @@ export default class EditAssignedUsers extends Component {
                     <p className="pt-4">Developer</p>
                     <Select
                     // value={{label: this.state.selectedDeveloper.username , value: this.state.selectedDeveloper.id }}
-                    options={developerList}
+                    options={this.state.developerList}
                     // renderValue={() => this.renderValue(this.state.selectedDeveloper)}
                     // defaultValue={{ label: this.state.selectedDeveloper.username , value: this.state.selectedDeveloper.id }}
                     onChange={(newValue) => this.onChangeSelectedDeveloper(newValue)}
