@@ -86,7 +86,6 @@ export default class ManageProjectUsers extends Component {
      <div id="manage-project-users">
       <div className="header-1 ">
           <h5 className=" header-1-text ">Assigned Personnel</h5>
-          <p className=" header-1-p ">All the projects you have in the database</p>            
       </div>
       <div className="box-1" style={{zIndex: "8!important"}}>
         <div className="box-inner">

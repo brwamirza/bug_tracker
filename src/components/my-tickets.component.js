@@ -82,29 +82,29 @@ export default class MyTickets extends Component {
          <div id="my-tickets">
 
            {/* toggle modal button */}
-            <button 
+            <Link 
               type="button" 
+              to="/admin/CreateTicket"
               className="btn btn-primary"> 
               CREATE NEW TICKET
-            </button>
+            </Link>
 
             <div className="header-1 ">
-                <h5 className=" header-1-text ">Your Tickets</h5>
-                <p className=" header-1-p ">All the tickets you have in the database</p>            
+                <h5 className=" header-1-text ">My Tickets</h5>
             </div>
-            <div className="box-1" style={{zIndex: "8!important"}}>
+            <div className="box-1 box-shadow" style={{zIndex: "8!important"}}>
               <div className="box-inner">
                   <table className="table">
                   <thead>
                     <tr>
                       <th className="th-header-1">Title</th>
-                      <th className="">Project Name</th>
-                      <th className="">Developer Assigned</th>
-                      <th className="">Ticket Priority</th>
-                      <th className="">Ticket Status</th>
-                      <th className="">Ticket Type</th>
-                      <th className="">Created</th>
-                      <th className=""></th>
+                      <th className="th-header-2">Project Name</th>
+                      <th className="th-header-3">Developer Assigned</th>
+                      <th className="th-header-4">Ticket Priority</th>
+                      <th className="th-header-5">Ticket Status</th>
+                      <th className="th-header-6">Ticket Type</th>
+                      <th className="th-header-7">Created</th>
+                      <th className="th-header-8"></th>
                     </tr>
                   </thead>
                   <tbody className="table-items">

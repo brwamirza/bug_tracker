@@ -19,6 +19,13 @@ import AuthService from "../services/auth.service";
 import UserService from "../services/user.service";
 import  '../css/drawer.css'
 import NotifyMe from 'react-notification-timeline';
+import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import PeopleIcon from '@material-ui/icons/People';
+import ReorderIcon from '@material-ui/icons/Reorder';
+import ListIcon from '@material-ui/icons/List';
 
 
 const drawerWidth = 240;
@@ -115,43 +122,43 @@ function ResponsiveDrawer(props) {
         ))}
       </List> */}
       <List>
-        <ListItem>
-          <ListItemLink button href={props.url+`/DashboardHome`} className="list-item" key="DashboardHome" >
-            <ListItemIcon><InboxIcon /></ListItemIcon>
-            <ListItemText primary="Dashboard Home" />
-          </ListItemLink>
+        <ListItem key="DashboardHome">
+          <NavLink to={props.url+`/DashboardHome`} button  className="list-item w-100" style={{display: "inline-flex"}}>
+            <ListItemIcon><DashboardIcon /></ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </NavLink>
         </ListItem>
 
         {isAdmin && (
           <ListItem >
-            <ListItemLink button href={props.url+`/ManageRoleAssignment`} className="list-item" key="ManageRoleAssignment" >
-              <ListItemIcon><InboxIcon /></ListItemIcon>
-              <ListItemText primary="Manage Role Assignment" />
-            </ListItemLink>
+            <NavLink to={props.url+`/ManageRoleAssignment`}  className="list-item w-100" style={{display: "inline-flex"}}>
+              <ListItemIcon><GroupAddIcon /></ListItemIcon>
+              <ListItemText primary="Role Assignment" />
+            </NavLink>
           </ListItem>
         )}
 
         {(isAdmin || isProjectManager)  && (
-          <ListItem >
-            <ListItemLink button href={props.url+`/ManageProjectUsers`} className="list-item" key="ManageProjectUsers" >
-              <ListItemIcon><InboxIcon /></ListItemIcon>
-              <ListItemText primary="Manage Project Users" />
-            </ListItemLink>
+          <ListItem key="ManageProjectUsers">
+            <NavLink to={props.url+`/ManageProjectUsers`} className="list-item w-100" style={{display: "inline-flex"}}>
+              <ListItemIcon><PeopleIcon /></ListItemIcon>
+              <ListItemText primary="Project Users" />
+            </NavLink>
           </ListItem>
         )}
         
-        <ListItem >
-          <ListItemLink button href={props.url+`/MyProjects`} className="list-item" key="MyProjects" >
-            <ListItemIcon><InboxIcon /></ListItemIcon>
+        <ListItem key="MyProjects">
+        <NavLink to={props.url+`/MyProjects`} className="list-item w-100" style={{display: "inline-flex"}}>
+            <ListItemIcon><ReorderIcon /></ListItemIcon>
             <ListItemText primary="My Projects" />
-          </ListItemLink>
+          </NavLink>
         </ListItem>
 
-        <ListItem >
-          <ListItemLink button href={props.url+`/MyTickets`} className="list-item" key="MyTickets" >
-            <ListItemIcon><InboxIcon /></ListItemIcon>
+        <ListItem key="MyTickets">
+          <NavLink to={props.url+`/MyTickets`} className="list-item w-100" style={{display: "inline-flex"}}>
+            <ListItemIcon><ListIcon /></ListItemIcon>
             <ListItemText primary="My Tickets" />
-          </ListItemLink>
+          </NavLink>
         </ListItem>
       </List>
     </div>

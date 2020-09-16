@@ -23,8 +23,6 @@
 }
 
 #manage-project-users .header-1{
-    max-width: 100vw;
-    background-color: #1c4966;
     margin-left: 25px;
     margin-right: 49px;
     margin-top: 15px;
@@ -32,15 +30,13 @@
     display: flex;
     flex-direction: column;   
     justify-content: center;  
-    border-radius: 3px;
     z-index: 2;
     position: relative;
-    box-shadow: 0px 2px 10px 0px #1c4966!important;
 }
 
 #manage-project-users .header-1-text{
-    color: #fff;
-    margin-left: 20px;
+    padding-left: 10px;
+    padding-top:30px;
     vertical-align:middle;
 }
 
@@ -53,7 +49,7 @@
 }
 
 #manage-project-users .box-1{
-    padding-top: 120px;
+    padding-top: 100px;
     padding-bottom: 30px;
     max-width: 100vw;
     background-color: #fff;
@@ -61,7 +57,7 @@
     margin-right: 34px;
     margin-top: -75px;
     margin-bottom: 50px;
-    border-radius: 3px; 
+    border-radius: 5px; 
 }
 
 #manage-project-users .box-1 .box-inner{
@@ -71,24 +67,27 @@
 
 #manage-project-users .table thead th {
     vertical-align: bottom;
-    border-bottom: 2px solid #000;
+    border-bottom: 1px solid #dee2e6;
     border-top: none;
 }
 
 #manage-project-users .th-header-1{
     width: 300px;
+    color: #9e9e9e;
 }
-
 #manage-project-users .th-header-2{
     width: 250px;
+    color: #9e9e9e;
 }
 
 #manage-project-users .th-header-3{
     width: 250px;
+    color: #9e9e9e;
 }
 
 #manage-project-users .th-header-4{
     width: 250px;
+    color: #9e9e9e;
 }
 
 #manage-project-users .td-3{
@@ -96,6 +95,11 @@
 }
 
 #manage-project-users .table-items{
-    border-bottom: #000 2px solid;
+    border-bottom: #dee2e6 1px solid;
 }
 
+#manage-project-users .box-shadow {
+    -webkit-box-shadow: 0px 0px 5px 4px rgba(0,0,0,0.04);
+    -moz-box-shadow: 0px 0px 5px 4px rgba(0,0,0,0.04);
+    box-shadow: 0px 0px 5px 4px rgba(0,0,0,0.04);
+}

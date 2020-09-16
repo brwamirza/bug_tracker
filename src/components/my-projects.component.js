@@ -138,10 +138,9 @@ export default class MyProjects extends Component {
             {/* end of modal */}
 
             <div className="header-1 ">
-                <h5 className=" header-1-text ">Your Projects</h5>
-                <p className=" header-1-p ">All the projects you have in the database</p>            
+                <h5 className=" header-1-text ">My Projects</h5>
             </div>
-            <div className="box-1" style={{zIndex: "8!important"}}>
+            <div className="box-1 box-shadow" style={{zIndex: "8!important"}}>
               <div className="box-inner">
                   <table className="table">
                   <thead>

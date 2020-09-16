@@ -13,6 +13,7 @@ import MyProjects from './my-projects.component';
 import MyTickets from './my-tickets.component';
 import ProjectDetail from './project-detail.component';
 import EditAssignedUsers from './edit-assigned-users.component';
+import CreateTicket from './create-ticket.component';
 
 
 export default class Admin extends Component {
@@ -39,6 +40,7 @@ export default class Admin extends Component {
             <Route exact path={`${this.props.match.url}/MyTickets`} component={MyTickets}/>
             <Route exact path={`${this.props.match.url}/ProjectDetail/:id`} component={ProjectDetail}/>
             <Route exact path={`${this.props.match.url}/EditAssignedUsers/:id`} component={EditAssignedUsers}/>
+            <Route exact path={`${this.props.match.url}/CreateTicket/`} component={CreateTicket}/>
            </div>
         </div>
       </div>

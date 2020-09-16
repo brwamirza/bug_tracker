@@ -10,7 +10,9 @@
 
 .MuiDrawer-paperAnchorDockedLeft {
     border-right: 1px solid rgba(0, 0, 0, 0.12);
-    box-shadow: 4px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)!important;
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.2), 0px 0px 0px 0px rgba(0,0,0,0.14), 0px 0px 0px 0px rgba(0,0,0,0.12)!important;
+    background-color: #152934!important;
+    color: #fff!important;
 }
 
 .MuiDrawer-paper {
@@ -28,21 +30,29 @@
 
 .MuiAppBar-root {
     z-index: 10!important;
-
 }
 
 #admin .MuiPaper-elevation4 {
-    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 4px 4px 5px 0px rgba(0,0,0,0.14), 10px 1px 10px 0px rgba(0,0,0,0.12);
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.2), 0px 0px 0px 0px rgba(0,0,0,0.14), 0px 0px 0px 0px rgba(0,0,0,0.12);
 }
 
 #admin .MuiListItem-gutters {
-    padding-left: 8px!important; 
-    padding-right: 8px!important;
+    padding:16px!important ;
 }
 
-#admin .list-item:hover {
-    background-color: lightgray;
+#admin .list-item {
+    border-radius: 7px;
+    padding: 8px;
+    color: #b8b6de;
 }
+
+.list-item svg {
+    color: #b8b6de;
+}
+
+/* #admin .list-item:hover {
+    background-color: #fff;
+} */
 
 .MuiButtonBase-root {
     color: inherit;
@@ -137,6 +147,29 @@ a:hover {
     opacity: 1;
 }
 
-#admin .list-item:hover{
-    background-color: lightgray;
+#admin .MuiList-padding {
+    padding-top: 25px;
+    padding-bottom: 8px;
+}
+
+.active , .active svg{
+    background-color: #fff;
+    color: #000!important;
+}
+
+#admin .MuiListItemText-root {
+    flex: none;
+    display: inline;
+    
+}
+
+#admin .MuiSvgIcon-root {
+    fill: currentColor;
+    width: 1em;
+    height: inherit;
+    display: inline-block;
+    font-size: 1.5rem;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    flex-shrink: 0;
+    user-select: none;
 }
