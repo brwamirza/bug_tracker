@@ -55,9 +55,9 @@ export default class ProjectDetail extends Component {
       <div className="header-1 ">
           <h5 className=" header-1-text ">Project Details</h5>
           <p className=" header-1-p ">
-            <Link className="pr-1" style={{color:"#fff"}} to="/admin/MyProjects">Back to List</Link>
+            <Link className="pr-1" style={{color:"#000"}} to="/admin/MyProjects">Back to List</Link>
             |
-            <Link className="pl-1" style={{color:"#fff"}} to="#">Edit</Link>
+            <Link className="pl-1" style={{color:"#000"}} to="#">Edit</Link>
           </p>            
       </div>
       <div className="box-1" style={{zIndex: "8!important"}}>
@@ -80,7 +80,6 @@ export default class ProjectDetail extends Component {
                 <div>
                   <div className="header-2 ">
                       <h5 className=" header-1-text ">Assigned Personnel</h5>
-                      <p className=" header-1-p ">Current users on this project</p>            
                   </div>
                   <div className="box-1" style={{zIndex: "8!important"}}>
                     <div>
@@ -103,7 +102,6 @@ export default class ProjectDetail extends Component {
                 <div>
                   <div className="header-2 ">
                       <h5 className=" header-1-text ">Tickets for this Project</h5>
-                      <p className=" header-1-p ">Condensed Ticket Details</p>            
                   </div>
                   <div className="box-1" style={{zIndex: "8!important"}}>
                     <div >

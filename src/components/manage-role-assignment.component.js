@@ -47,7 +47,10 @@ export default class ManageRoleAssignment extends Component {
         members: response.data
       });
       console.log(this.state.members);
-    
+
+      newMembersList.length = 0;
+      membersList.length = 0;
+
         Object.keys(this.state.members).forEach(key => {
           if (this.state.members[key].isMember === "false"){
             newMembersList.push({
@@ -147,7 +150,6 @@ handleSubmit(e) {
          <div className="col-xs-12 col-xl-8">
             <div className="header-1 ">
               <h5 className=" header-1-text ">Your Personnel</h5>
-              <p className=" header-1-p ">All the users in your database</p>            
             </div>
             <div className="box-1" style={{zIndex: "8!important"}}>
               <div className="box-inner">

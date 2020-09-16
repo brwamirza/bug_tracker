@@ -45,6 +45,11 @@ export default class EditAssignedUsers extends Component {
         this.setState({
           project: response.data
         });
+
+        submitterList.length = 0;
+        developerList.length = 0;
+        managerList.length = 0;
+
         var i = 0;
         var size = Object.keys(this.state.project.users).length;
         for( i=0;i<size;i++){
@@ -199,10 +204,7 @@ export default class EditAssignedUsers extends Component {
      <div id="edit-assigned-users">
          <div className="box">
             <div className="header-1 ">
-            <h5 className=" header-1-text ">Edit Assigned Users</h5>
-            <p className=" header-1-p ">
-                <a className="pr-1" style={{color:"#fff"}} href="/admin/ManageProjectUsers">Back to List</a>
-            </p>            
+            <h5 className=" header-1-text">Edit Assigned Users</h5>          
             </div>
             <div className="box-1" style={{zIndex: "8!important"}}>
             <div className="box-inner">
@@ -251,7 +253,12 @@ export default class EditAssignedUsers extends Component {
 
                 </div>
               </div>
-              <div className="input-right">
+              
+              <div className="input-right" >
+                <div className=" align-left mt-4">
+                <Link className="pr-1 header-1-p" style={{color:"#fff"}} to="/admin/ManageProjectUsers">Back to List</Link>
+
+                </div>
                 <input type="submit" className="btn btn-primary mt-4" value="UPDATE PROJECT" onClick={this.refreshPage}/>
               </div>
 
