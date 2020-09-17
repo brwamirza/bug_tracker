@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import '../css/edit-assigned-users.css';
+import '../css/create-ticket.css';
 import "@material/drawer";
 import "@material/list";
 import AuthService from "../services/auth.service";
@@ -10,7 +10,7 @@ import UserService from "../services/user.service";
 import Select from 'react-select'
 
 
-const submitterList = [];
+const projectsList = [];
 const developerList = [];
 const managerList = [];
 
@@ -25,49 +25,28 @@ export default class CreateTicket extends Component {
 
     this.state = {
       currentUser: AuthService.getCurrentUser(),
-      project: [],
-      submitter:"",
+      projects: [],
       developer:"",
-      manager:"",
       members: [],
-      submitterList: [],
       developerList: [],
-      selectedSubmitter:"",
       selectedDeveloper:""
     };
   }
 
   componentDidMount(){
-    ProjectService.getOneProject(this.props.match.params.id).then(
+    const user = AuthService.getCurrentUser();
+
+    ProjectService.getAllProjects(user.email).then(
       response => {
-        this.setState({
-          project: response.data
+        projectsList.length = 0;
+        developerList.length = 0;
+
+        response.data.map(project => {
+
+          projectsList.push({
+            value: project.id, label: project.name
+          });
         });
-        var i = 0;
-        var size = Object.keys(this.state.project.users).length;
-        for( i=0;i<size;i++){
-          if(this.state.project.users[i].role === "submitter"){
-            this.setState({
-              submitter: this.state.project.users[i],
-              selectedSubmitter: this.state.project.users[i]
-            })
-          }
-          if(this.state.project.users[i].role === "developer"){
-            this.setState({
-              developer: this.state.project.users[i],
-              selectedDeveloper: this.state.project.users[i]
-            })
-          }
-          if(this.state.project.users[i].role === "project-manager"){
-            this.setState({
-              manager: this.state.project.users[i],
-              selectedManager: this.state.project.users[i]
-            })
-          }
-        }
-
-        const user = AuthService.getCurrentUser();
-
         if(user.roles === "ADMIN"){
           UserService.getAllMembers(user.email).then(
             response => {
@@ -76,27 +55,15 @@ export default class CreateTicket extends Component {
               });
                 Object.keys(this.state.members).forEach(key => {
                   if (this.state.members[key].isMember === "true"){
-                     if(this.state.members[key].role === "submitter"){
-                       submitterList.push({
-                         value: this.state.members[key].id, label: this.state.members[key].username
-                       })
-                     }  
                      if(this.state.members[key].role === "developer"){
                       developerList.push({
                         value: this.state.members[key].id, label: this.state.members[key].username
                       })
                     } 
-                    if(this.state.members[key].role === "project-manager"){
-                      managerList.push({
-                        value: this.state.members[key].id, label: this.state.members[key].username
-                      })
-                    }
                   }
                 });
                 this.setState({
-                  submitterList: submitterList,
-                  developerList: developerList,
-                  managerList: managerList
+                  developerList: developerList
                 });
             }
           ).catch((error) => {
@@ -113,27 +80,15 @@ export default class CreateTicket extends Component {
             
                 Object.keys(this.state.members).forEach(key => {
                   if (this.state.members[key].isMember === "true"){
-                    if(this.state.members[key].role === "submitter"){
-                      submitterList.push({
-                        value: this.state.members[key].id, label: this.state.members[key].username
-                      })
-                    }
                     if(this.state.members[key].role === "developer"){
                      developerList.push({
-                       value: this.state.members[key].id, label: this.state.members[key].username
-                     })
-                   } 
-                   if(this.state.members[key].role === "project-manager"){
-                     managerList.push({
                        value: this.state.members[key].id, label: this.state.members[key].username
                      })
                    }
                   }
                 });
                 this.setState({
-                  submitterList: submitterList,
-                  developerList: developerList,
-                  managerList: managerList
+                  developerList: developerList
                 });
             }
           ).catch((error) => {
@@ -194,13 +149,10 @@ export default class CreateTicket extends Component {
 
   render() {
     return (
-     <div id="edit-assigned-users">
+     <div id="create-ticket">
          <div className="box">
             <div className="header-1 ">
             <h5 className=" header-1-text ">Create Ticket</h5>
-            <p className=" header-1-p ">
-                <a className="pr-1" style={{color:"#fff"}} href="/admin/MyTickets">Back to List</a>
-            </p>            
             </div>
             <div className="box-1" style={{zIndex: "8!important"}}>
             <div className="box-inner">
@@ -209,12 +161,21 @@ export default class CreateTicket extends Component {
 
                 <div className="row horizantal-line pb-4">
                 <div className="col-sm-5 pr-5">
-                  <p>Title</p>
-                   <h6>{this.state.project.name}</h6>
+                  <div className="form-group">
+                    <label htmlFor="project-name" className="col-form-label">Title</label>
+                    <input 
+                      type="text" 
+                      className="form-control" 
+                      id="project-name" 
+                      name="project-name" 
+                      // value={this.state.projectName}
+                      // onChange={this.onChangeProjectName} 
+                      required />
+                  </div>
 
                     <p className="pt-4">Project</p>
                     <Select
-                    options={this.state.managerList}
+                    options={projectsList}
                     // renderValue={() => this.renderValue(this.state.selectedSubmitter)}
                     // defaultValue={this.state.manager.username}
                     // value={{label: this.state.selectedManager.username , value: this.state.selectedManager.id}}
@@ -224,7 +185,12 @@ export default class CreateTicket extends Component {
 
                     <p className="pt-4">Ticket Priority</p>
                     <Select
-                    options={this.state.submitterList}
+                    options={[
+                      { value: null, label: 'None' },
+                      { value: 'low', label: 'Low' },
+                      { value: 'medium', label: 'Medium' },
+                      { value: 'high', label: 'High' }
+                    ]}
                     // renderValue={() => this.renderValue(this.state.selectedSubmitter)}
                     // defaultValue={{ label:`${this.state.selectedSubmitter.username}`}}
                     // value={{label: this.state.selectedSubmitter.username , value: this.state.selectedSubmitter.id}}
@@ -234,7 +200,13 @@ export default class CreateTicket extends Component {
 
                     <p className="pt-4">Ticket Type</p>
                     <Select
-                    options={this.state.submitterList}
+                    options={[
+                      { value: null, label: 'None' },
+                      { value: 'bugs/errors', label: 'Bugs/Errors' },
+                      { value: 'future-requests', label: 'Future Requests' },
+                      { value: 'training/document-requests', label: 'Training/Document Requests' },
+                      { value: 'other-comments', label: 'Other Comments' }
+                    ]}
                     // renderValue={() => this.renderValue(this.state.selectedSubmitter)}
                     // defaultValue={{ label:`${this.state.selectedSubmitter.username}`}}
                     // value={{label: this.state.selectedSubmitter.username , value: this.state.selectedSubmitter.id}}
@@ -244,8 +216,16 @@ export default class CreateTicket extends Component {
                 </div>
 
                 <div className=" pl-5 col-sm-5">
-                    <p>Description</p>
-                    <h6>{this.state.project.description}</h6>
+                   <div className="form-group">
+                      <label htmlFor="description" className="col-form-label">Description</label>
+                      <textarea 
+                        className="form-control" 
+                        id="description" 
+                        name ="description"
+                        // value={this.state.description}
+                        // onChange={this.onChangeDescription} 
+                        required></textarea>
+                    </div>
 
                     <p className="pt-4">Assigned Developer</p>
                     <Select
@@ -259,7 +239,12 @@ export default class CreateTicket extends Component {
 
                     <p className="pt-4">Ticket Status</p>
                     <Select
-                    options={this.state.submitterList}
+                    options={[
+                      { value: 'open', label: 'Open' },
+                      { value: 'in-progress', label: 'In progress' },
+                      { value: 'additional-info-required', label: 'Additional Info Required' },
+                      { value: 'closed', label: 'Closed' }
+                    ]}
                     // renderValue={() => this.renderValue(this.state.selectedSubmitter)}
                     // defaultValue={{ label:`${this.state.selectedSubmitter.username}`}}
                     // value={{label: this.state.selectedSubmitter.username , value: this.state.selectedSubmitter.id}}
@@ -269,7 +254,12 @@ export default class CreateTicket extends Component {
 
                 </div>
               </div>
+
               <div className="input-right">
+              <div className=" align-left mt-4">
+                <Link className="pr-1 header-1-p" style={{color:"#fff"}} to="/admin/MyTickets">Back to List</Link>
+              </div>
+            
                 <input type="submit" className="btn btn-primary mt-4" value="CREATE TICKET" onClick={this.refreshPage}/>
               </div>
 

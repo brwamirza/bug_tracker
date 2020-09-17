@@ -62,7 +62,7 @@ export default class ProjectDetail extends Component {
       </div>
       <div className="box-1" style={{zIndex: "8!important"}}>
         <div className="box-inner">
-          <div className="horizantal-line pb-4">
+          <div className="pb-4 pt-4">
             <div className="pl-4 row">
               <div className="col-sm-6">
                 <p>Project Name</p>
@@ -74,7 +74,11 @@ export default class ProjectDetail extends Component {
               </div>
             </div>
           </div>
-          <div>
+        </div>
+      </div>
+
+      <div>
+        <div className="box-2">
             <div className="row">
               <div className="col-sm-5">
                 <div>
@@ -124,7 +128,7 @@ export default class ProjectDetail extends Component {
                 </div>
               </div>
             </div>
-          </div>
+          
         </div>
       </div>
      </div>     
