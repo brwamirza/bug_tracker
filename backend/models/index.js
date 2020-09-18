@@ -68,4 +68,16 @@ db.project.belongsToMany(db.ticket, {
   otherKey: "ticketId"
 });
 
+db.ticket.belongsToMany(db.user, {
+  through: "user_tickets",
+  foreignKey: "tickettId",
+  otherKey: "userId"
+});
+
+db.user.belongsToMany(db.ticket, {
+  through: "user_tickets",
+  foreignKey: "userId",
+  otherKey: "ticketId"
+});
+
 module.exports = db;

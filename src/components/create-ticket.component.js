@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../css/create-ticket.css';
 import "@material/drawer";
 import "@material/list";
+import TicketService from "../services/ticket.service";
 import AuthService from "../services/auth.service";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ProjectService from "../services/project.service";
@@ -12,7 +13,6 @@ import Select from 'react-select'
 
 const projectsList = [];
 const developerList = [];
-const managerList = [];
 
 export default class CreateTicket extends Component {
   constructor(props) {
@@ -29,7 +29,13 @@ export default class CreateTicket extends Component {
       developer:"",
       members: [],
       developerList: [],
-      selectedDeveloper:""
+      selectedDeveloper:"",
+      title: "",
+      description: "",
+      projectId: "",
+      priority: "",
+      status: "",
+      type: ""
     };
   }
 
@@ -129,10 +135,15 @@ export default class CreateTicket extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    ProjectService.assignUsers(
-      this.props.match.params.id,
-      [this.state.selectedSubmitter.value,this.state.selectedDeveloper.value,this.state.selectedManager.value],
-      [this.state.submitter,this.state.developer,this.state.manager]
+    TicketService.addTicket(
+      this.state.title,
+      this.state.description,
+      this.state.projectId,
+      this.state.developerId,
+      this.state.priority,
+      this.state.status,
+      this.state.type,
+      this.state.currentUser.email
     );
     ProjectService.updateProject(
       this.props.match.params.id,
