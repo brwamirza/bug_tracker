@@ -17,10 +17,15 @@ const developerList = [];
 export default class CreateTicket extends Component {
   constructor(props) {
     super(props);
-    this.onChangeSelectedSubmitter = this.onChangeSelectedSubmitter.bind(this);
     this.refreshPage = this.refreshPage.bind(this);
+    this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeSelectedDeveloper = this.onChangeSelectedDeveloper.bind(this);
-    this.onChangeSelectedManager = this.onChangeSelectedManager.bind(this);
+    this.onChangeStatus = this.onChangeStatus.bind(this);
+    this.onChangeType = this.onChangeType.bind(this);
+    this.onChangePriority = this.onChangePriority.bind(this);
+    this.onChangeProject = this.onChangeProject.bind(this);
+    this.onChangeDescription = this.onChangeDescription.bind(this);
+
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
@@ -32,7 +37,7 @@ export default class CreateTicket extends Component {
       selectedDeveloper:"",
       title: "",
       description: "",
-      projectId: "",
+      project: "",
       priority: "",
       status: "",
       type: ""
@@ -107,11 +112,11 @@ export default class CreateTicket extends Component {
    });
   }
 
-  onChangeSelectedSubmitter(submitter) {
+  onChangeTitle(e) {
     this.setState({
-      selectedSubmitter: submitter
+      title: e.target.value
     });
-    console.log(this.state.selectedSubmitter);
+    console.log(this.state.title);
   }
   
   onChangeSelectedDeveloper(developer) {
@@ -121,11 +126,39 @@ export default class CreateTicket extends Component {
     console.log(this.state.selectedDeveloper);
   }
   
-  onChangeSelectedManager(manager) {
+  onChangeDescription(e) {
     this.setState({
-      selectedManager: manager
+      description: e.target.value
     });
-    console.log(this.state.selectedManager);
+    console.log(this.state.description);
+  }
+
+  onChangeProject(project) {
+    this.setState({
+      project: project
+    });
+    console.log(this.state.project);
+  }
+
+  onChangeStatus(status) {
+    this.setState({
+      status:status
+    });
+    console.log(this.state.status);
+  }
+
+  onChangeType(type) {
+    this.setState({
+      type: type
+    });
+    console.log(this.state.type);
+  }
+
+  onChangePriority(priority) {
+    this.setState({
+      priority: priority
+    });
+    console.log(this.state.priority);
   }
 
   // this will refresh the component
@@ -138,19 +171,17 @@ export default class CreateTicket extends Component {
     TicketService.addTicket(
       this.state.title,
       this.state.description,
-      this.state.projectId,
-      this.state.developerId,
-      this.state.priority,
-      this.state.status,
-      this.state.type,
-      this.state.currentUser.email
-    );
-    ProjectService.updateProject(
-      this.props.match.params.id,
-      this.state.selectedSubmitter.label,
+      this.state.project.label,
       this.state.selectedDeveloper.label,
-      this.state.selectedManager.label
-    );
+      this.state.priority.label,
+      this.state.status.label,
+      this.state.type.label,
+      this.state.currentUser.email,
+    ).then(() => {
+      this.props.history.push("/admin/myTickets");
+      window.location.reload();
+    })
+   
   }
 
   renderValue = (value) => {
@@ -179,8 +210,8 @@ export default class CreateTicket extends Component {
                       className="form-control" 
                       id="project-name" 
                       name="project-name" 
-                      // value={this.state.projectName}
-                      // onChange={this.onChangeProjectName} 
+                      value={this.state.title}
+                      onChange={this.onChangeTitle} 
                       required />
                   </div>
 
@@ -190,7 +221,7 @@ export default class CreateTicket extends Component {
                     // renderValue={() => this.renderValue(this.state.selectedSubmitter)}
                     // defaultValue={this.state.manager.username}
                     // value={{label: this.state.selectedManager.username , value: this.state.selectedManager.id}}
-                    onChange={(newValue) => this.onChangeSelectedManager(newValue)}
+                    onChange={(newValue) => this.onChangeProject(newValue)}
                     onSubmit={() => console.log('onSubmit')}
                     />
 
@@ -205,7 +236,7 @@ export default class CreateTicket extends Component {
                     // renderValue={() => this.renderValue(this.state.selectedSubmitter)}
                     // defaultValue={{ label:`${this.state.selectedSubmitter.username}`}}
                     // value={{label: this.state.selectedSubmitter.username , value: this.state.selectedSubmitter.id}}
-                    onChange={(newValue) => this.onChangeSelectedSubmitter(newValue)}
+                    onChange={(newValue) => this.onChangePriority(newValue)}
                     onSubmit={() => console.log('onSubmit')}
                     />
 
@@ -221,7 +252,7 @@ export default class CreateTicket extends Component {
                     // renderValue={() => this.renderValue(this.state.selectedSubmitter)}
                     // defaultValue={{ label:`${this.state.selectedSubmitter.username}`}}
                     // value={{label: this.state.selectedSubmitter.username , value: this.state.selectedSubmitter.id}}
-                    onChange={(newValue) => this.onChangeSelectedSubmitter(newValue)}
+                    onChange={(newValue) => this.onChangeType(newValue)}
                     onSubmit={() => console.log('onSubmit')}
                     />
                 </div>
@@ -233,8 +264,8 @@ export default class CreateTicket extends Component {
                         className="form-control" 
                         id="description" 
                         name ="description"
-                        // value={this.state.description}
-                        // onChange={this.onChangeDescription} 
+                        value={this.state.description}
+                        onChange={this.onChangeDescription} 
                         required></textarea>
                     </div>
 
@@ -259,7 +290,7 @@ export default class CreateTicket extends Component {
                     // renderValue={() => this.renderValue(this.state.selectedSubmitter)}
                     // defaultValue={{ label:`${this.state.selectedSubmitter.username}`}}
                     // value={{label: this.state.selectedSubmitter.username , value: this.state.selectedSubmitter.id}}
-                    onChange={(newValue) => this.onChangeSelectedSubmitter(newValue)}
+                    onChange={(newValue) => this.onChangeStatus(newValue)}
                     onSubmit={() => console.log('onSubmit')}
                     />
 
@@ -271,7 +302,7 @@ export default class CreateTicket extends Component {
                 <Link className="pr-1 header-1-p" style={{color:"#fff"}} to="/admin/MyTickets">Back to List</Link>
               </div>
             
-                <input type="submit" className="btn btn-primary mt-4" value="CREATE TICKET" onClick={this.refreshPage}/>
+                <input type="submit" className="btn btn-primary mt-4" value="CREATE TICKET" />
               </div>
 
               </form>

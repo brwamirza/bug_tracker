@@ -11,13 +11,13 @@ var bcrypt = require("bcryptjs");
 const { project } = require("../models");
 
 
-// adding a project to db
+// adding a ticket to db
 exports.addTicket = (req, res) => {
-  // Save Project to Database
+  // Save ticket to Database
   Ticket.create({
     title: req.body.title,
-    description: req.body.descritpion,
-    projectName: req.body.projectName,
+    description: req.body.description,
+    project: req.body.project,
     developer: req.body.developer,
     priority: req.body.priority,
     status: req.body.status,
@@ -25,17 +25,35 @@ exports.addTicket = (req, res) => {
     submitter: req.body.submitter
   })
     .then(ticket => {
-        if (req.body.email) {
-        User.findOne({
+        Project.findOne({
             where: {
-                email: req.body.email
+                name: req.body.project
             }
-        }).then(user => {
-            user.addProjects(project).then(() => {
-            res.send({ message: "Project was added successfully!" });
+        }).then(project => {
+            project.addTickets(ticket).then(() => {
+              User.findAll({
+                where: {
+                  username : {
+                    [Op.or]: [req.body.submitter,req.body.developer,project.manager]
+                  }
+                }
+              }).then(users => {
+                  ticket.addUsers(users).then(() => {
+                    User.findOne({
+                      where: {
+                        email: project.email
+                      }
+                    }).then(user => {
+                      ticket.addUsers(user).then(() => {
+                        res.send({ message: "ticket was added successfully!" });
+                      });
+                    });
+                  });
+              }).catch(err => {
+                res.status(500).send({ message: err.message });
+              });
             });
         });
-        }
     })
     .catch(err => {
       res.status(500).send({ message: err.message });
@@ -43,21 +61,21 @@ exports.addTicket = (req, res) => {
 };
 
 // getting all project
-exports.getAllProject = (req,res) => {
- Project.findAll({
+exports.getAllTickets = (req,res) => {
+ User.findOne({
    where: {
      email: req.body.email
    }
-  }).then(project => {
-    res.json(project)
-   })
-
-   .catch(err => {
-    res.status(500).send({ message: err.message });
+  }).then(user => {
+    user.getTickets().then(tickets => {
+      res.json(tickets);
+    })
+   }).catch(err => {
+      res.status(500).send({ message: err.message });
   });
 };
 
-// getting all project
+// getting all project with users
 exports.getAllProjectsWithUsers = (req,res) => {
   Project.findAll({
     where: {

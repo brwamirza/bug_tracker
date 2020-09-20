@@ -5,76 +5,55 @@ import "@material/drawer";
 import "@material/list";
 import AuthService from "../services/auth.service";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import ProjectService from "../services/project.service";
+import TicketService from "../services/ticket.service";
 
+const tickets = [];
 
-// const Project = props => (
-//   <tr>
-//     <td>{props.project.name}</td>
-//     <td>{props.project.description}</td>
-//     <td className="td-3">
-//       <Link to="#">Edit/Assign</Link> | <Link to={"/admin/ProjectDetail/"+props.id}>Details</Link>
-//     </td>
-//   </tr>
-// )
+const Ticket = props => (
+  <tr>
+    <td>{props.ticket.title}</td>
+    <td>{props.ticket.project}</td>
+    <td>{props.ticket.developer}</td>
+    <td>{props.ticket.priority}</td>
+    <td>{props.ticket.status}</td>
+    <td>{props.ticket.type}</td>
+    <td>{props.ticket.createdAt}</td>
+
+    <td className="td-3">
+      <Link to="#">Edit/Assign</Link> | <Link to={"/admin/ProjectDetail/"+props.id}>Details</Link>
+    </td>
+  </tr>
+)
 
 export default class MyTickets extends Component {
   constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.onChangeProjectName = this.onChangeProjectName.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.refreshPage = this.refreshPage.bind(this);
 
     this.state = {
       currentUser: AuthService.getCurrentUser(),
-      projects: [],
+      tickets: [],
       projectName: "",
       description: ""
     };
   }
 
   componentDidMount(){
-    ProjectService.getAllProjects(this.state.currentUser.email).then(
+    TicketService.getAllTickets(this.state.currentUser.email).then(
       response => {
         this.setState({
-          projects: response.data
+          tickets: response.data
         });
+        console.log(this.state.tickets);
+
       }
     ).catch((error) => {
       console.log(error);
    })}
 
-  // projectList() {
-  //   return this.state.projects.map(currentproject => {
-  //     return <Project project={currentproject} id={currentproject.id} key={currentproject.id} refresh={this.refreshPage}/>;
-  //   })
-  // }
-
-  onChangeProjectName(e) {
-    this.setState({
-      projectName: e.target.value
-    });
-  }
-
-  onChangeDescription(e) {
-    this.setState({
-      description: e.target.value
-    });
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    ProjectService.addProject(
-      this.state.projectName,
-      this.state.description,
-      this.state.currentUser.email
-    )
-  }
-
-    // this will refresh the component
-   refreshPage() {
-    window.location.reload(false);
+  ticketList() {
+    return this.state.tickets.map(currentTicket => {
+      return <Ticket ticket={currentTicket} id={currentTicket.id} key={currentTicket.id} />;
+    })
   }
 
   render() {
@@ -108,7 +87,7 @@ export default class MyTickets extends Component {
                     </tr>
                   </thead>
                   <tbody className="table-items">
-                    {/* { this.projectList() } */}
+                    { this.ticketList() }
                   </tbody>
                 </table>
               </div>

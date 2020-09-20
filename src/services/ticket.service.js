@@ -10,16 +10,16 @@ class TicketService {
      });
   }
 
-  addTicket(title,description,projectId,developerId,priority,status,type,submitter){
+  addTicket(title,description,project,developer,priority,status,type,submitter){
     return axios.post(API_URL + "/add", {
         title,
         description,
-        projectId,
-        developerId,
+        project,
+        developer,
         priority,
         status,
         type,
-        submitter
+        submitter,
     });
   }
 

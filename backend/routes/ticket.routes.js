@@ -18,27 +18,27 @@ module.exports = function(app) {
     //getting all tickets
     app.post(
       "/api/ticket/all",
-      controller.getAllTicket
+      controller.getAllTickets
     );
 
-    //deleting a single ticket
-    app.delete(
-      "/api/ticket/:id",
-      controller.delete
-    );
+    // //deleting a single ticket
+    // app.delete(
+    //   "/api/ticket/:id",
+    //   controller.delete
+    // );
 
-     // Update a Tutorial with id
-    app.put("/api/ticket/:id",
-    controller.update
-    );
+    //  // Update a Tutorial with id
+    // app.put("/api/ticket/:id",
+    // controller.update
+    // );
 
-    //getting a single ticket
-    app.get("/api/ticket/:id",
-    controller.findOne
-    );
+    // //getting a single ticket
+    // app.get("/api/ticket/:id",
+    // controller.findOne
+    // );
 
-     app.post("/api/ticket/assignUsers",
-     controller.assignUsers
-     );
+    //  app.post("/api/ticket/assignUsers",
+    //  controller.assignUsers
+    //  );
   
   };

@@ -70,7 +70,7 @@ db.project.belongsToMany(db.ticket, {
 
 db.ticket.belongsToMany(db.user, {
   through: "user_tickets",
-  foreignKey: "tickettId",
+  foreignKey: "ticketId",
   otherKey: "userId"
 });
 
