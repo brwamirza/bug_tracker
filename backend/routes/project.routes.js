@@ -45,5 +45,13 @@ module.exports = function(app) {
      app.post("/api/project/assignUsers",
      controller.assignUsers
      );
+
+     app.post("/api/project/getUsers",
+     controller.getUsers
+     );
+
+     app.post("/api/project/Tickets",
+     controller.getTickets
+     );
   
   };

@@ -28,6 +28,18 @@ class ProjectService {
     return axios.get(API_URL + `/${id}`);
   }
 
+  getTickets(id) {
+    return axios.post(API_URL + '/Tickets', {
+      id
+    })
+  }
+
+  getUsers(id) {
+    return axios.post(API_URL + `/getUsers`, {
+      id
+    });
+  }
+
   assignUsers(projectId,newUsers,oldUsers) {
     return axios.post(API_URL + "/assignUsers", {
       projectId,

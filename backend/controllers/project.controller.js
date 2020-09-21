@@ -66,6 +66,42 @@ exports.getAllProjectsWithUsers = (req,res) => {
    });
  };
 
+exports.getUsers = (req, res) => {
+  Project.findOne({
+    where: {
+      id: req.body.id
+    }
+  }) 
+    .then(project => {
+      project.getUsers().then(users => {
+        res.json(users);
+      })
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error retrieving Project with id=" + req.body.id
+      });
+    });
+};
+
+exports.getTickets = (req, res) => {
+  Project.findOne({
+    where: {
+      id: req.body.id
+    }
+  }) 
+    .then(project => {
+      project.getTickets().then(tickets => {
+        res.json(tickets);
+      })
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error retrieving tickets for Project with id=" + req.body.id
+      });
+    });
+};
+
 // getting one project
 exports.findOne = (req, res) => {
   const id = req.params.id;

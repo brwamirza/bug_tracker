@@ -11,15 +11,13 @@ const tickets = [];
 
 const Ticket = props => (
   <tr>
-    <td>{props.ticket.title}</td>
-    <td>{props.ticket.project}</td>
-    <td>{props.ticket.developer}</td>
-    <td>{props.ticket.priority}</td>
-    <td>{props.ticket.status}</td>
-    <td>{props.ticket.type}</td>
-    <td>{props.ticket.createdAt}</td>
-
-    <td className="td-3">
+    <td className="pl-0">{props.ticket.title}</td>
+    <td className="pl-0">{props.ticket.project}</td>
+    <td className="pl-0">{props.ticket.developer}</td>
+    <td className="pl-0">{props.ticket.priority}</td>
+    <td className="pl-0">{props.ticket.status}</td>
+    <td className="pl-0">{props.ticket.type}</td>
+    <td className="td-3 pl-0">
       <Link to="#">Edit/Assign</Link> | <Link to={"/admin/ProjectDetail/"+props.id}>Details</Link>
     </td>
   </tr>
@@ -82,7 +80,6 @@ export default class MyTickets extends Component {
                       <th className="th-header-4">Ticket Priority</th>
                       <th className="th-header-5">Ticket Status</th>
                       <th className="th-header-6">Ticket Type</th>
-                      <th className="th-header-7">Created</th>
                       <th className="th-header-8"></th>
                     </tr>
                   </thead>

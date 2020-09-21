@@ -8,26 +8,35 @@ import AuthService from "../services/auth.service";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ProjectService from "../services/project.service";
 
-// const Project = props => (
-//   <tr>
-//     <td>{props.project.name}</td>
-//     <td>{props.project.description}</td>
-//     <td>{props.project.description}</td>
-//     <td>{props.project.description}</td>
-//     <td className="td-3">
-//       <Link to="#">Details</Link> | <a href="#" >Edit</a>
-//     </td>
-//   </tr>
-// )
+const User = props => (
+  <tr>
+    <td className="pl-0">{props.user.username}</td>
+    <td className="pl-0 ">{props.user.email}</td>
+    <td className="pl-0">{props.user.role}</td>
+  </tr>
+)
+
+const Ticket = props => (
+  <tr>
+    <td className="pl-0">{props.ticket.title}</td>
+    <td className="pl-0">{props.ticket.submitter}</td>
+    <td className="pl-0">{props.ticket.developer}</td>
+    <td className="pl-0">{props.ticket.status}</td>
+    <td className="td-3 pl-0">
+      <Link to="#">More Details</Link>
+    </td>
+  </tr>
+)
 
 export default class ProjectDetail extends Component {
   constructor(props) {
     super(props);
 
-
     this.state = {
       currentUser: AuthService.getCurrentUser(),
-      project: []
+      project: [],
+      users: [],
+      tickets: []
     };
   }
 
@@ -40,96 +49,121 @@ export default class ProjectDetail extends Component {
       }
     ).catch((error) => {
       console.log(error);
-   })
+   });
+
+   ProjectService.getUsers(this.props.match.params.id).then(
+    response => {
+      this.setState({
+        users: response.data
+      });
+    }
+  ).catch((error) => {
+    console.log(error);
+ });
+
+ ProjectService.getTickets(this.props.match.params.id).then(
+  response => {
+    this.setState({
+      tickets: response.data
+    });
+    }
+  ).catch((error) => {
+    console.log(error);
+  });
+}
+
+  userList() {
+    return this.state.users.map(currentUser => {
+      return <User user={currentUser} key={currentUser.id}/>;
+    })
   }
 
-  // projectList() {
-  //   return this.state.project.map(currentproject => {
-  //     return <Project project={currentproject} key={currentproject.id}/>;
-  //   })
-  // }
+  ticketList() {
+    return this.state.tickets.map(currentTicket => {
+      return <Ticket ticket={currentTicket} key={currentTicket.id}/>;
+    })
+  }
 
   render() {
     return (
      <div id="project-detail">
-      <div className="header-1 ">
-          <h5 className=" header-1-text ">Project Details</h5>
-          <p className=" header-1-p ">
-            <Link className="pr-1" style={{color:"#000"}} to="/admin/MyProjects">Back to List</Link>
-            |
-            <Link className="pl-1" style={{color:"#000"}} to="#">Edit</Link>
-          </p>            
-      </div>
-      <div className="box-1" style={{zIndex: "8!important"}}>
-        <div className="box-inner">
-          <div className="pb-4 pt-4">
-            <div className="pl-4 row">
-              <div className="col-sm-6">
-                <p>Project Name</p>
-                <h6 className="pl-2">{this.state.project.name}</h6>
+       <div className="row">
+          <div className="col-md-5">
+              <div className="header-1 pt-4">
+                <h5 className=" header-1-text ">Project Details</h5>
+                <p className=" header-1-p ">
+                  <Link className="pr-1" style={{color:"#000"}} to="/admin/MyProjects">Back to List</Link>
+                  |
+                  <Link className="pl-1" style={{color:"#000"}} to="#">Edit</Link>
+                </p>            
+            </div>
+            <div className="box-1" style={{zIndex: "8!important"}}>
+              <div className="box-inner">
+                <div className="pb-4 pt-5">
+                  <div className=" row pt-5">
+                    <div className="col-sm-5">
+                      <p style={{color: "#9e9e9e"}}>Project Name</p>
+                      <h6 className="pl-2">{this.state.project.name}</h6>
+                    </div>
+                    <div className="col-sm-7">
+                      <p style={{color: "#9e9e9e"}}>Project Description</p>
+                      <h6 className="pl-2">{this.state.project.description}</h6>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="col-sm-6">
-                <p>Project Description</p>
-                <h6 className="pl-2">{this.state.project.description}</h6>
+            </div>
+         </div>
+         <div className="col-md-7">
+            <div>
+              <div className="header-1 ">
+                  <h5 className=" header-1-text ">Assigned Personnel</h5>
+              </div>
+              <div className="box-1" style={{zIndex: "8!important"}}>
+                <div>
+                    <table className="table">
+                    <thead>
+                      <tr>
+                        <th className="th-header-1">User Name</th>
+                        <th className="th-header-2">Email</th>
+                        <th className="th-header-3">Role</th>
+                      </tr>
+                    </thead>
+                    <tbody className="table-items">
+                      {this.userList()}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+       </div>
+      <div> 
 
       <div>
-        <div className="box-2">
-            <div className="row">
-              <div className="col-sm-5">
-                <div>
-                  <div className="header-2 ">
-                      <h5 className=" header-1-text ">Assigned Personnel</h5>
-                  </div>
-                  <div className="box-1" style={{zIndex: "8!important"}}>
-                    <div>
-                        <table className="table">
-                        <thead>
-                          <tr>
-                            <th className="th-header-1">User Name</th>
-                            <th className="th-header-2">Email</th>
-                            <th className="th-header-3">Role</th>
-                          </tr>
-                        </thead>
-                        <tbody className="table-items">
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-7">
-                <div>
-                  <div className="header-2 ">
-                      <h5 className=" header-1-text ">Tickets for this Project</h5>
-                  </div>
-                  <div className="box-1" style={{zIndex: "8!important"}}>
-                    <div >
-                        <table className="table">
-                        <thead>
-                          <tr>
-                            <th className="th-header-1">Title</th>
-                            <th className="th-header-2">Submitter</th>
-                            <th className="th-header-3">Developer</th>
-                            <th className="th-header-4">Status</th>
-                            <th className="th-header-5">Created</th>
-                            <th className="th-header-6"></th>
-                          </tr>
-                        </thead>
-                        <tbody className="table-items">
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          
+        <div className="header-1 ">
+            <h5 className=" header-1-text ">Tickets for this Project</h5>
         </div>
+        <div className="box-1" style={{zIndex: "8!important"}}>
+          <div >
+              <table className="table">
+              <thead>
+                <tr>
+                  <th className="th-header-1">Title</th>
+                  <th className="th-header-2">Submitter</th>
+                  <th className="th-header-3">Developer</th>
+                  <th className="th-header-4">Status</th>
+                  <th className="th-header-5"></th>
+                </tr>
+              </thead>
+              <tbody className="table-items">
+                {this.ticketList()}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+  
       </div>
      </div>     
     );
