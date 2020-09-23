@@ -245,7 +245,7 @@ export default class CreateTicket extends Component {
                     options={[
                       { value: null, label: 'None' },
                       { value: 'bugs/errors', label: 'Bugs/Errors' },
-                      { value: 'future-requests', label: 'Future Requests' },
+                      { value: 'feature-requests', label: 'Feature Requests' },
                       { value: 'training/document-requests', label: 'Training/Document Requests' },
                       { value: 'other-comments', label: 'Other Comments' }
                     ]}

@@ -7,7 +7,7 @@ import Drawer from "./drawer.component"
 import TicketService from "../services/ticket.service";
 import AuthService from "../services/auth.service";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { BarChart, Bar,  XAxis, YAxis, Tooltip, ResponsiveContainer,PieChart, Pie, Sector, Cell } from 'recharts';
+import { BarChart, Bar,  XAxis, YAxis, Tooltip, ResponsiveContainer,PieChart, Pie, Sector, Cell, CartesianGrid } from 'recharts';
 
 var lowCount = "0";
 var mediumCount = "0";
@@ -17,9 +17,16 @@ var openCount = "0";
 var inProgressCount = "0";
 var infoRequiredCount = "0";
 var closedCount = "0";
+var noneTypeCount = "0";
+var bugsCount = "0";
+var featureRequestsCount = "0";
+var trainingCount = "0";
+var otherCount = "0";
 
 //pie chart
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const priorityChartColors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const typeChartColors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042','#8884d8'];
+const statusChartColors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 const data2 = [
   { name: 'Group A', value: 400 },
@@ -46,7 +53,7 @@ const renderActiveShape = (props) => {
 
   return (
     <g>
-      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>{payload.name}</text>
+      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>{payload.type}</text>
       <Sector
         cx={cx}
         cy={cy}
@@ -84,6 +91,7 @@ export default class DashboardHome extends Component {
       activeIndex: 0,
       ticketPriorityData:[],
       ticketStatusData: [],
+      ticketTypeData: [],
       currentUser: AuthService.getCurrentUser(),
       tickets: [],
       projectName: "",
@@ -107,8 +115,14 @@ export default class DashboardHome extends Component {
         inProgressCount = "0";
         infoRequiredCount = "0";
         closedCount = "0";
+        noneTypeCount = "0";
+        bugsCount = "0";
+        featureRequestsCount = "0";
+        trainingCount = "0";
+        otherCount = "0";
 
         response.data.map(ticket => {
+          // for ticket priority data array
           if(ticket.priority==="Low"){
             lowCount++
           }
@@ -121,6 +135,7 @@ export default class DashboardHome extends Component {
           if(ticket.priority==="None"){
             noneCount++
           }
+          // for ticket status data array
           if(ticket.status==="Open"){
             openCount++
           }
@@ -132,6 +147,22 @@ export default class DashboardHome extends Component {
           }
           if(ticket.status==="Closed"){
             closedCount++
+          }
+          // for ticket type data array
+          if(ticket.type==="None"){
+            noneTypeCount++
+          }
+          if(ticket.type==="Bugs/Errors"){
+            bugsCount++
+          }
+          if(ticket.type==="Feature Requests"){
+            featureRequestsCount++
+          }
+          if(ticket.type==="Training/Document Requests"){
+            trainingCount++
+          }
+          if(ticket.type==="Other Comments"){
+            otherCount++
           }
         });
         this.setState({
@@ -164,12 +195,35 @@ export default class DashboardHome extends Component {
               "tickets": inProgressCount
             },
             {
-              "status": "Additional Info Required",
+              "status": "More Info Required",
               "tickets": infoRequiredCount
             },
             {
               "status": "Closed",
               "tickets": closedCount
+            }
+          ],
+
+          ticketTypeData: [
+            {
+              "type": "None",
+              "tickets": noneTypeCount
+            },
+            {
+              "type": "Bugs/Errors",
+              "tickets": bugsCount
+            },
+            {
+              "type": "Feature Request",
+              "tickets": featureRequestsCount
+            },
+            {
+              "type": "Training/Document",
+              "tickets": trainingCount
+            },
+            {
+              "type": "Other Comments",
+              "tickets": otherCount
             }
           ]
 
@@ -189,77 +243,84 @@ export default class DashboardHome extends Component {
   render() {
     return (
      <div id="dashboard">
-       <div className="row  pt-5">
+       <div className="row pt-3">
         <div className="col-sm-12 col-md-6">
-          <ResponsiveContainer  height={230}>
-            <BarChart  data={this.state.ticketPriorityData}>
-              <XAxis dataKey="priority" />
-              <YAxis />
-              <Tooltip />
-              <Bar dataKey="tickets" fill="#8884d8">
-               {
-                  this.state.ticketPriorityData.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
-               }
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
+          <div className="box">
+            <div className="chart-label">
+              <strong>Tickets by Priority</strong>
+            </div>
+            <div style={{padding:"10px"}}>
+            <ResponsiveContainer  height={300} style={{padding:"10px"}}>
+              <BarChart  data={this.state.ticketPriorityData}>
+                <XAxis dataKey="priority" />
+                <YAxis />
+                <Tooltip />
+                <CartesianGrid strokeDasharray="3 3" />
+                <Bar dataKey="tickets" fill="#8884d8">
+                {
+                    this.state.ticketPriorityData.map((entry, index) => <Cell key={`cell-${index}`} fill={priorityChartColors[index % priorityChartColors.length]} />)
+                }
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+            </div>
+          </div>
+         
         </div>
         <div className="col-xs-12 col-lg-6">
-            <PieChart width={500} height={400}>
-              <Pie
-                activeIndex={this.state.activeIndex}
-                activeShape={renderActiveShape}
-                data={data2}
-                cx={250}
-                cy={150}
-                innerRadius={60}
-                outerRadius={80}
-                fill="#8884d8"
-                dataKey="value"
-                onMouseEnter={this.onPieEnter}
-             >
-                {
-                  data2.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
-                }
-            </Pie>
-            </PieChart>
+          <div className="box">
+            <div className="chart-label">
+              <strong>Tickets by Type</strong>
+            </div>
+            <div style={{padding:"10px"}}>
+            <ResponsiveContainer  height={300} style={{padding:"10px"}}>
+              <PieChart >
+                  <Pie
+                    activeIndex={this.state.activeIndex}
+                    activeShape={renderActiveShape}
+                    data={this.state.ticketTypeData}
+                    innerRadius={75}
+                    outerRadius={95}
+                    fill="#8884d8"
+                    dataKey="tickets"
+                    onMouseEnter={this.onPieEnter}
+                  >
+                    {
+                      this.state.ticketTypeData.map((entry, index) => <Cell key={`cell-${index}`} fill={typeChartColors[index % typeChartColors.length]} />)
+                    }
+                  </Pie>
+                </PieChart>
+              </ResponsiveContainer>
+              </div>
+
+          </div>
         </div>
        </div>
 
-       <div className="row ">
-        <div className="col-sm-12 col-md-6">
-          <ResponsiveContainer  height={230}>
-            <BarChart  data={this.state.ticketStatusData}>
-              <XAxis dataKey="status" />
-              <YAxis />
-              <Tooltip />
-              <Bar dataKey="tickets" fill="#8884d8" >
-                {
-                  this.state.ticketStatusData.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
-                }
-                </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-        <div className="col-xs-12 col-lg-6">
-            <PieChart width={500} height={400}>
-              <Pie
-                activeIndex={this.state.activeIndex}
-                activeShape={renderActiveShape}
-                data={data2}
-                cx={250}
-                cy={150}
-                innerRadius={60}
-                outerRadius={80}
-                fill="#8884d8"
-                dataKey="value"
-                onMouseEnter={this.onPieEnter}
-             >
-                {
-                  data2.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
-                }
-            </Pie>
-            </PieChart>
+       <div className="row pt-3 pb-5">
+        <div className="col-sm-12 col-md-6 pb-3">
+          <div className="box">
+            <div className="chart-label">
+              <strong>Tickets by Status</strong>
+            </div>
+            <div style={{padding:"10px"}}>
+              <ResponsiveContainer  height={300}>
+                <BarChart  data={this.state.ticketStatusData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="status" />
+                  <YAxis />
+                  <Tooltip />
+                  <Bar dataKey="tickets" fill="#8884d8" >
+                    {
+                      this.state.ticketStatusData.map((entry, index) => <Cell key={`cell-${index}`} fill={statusChartColors[index % statusChartColors.length]} />)
+                    }
+                    </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+        
+           
+          </div>
         </div>
        </div>
    

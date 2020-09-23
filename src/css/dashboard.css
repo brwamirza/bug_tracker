@@ -1,4 +1,21 @@
 #dashboard{
     overflow-y: scroll;
-    height: 100vh;
+    max-height: 100vh;
+    padding: 15px;
+}
+
+#dashboard .box {
+    border: 0.5px rgb(219, 219, 219) solid;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+}
+
+#dashboard .chart-label {
+    text-align: center;
+    font-size: 25px;
+    border-radius: 5px;
+    color: #444444;
+    padding-top: 5px;
 }
