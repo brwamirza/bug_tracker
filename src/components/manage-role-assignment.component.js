@@ -132,13 +132,11 @@ handleSubmit(e) {
 
                 <Select
                   options={[
-                    { value: null, label: 'Select a Role or None' },
                     { value: 'submitter', label: 'Submitter' },
                     { value: 'developer', label: 'Developer' },
                     { value: 'project-manager', label: 'Project Manager' },
                     { value: 'admin', label: 'Admin' },
                   ]}
-                 
                   onChange={(newValue) => this.onChangeSelectedRole(newValue.value)}
                   onSubmit={() => console.log('onSubmit')}
                 />

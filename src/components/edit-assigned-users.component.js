@@ -13,6 +13,9 @@ import Select from 'react-select'
 const submitterList = [];
 const developerList = [];
 const managerList = [];
+var defaultManager =[];
+var defaultSubmitter =[];
+var defaultDeveloper =[];
 
 export default class EditAssignedUsers extends Component {
   constructor(props) {
@@ -26,9 +29,6 @@ export default class EditAssignedUsers extends Component {
     this.state = {
       currentUser: AuthService.getCurrentUser(),
       project: [],
-      submitter:"",
-      developer:"",
-      manager:"",
       members: [],
       submitterList: [],
       developerList: [],
@@ -49,26 +49,35 @@ export default class EditAssignedUsers extends Component {
         submitterList.length = 0;
         developerList.length = 0;
         managerList.length = 0;
+        defaultManager.length = 0;
+        defaultSubmitter.length = 0;
+        defaultDeveloper.length = 0;
 
         var i = 0;
         var size = Object.keys(this.state.project.users).length;
         for( i=0;i<size;i++){
           if(this.state.project.users[i].role === "submitter"){
+            defaultSubmitter.push({
+              value: this.state.project.users[i].id, label: this.state.project.users[i].username
+            })
             this.setState({
-              submitter: this.state.project.users[i],
-              selectedSubmitter: this.state.project.users[i]
+              selectedSubmitter: defaultSubmitter
             })
           }
           if(this.state.project.users[i].role === "developer"){
+            defaultDeveloper.push({
+              value: this.state.project.users[i].id, label: this.state.project.users[i].username
+            });
             this.setState({
-              developer: this.state.project.users[i],
-              selectedDeveloper: this.state.project.users[i]
+              selectedDeveloper: defaultDeveloper
             })
           }
           if(this.state.project.users[i].role === "project-manager"){
+            defaultManager.push({
+              value: this.state.project.users[i].id, label: this.state.project.users[i].username
+            });
             this.setState({
-              manager: this.state.project.users[i],
-              selectedManager: this.state.project.users[i]
+              selectedManager: defaultManager
             })
           }
         }
@@ -184,7 +193,7 @@ export default class EditAssignedUsers extends Component {
     ProjectService.assignUsers(
       this.props.match.params.id,
       [this.state.selectedSubmitter.value,this.state.selectedDeveloper.value,this.state.selectedManager.value],
-      [this.state.submitter,this.state.developer,this.state.manager]
+      [defaultSubmitter.value,defaultDeveloper.value,defaultManager.value]
     );
     ProjectService.updateProject(
       this.props.match.params.id,
@@ -219,9 +228,8 @@ export default class EditAssignedUsers extends Component {
                     <p className="pt-4">Project Manager</p>
                     <Select
                     options={this.state.managerList}
-                    // renderValue={() => this.renderValue(this.state.selectedSubmitter)}
-                    // defaultValue={this.state.manager.username}
-                    // value={{label: this.state.selectedManager.username , value: this.state.selectedManager.id}}
+                    defaultValue={defaultManager}
+                    getOptionLabel={(option) => option.label}
                     onChange={(newValue) => this.onChangeSelectedManager(newValue)}
                     onSubmit={() => console.log('onSubmit')}
                     />
@@ -229,9 +237,8 @@ export default class EditAssignedUsers extends Component {
                     <p className="pt-4">Submitter</p>
                     <Select
                     options={this.state.submitterList}
-                    // renderValue={() => this.renderValue(this.state.selectedSubmitter)}
-                    // defaultValue={{ label:`${this.state.selectedSubmitter.username}`}}
-                    // value={{label: this.state.selectedSubmitter.username , value: this.state.selectedSubmitter.id}}
+                    defaultValue={defaultSubmitter}
+                    getOptionLabel={(option) => option.label}
                     onChange={(newValue) => this.onChangeSelectedSubmitter(newValue)}
                     onSubmit={() => console.log('onSubmit')}
                     />
@@ -243,10 +250,9 @@ export default class EditAssignedUsers extends Component {
 
                     <p className="pt-4">Developer</p>
                     <Select
-                    // value={{label: this.state.selectedDeveloper.username , value: this.state.selectedDeveloper.id }}
                     options={this.state.developerList}
-                    // renderValue={() => this.renderValue(this.state.selectedDeveloper)}
-                    // defaultValue={{ label: this.state.selectedDeveloper.username , value: this.state.selectedDeveloper.id }}
+                    defaultValue={defaultDeveloper}
+                    getOptionLabel={(option) => option.label}
                     onChange={(newValue) => this.onChangeSelectedDeveloper(newValue)}
                     onSubmit={() => console.log('onSubmit')}
                     />
