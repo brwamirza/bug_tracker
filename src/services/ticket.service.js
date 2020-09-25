@@ -27,6 +27,20 @@ class TicketService {
     return axios.get(API_URL + `/${id}`);
   }
 
+  getAllMessages(id) {
+    return axios.get(API_URL + `/messages` , {
+      id
+    });
+  }
+
+  addMessage(id, commenter, message) {
+    return axios.post(API_URL + `/addMessage`, {
+      id,
+      commenter,
+      message
+    });
+  }
+
   assignDeveloper(ticketId,newDeveloper,oldDeveloper) {
     return axios.post(API_URL + "/assignUsers", {
         ticketId,

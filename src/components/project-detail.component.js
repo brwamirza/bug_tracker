@@ -92,7 +92,7 @@ export default class ProjectDetail extends Component {
               <div className="header-1 pt-4">
                 <h5 className=" header-1-text ">Project Details</h5>
                 <p className=" header-1-p ">
-                  <Link className="pr-1" style={{color:"#000"}} to="/admin/MyProjects">Back to List</Link>
+                  <Link className="pr-1" style={{color:"#000"}} to="/MyProjects">Back to List</Link>
                   |
                   <Link className="pl-1" style={{color:"#000"}} to="#">Edit</Link>
                 </p>            

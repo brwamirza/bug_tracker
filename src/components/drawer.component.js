@@ -123,7 +123,7 @@ function ResponsiveDrawer(props) {
       </List> */}
       <List>
         <ListItem key="DashboardHome">
-          <NavLink to={props.url+`/DashboardHome`} button  className="list-item w-100" style={{display: "inline-flex"}}>
+          <NavLink to={`/Dashboard`} button  className="list-item w-100" style={{display: "inline-flex"}}>
             <ListItemIcon><DashboardIcon /></ListItemIcon>
             <ListItemText primary="Dashboard" />
           </NavLink>
@@ -131,7 +131,7 @@ function ResponsiveDrawer(props) {
 
         {isAdmin && (
           <ListItem >
-            <NavLink to={props.url+`/ManageRoleAssignment`}  className="list-item w-100" style={{display: "inline-flex"}}>
+            <NavLink to={`/ManageRoleAssignment`}  className="list-item w-100" style={{display: "inline-flex"}}>
               <ListItemIcon><GroupAddIcon /></ListItemIcon>
               <ListItemText primary="Role Assignment" />
             </NavLink>
@@ -140,7 +140,7 @@ function ResponsiveDrawer(props) {
 
         {(isAdmin || isProjectManager)  && (
           <ListItem key="ManageProjectUsers">
-            <NavLink to={props.url+`/ManageProjectUsers`} className="list-item w-100" style={{display: "inline-flex"}}>
+            <NavLink to={`/ManageProjectUsers`} className="list-item w-100" style={{display: "inline-flex"}}>
               <ListItemIcon><PeopleIcon /></ListItemIcon>
               <ListItemText primary="Project Users" />
             </NavLink>
@@ -148,14 +148,14 @@ function ResponsiveDrawer(props) {
         )}
         
         <ListItem key="MyProjects">
-        <NavLink to={props.url+`/MyProjects`} className="list-item w-100" style={{display: "inline-flex"}}>
+        <NavLink to={`/MyProjects`} className="list-item w-100" style={{display: "inline-flex"}}>
             <ListItemIcon><ReorderIcon /></ListItemIcon>
             <ListItemText primary="My Projects" />
           </NavLink>
         </ListItem>
 
         <ListItem key="MyTickets">
-          <NavLink to={props.url+`/MyTickets`} className="list-item w-100" style={{display: "inline-flex"}}>
+          <NavLink to={`/MyTickets`} className="list-item w-100" style={{display: "inline-flex"}}>
             <ListItemIcon><ListIcon /></ListItemIcon>
             <ListItemText primary="My Tickets" />
           </NavLink>

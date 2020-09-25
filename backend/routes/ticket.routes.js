@@ -32,10 +32,18 @@ module.exports = function(app) {
     // controller.update
     // );
 
-    // //getting a single ticket
-    // app.get("/api/ticket/:id",
-    // controller.findOne
-    // );
+    //getting a single ticket
+    app.get("/api/ticket/:id",
+    controller.getOneTicket
+    );
+
+    app.post("/api/ticket/addMessage",
+    controller.addMessage
+    );
+
+    app.get("/api/ticket/messages",
+    controller.getAllMessages
+    );
 
     //  app.post("/api/ticket/assignUsers",
     //  controller.assignUsers

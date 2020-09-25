@@ -1,0 +1,124 @@
+#ticket-detail{
+    padding-top: 40px;
+    padding-left: 24px;
+    padding-right: 24px;
+    overflow: auto;
+    max-height: 100vh;
+    padding-bottom: 70px;
+}
+
+
+#ticket-detail .btn-primary {
+    color: #fff;
+    background-color: #2e5984;
+    border-color: #2e5984;
+}
+
+#ticket-detail .btn {
+    font-weight: 400;
+    padding: .60rem 1.3rem;
+    font-size: 0.9em;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+#ticket-detail .header-1{
+    margin-left: 25px;
+    margin-right: 49px;
+    margin-top: 15px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;   
+    justify-content: center;  
+    z-index: 2;
+    position: relative;
+}
+
+#ticket-detail .header-2{
+    max-width: 100vw;
+    margin-top: 15px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;   
+    justify-content: center;  
+    border-radius: 3px;
+    z-index: 2;
+    position: relative;
+}
+
+#ticket-detail .header-1-text{
+    padding-left: 10px;
+    padding-top:30px;
+    vertical-align:middle;
+}
+
+#ticket-detail .header-1-p{
+    vertical-align:middle;
+    margin-bottom:0;
+    margin-left: 30px;
+    font-weight: 300;
+}
+
+#ticket-detail .box-1{
+    padding-top: 90px;
+    padding-bottom: 30px;
+    max-width: 100vw;
+    background-color: #fff;
+    margin-top: -75px;
+    margin-bottom: 50px;
+    border-radius: 5px; 
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#ticket-detail .box-1 .box-inner{
+   margin-left: 15px;
+   margin-right: 15px;
+}
+
+#ticket-detail .table thead th {
+    vertical-align: bottom;
+    border-bottom: 1px solid #dee2e6;
+    border-top: none;
+}
+
+#ticket-detail .th-header-1{
+    width: 300px;
+    color: #9e9e9e;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#ticket-detail .th-header-2{
+    width: 250px;
+    color: #9e9e9e;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#ticket-detail .th-header-3{
+    width: 250px;
+    color: #9e9e9e;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#ticket-detail .th-header-4{
+    width: 400px;
+    color: #9e9e9e;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#ticket-detail .td-3{
+    width: 200px;
+}
+
+#ticket-detail .table-items{
+    border-bottom: #dee2e6 1px solid;
+}
+
+.horizantal-line{
+    border-bottom: 1px solid gray;
+}

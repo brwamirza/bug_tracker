@@ -18,7 +18,7 @@ const Ticket = props => (
     <td className="pl-0">{props.ticket.status}</td>
     <td className="pl-0">{props.ticket.type}</td>
     <td className="td-3 pl-0">
-      <Link to="#">Edit/Assign</Link> | <Link to={"/admin/ProjectDetail/"+props.id}>Details</Link>
+      <Link to="#">Edit/Assign</Link> | <Link to={"/TicketDetails/"+props.id}>Details</Link>
     </td>
   </tr>
 )
@@ -61,7 +61,7 @@ export default class MyTickets extends Component {
            {/* toggle modal button */}
             <Link 
               type="button" 
-              to="/admin/CreateTicket"
+              to="/CreateTicket"
               className="btn btn-primary"> 
               CREATE NEW TICKET
             </Link>

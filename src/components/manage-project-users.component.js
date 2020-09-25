@@ -22,7 +22,7 @@ const Project = props => (
     <td>{props.project.developer}</td>
     <td>{props.project.submitter}</td>
     <td className="td-3">
-      <Link to={"/admin/ProjectDetail/"+props.id}>Details</Link> | <Link to={"/admin/EditAssignedUsers/"+props.id}>Edit</Link>
+      <Link to={"/ProjectDetail/"+props.id}>Details</Link> | <Link to={"/EditAssignedUsers/"+props.id}>Edit</Link>
     </td>
   </tr>
 )

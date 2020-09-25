@@ -3,6 +3,7 @@ const config = require("../config/auth.config");
 const User = db.user;
 const Project = db.project;
 const Ticket = db.ticket;
+const Message = db.message;
 
 const Op = db.Sequelize.Op;
 
@@ -90,21 +91,63 @@ exports.getAllProjectsWithUsers = (req,res) => {
    });
  };
 
-// getting one project
-exports.findOne = (req, res) => {
+// getting one ticket
+exports.getOneTicket = (req, res) => {
   const id = req.params.id;
 
-  Project.findOne({
+  Ticket.findOne({
     where: {
       id:id
-    },include: User
+    }
   }) 
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error retrieving Project with id=" + id
+        message: "Error retrieving Ticket with id=" + id
+      });
+    });
+};
+
+// add message and assign it to a ticket
+exports.addMessage = (req, res) => {
+  Message.Create({
+    commenter: req.body.commenter,
+    message: req.body.message
+  }) 
+    .then(message => {
+      Ticket.findOne({
+        where: {
+          id: req.body.id
+        }
+      })
+        .then(ticket => {
+          ticket.addMessages(message).then(() => {
+            res.send({ message: "message was added successfully!" });
+          })
+        })
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+// getting all message
+exports.getAllMessages = (req, res) => {
+  Ticket.findOne({
+    where: {
+      id:id
+    }
+  }) 
+    .then(ticket => {
+      ticket.getMessages().then(messages => {
+        res.send(messages);
+      })
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error retrieving Ticket with id=" + id
       });
     });
 };

@@ -35,7 +35,7 @@ h1 {
     align-items: center;
     -webkit-box-pack: center;
     justify-content: center;
-    background-color: rgb(88, 111, 250);
+    background-color: #033f7a;
     color: rgb(251, 251, 255);
 }
 
@@ -83,3 +83,7 @@ h1 {
     }
 }
 
+#signin .btn-primary{
+    background-color: #033f7a;
+    border-color: #033f7a;
+}

@@ -218,9 +218,6 @@ export default class CreateTicket extends Component {
                     <p className="pt-4">Project</p>
                     <Select
                     options={projectsList}
-                    // renderValue={() => this.renderValue(this.state.selectedSubmitter)}
-                    // defaultValue={this.state.manager.username}
-                    // value={{label: this.state.selectedManager.username , value: this.state.selectedManager.id}}
                     onChange={(newValue) => this.onChangeProject(newValue)}
                     onSubmit={() => console.log('onSubmit')}
                     />
@@ -233,9 +230,6 @@ export default class CreateTicket extends Component {
                       { value: 'medium', label: 'Medium' },
                       { value: 'high', label: 'High' }
                     ]}
-                    // renderValue={() => this.renderValue(this.state.selectedSubmitter)}
-                    // defaultValue={{ label:`${this.state.selectedSubmitter.username}`}}
-                    // value={{label: this.state.selectedSubmitter.username , value: this.state.selectedSubmitter.id}}
                     onChange={(newValue) => this.onChangePriority(newValue)}
                     onSubmit={() => console.log('onSubmit')}
                     />
@@ -249,9 +243,6 @@ export default class CreateTicket extends Component {
                       { value: 'training/document-requests', label: 'Training/Document Requests' },
                       { value: 'other-comments', label: 'Other Comments' }
                     ]}
-                    // renderValue={() => this.renderValue(this.state.selectedSubmitter)}
-                    // defaultValue={{ label:`${this.state.selectedSubmitter.username}`}}
-                    // value={{label: this.state.selectedSubmitter.username , value: this.state.selectedSubmitter.id}}
                     onChange={(newValue) => this.onChangeType(newValue)}
                     onSubmit={() => console.log('onSubmit')}
                     />
@@ -271,10 +262,7 @@ export default class CreateTicket extends Component {
 
                     <p className="pt-4">Assigned Developer</p>
                     <Select
-                    // value={{label: this.state.selectedDeveloper.username , value: this.state.selectedDeveloper.id }}
                     options={this.state.developerList}
-                    // renderValue={() => this.renderValue(this.state.selectedDeveloper)}
-                    // defaultValue={{ label: this.state.selectedDeveloper.username , value: this.state.selectedDeveloper.id }}
                     onChange={(newValue) => this.onChangeSelectedDeveloper(newValue)}
                     onSubmit={() => console.log('onSubmit')}
                     />
@@ -287,9 +275,6 @@ export default class CreateTicket extends Component {
                       { value: 'additional-info-required', label: 'Additional Info Required' },
                       { value: 'closed', label: 'Closed' }
                     ]}
-                    // renderValue={() => this.renderValue(this.state.selectedSubmitter)}
-                    // defaultValue={{ label:`${this.state.selectedSubmitter.username}`}}
-                    // value={{label: this.state.selectedSubmitter.username , value: this.state.selectedSubmitter.id}}
                     onChange={(newValue) => this.onChangeStatus(newValue)}
                     onSubmit={() => console.log('onSubmit')}
                     />
@@ -299,7 +284,7 @@ export default class CreateTicket extends Component {
 
               <div className="input-right">
               <div className=" align-left mt-4">
-                <Link className="pr-1 header-1-p" style={{color:"#fff"}} to="/admin/MyTickets">Back to List</Link>
+                <Link className="pr-1 header-1-p" style={{color:"#fff"}} to="/MyTickets">Back to List</Link>
               </div>
             
                 <input type="submit" className="btn btn-primary mt-4" value="CREATE TICKET" />
