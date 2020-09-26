@@ -28,7 +28,7 @@ class TicketService {
   }
 
   getAllMessages(id) {
-    return axios.get(API_URL + `/messages` , {
+    return axios.post(API_URL + `/messages` , {
       id
     });
   }

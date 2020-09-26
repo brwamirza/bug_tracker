@@ -41,7 +41,7 @@ module.exports = function(app) {
     controller.addMessage
     );
 
-    app.get("/api/ticket/messages",
+    app.post("/api/ticket/messages",
     controller.getAllMessages
     );
 

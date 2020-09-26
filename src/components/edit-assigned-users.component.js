@@ -262,7 +262,7 @@ export default class EditAssignedUsers extends Component {
               
               <div className="input-right" >
                 <div className=" align-left mt-4">
-                <Link className="pr-1 header-1-p" style={{color:"#fff"}} to="/admin/ManageProjectUsers">Back to List</Link>
+                <Link className="pr-1 header-1-p" style={{color:"#fff"}} to="/ManageProjectUsers">Back to List</Link>
 
                 </div>
                 <input type="submit" className="btn btn-primary mt-4" value="UPDATE PROJECT" onClick={this.refreshPage}/>

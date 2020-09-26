@@ -122,15 +122,15 @@ function ResponsiveDrawer(props) {
         ))}
       </List> */}
       <List>
-        <ListItem key="DashboardHome">
-          <NavLink to={`/Dashboard`} button  className="list-item w-100" style={{display: "inline-flex"}}>
+        <ListItem key="Dashboard">
+          <NavLink to="/Dashboard" button  className="list-item w-100" style={{display: "inline-flex"}}>
             <ListItemIcon><DashboardIcon /></ListItemIcon>
             <ListItemText primary="Dashboard" />
           </NavLink>
         </ListItem>
 
         {isAdmin && (
-          <ListItem >
+          <ListItem key="ManageRoleAssignment">
             <NavLink to={`/ManageRoleAssignment`}  className="list-item w-100" style={{display: "inline-flex"}}>
               <ListItemIcon><GroupAddIcon /></ListItemIcon>
               <ListItemText primary="Role Assignment" />

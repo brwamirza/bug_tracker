@@ -4,7 +4,6 @@
     padding-right: 24px;
     overflow: auto;
     max-height: 100vh;
-    padding-bottom: 70px;
 }
 
 
@@ -97,6 +96,19 @@
     padding-right: 0;
 }
 
+#ticket-detail #comment-section .th-header-1{
+    width: 130px;
+    color: #9e9e9e;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#ticket-detail  #comment-section .th-header-2{
+    color: #9e9e9e;
+    padding-left: 0;
+    padding-right: 0;
+}
+
 #ticket-detail .th-header-3{
     width: 250px;
     color: #9e9e9e;
@@ -115,10 +127,29 @@
     width: 200px;
 }
 
-#ticket-detail .table-items{
-    border-bottom: #dee2e6 1px solid;
+#ticket-detail .td-header-1{
+    width: 195px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#ticket-detail .thd-header-2{
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .horizantal-line{
     border-bottom: 1px solid gray;
 }
+
+  table.tableBodyScroll tbody {
+    display: block;
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  
+  #ticket-detail table.tableBodyScroll thead, #ticket-detail table.tableBodyScroll tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }

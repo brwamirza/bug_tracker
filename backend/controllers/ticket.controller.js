@@ -112,7 +112,7 @@ exports.getOneTicket = (req, res) => {
 
 // add message and assign it to a ticket
 exports.addMessage = (req, res) => {
-  Message.Create({
+  Message.create({
     commenter: req.body.commenter,
     message: req.body.message
   }) 
@@ -137,13 +137,13 @@ exports.addMessage = (req, res) => {
 exports.getAllMessages = (req, res) => {
   Ticket.findOne({
     where: {
-      id:id
+      id: req.body.id
     }
   }) 
     .then(ticket => {
       ticket.getMessages().then(messages => {
         res.send(messages);
-      })
+      });
     })
     .catch(err => {
       res.status(500).send({

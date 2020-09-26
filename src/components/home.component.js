@@ -23,15 +23,29 @@ export default class Home extends Component {
     
     this.state = {
       currentUser: AuthService.getCurrentUser(),
-      userRole: AuthService.getCurrentUser().roles
+      role:"",
+      username:""
     };
   }
+componentDidMount(){
+  var user = AuthService.getCurrentUser();
+  if(user.email === null){
+    this.props.history.push("/signin");
+    window.location.reload();
+  }
+  else{
+    this.setState({
+      role: user.roles,
+      username: user.username
+    })
+  }
+}
 
   render() {
     return (
       <div className="background">
         <div id="admin">
-           <Drawer username={this.state.currentUser.username} role={this.state.userRole} 
+           <Drawer username={this.state.currentUser.username} role={this.state.currentUser.roles} 
            urlPrefix={this.props.match.url} />
            <div >
             <Route exact path={`/Dashboard`} component={Dashboard}/>

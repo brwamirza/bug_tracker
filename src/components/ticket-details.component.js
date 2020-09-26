@@ -9,33 +9,23 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import TicketService from "../services/ticket.service";
 import ProjectService from "../services/project.service";
 
-// const Message = props => (
-//   <tr>
-//     <td className="pl-0">{props.message.commenter}</td>
-//     <td className="pl-0 ">{props.message.message}</td>
-//   </tr>
-// )
-
-// const Ticket = props => (
-//   <tr>
-//     <td className="pl-0">{props.ticket.title}</td>
-//     <td className="pl-0">{props.ticket.submitter}</td>
-//     <td className="pl-0">{props.ticket.developer}</td>
-//     <td className="pl-0">{props.ticket.status}</td>
-//     <td className="td-3 pl-0">
-//       <Link to="#">More Details</Link>
-//     </td>
-//   </tr>
-// )
+const Message = props => (
+  <tr>
+    <td className="pl-0 td-header-1">{props.message.commenter}</td>
+    <td className="pl-0 td-header-2">{props.message.message}</td>
+  </tr>
+)
 
 export default class TicketDetails extends Component {
   constructor(props) {
     super(props);
+    this.onChangeMessage = this.onChangeMessage.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
       currentUser: AuthService.getCurrentUser(),
-    //   messages: [],
-    //   users: [],
+      message: "",
+      messageList:[],
       ticket: []
     };
   }
@@ -51,38 +41,41 @@ export default class TicketDetails extends Component {
       console.log(error);
    });
 
-//    ProjectService.getUsers(this.props.match.params.id).then(
-//     response => {
-//       this.setState({
-//         users: response.data
-//       });
-//     }
-//   ).catch((error) => {
-//     console.log(error);
-//  });
-
-//  ProjectService.getTickets(this.props.match.params.id).then(
-//   response => {
-//     this.setState({
-//       tickets: response.data
-//     });
-//     }
-//   ).catch((error) => {
-//     console.log(error);
-//   });
+   TicketService.getAllMessages(this.props.match.params.id).then(
+    response => {
+      this.setState({
+        messageList: response.data
+      });
+    }
+  ).catch((error) => {
+    console.log(error);
+ });
 }
 
-//   messageList() {
-//     return this.state.users.map(currentUser => {
-//       return <User user={currentUser} key={currentUser.id}/>;
-//     })
-//   }
 
-//   ticketList() {
-//     return this.state.tickets.map(currentTicket => {
-//       return <Ticket ticket={currentTicket} key={currentTicket.id}/>;
-//     })
-//   }
+onChangeMessage(e) {
+  this.setState({
+    message: e.target.value
+  });
+}
+
+handleSubmit(e) {
+  e.preventDefault();
+  TicketService.addMessage(
+    this.state.ticket.id,
+    this.state.currentUser.username,
+    this.state.message
+  ).then(() => {
+    window.location.reload();
+  })
+ 
+}
+
+  messageList() {
+    return this.state.messageList.map(currentMessage => {
+      return <Message message={currentMessage} key={currentMessage.id}/>;
+    })
+  }
 
   render() {
     return (
@@ -90,7 +83,7 @@ export default class TicketDetails extends Component {
        <div className="row">
           <div className="col-md-6">
             <div className="header-1 pt-4">
-                <h5 className=" header-1-text ">Project Details</h5>
+                <h5 className=" header-1-text ">Ticket Details</h5>
                 <p className=" header-1-p ">
                     <Link className="pr-1" style={{color:"#000"}} to="/MyTickets">Back to List</Link>
                     |
@@ -101,7 +94,7 @@ export default class TicketDetails extends Component {
               <div className="box-inner">
                 <div className="pb-4 pt-5">
                   <div className=" row">
-                    <div className="col-sm-5">
+                    <div className="col-sm-6">
                       <p  className="pt-4" style={{color: "#9e9e9e"}}>Ticket Title</p>
                       <h6 className="pl-2">{this.state.ticket.title}</h6>
 
@@ -115,7 +108,7 @@ export default class TicketDetails extends Component {
                       <h6 className="pl-2">{this.state.ticket.status}</h6>
                     </div>
 
-                    <div className="col-sm-7">
+                    <div className="col-sm-6">
                       <p className="pt-4" style={{color: "#9e9e9e"}}>Ticket Description</p>
                       <h6 className="pl-2">{this.state.ticket.description}</h6>
 
@@ -133,58 +126,46 @@ export default class TicketDetails extends Component {
               </div>
             </div>
          </div>
-         <div className="col-md-6">
+         <div className="col-md-6 pt-2" id="comment-section">
             <div>
-              <div>
-
-              </div>
+             <form onSubmit={this.handleSubmit}>
+               <div className="form-group">
+                  <label htmlFor="message" className="col-form-label">Add a Comment?</label>
+                  <div className="d-flex">
+                    <input 
+                      type="text" 
+                      className="form-control mr-2 ml-5" 
+                      id="message" 
+                      name="message" 
+                      value={this.state.message}
+                      onChange={this.onChangeMessage} 
+                      required />
+                      <button type="submit" className="btn btn-primary">Add</button>
+                  </div>
+                </div>
+              </form>
               <div className="header-1 ">
                   <h5 className=" header-1-text ">Ticket Comments</h5>
               </div>
               <div className="box-1" style={{zIndex: "8!important"}}>
-                <div>
-                    <table className="table">
+                <div className="">
+                    <table className="table tableBodyScroll">
                     <thead>
                       <tr>
                         <th className="th-header-1">Commenter</th>
                         <th className="th-header-2">Message</th>
                       </tr>
                     </thead>
-                    <tbody className="table-items">
-                      {/* {this.messageList()} */}
-                    </tbody>
+                    <tbody className="table-items ">
+                      {this.messageList()}
+                    </tbody>                   
                   </table>
                 </div>
               </div>
             </div>
           </div>
-       </div>
-      <div> 
-
-      <div>
-        <div className="header-1 ">
-            <h5 className=" header-1-text ">Tickets for this Project</h5>
         </div>
-        <div className="box-1" style={{zIndex: "8!important"}}>
-          <div >
-              <table className="table">
-              <thead>
-                <tr>
-                  <th className="th-header-1">Title</th>
-                  <th className="th-header-2">Submitter</th>
-                  <th className="th-header-3">Developer</th>
-                  <th className="th-header-4">Status</th>
-                  <th className="th-header-5"></th>
-                </tr>
-              </thead>
-              <tbody className="table-items">
-                {/* {this.ticketList()} */}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-  
+       <div> 
       </div>
      </div>     
     );
