@@ -27,10 +27,10 @@ module.exports = function(app) {
     //   controller.delete
     // );
 
-    //  // Update a Tutorial with id
-    // app.put("/api/ticket/:id",
-    // controller.update
-    // );
+     // Update a Ticket with id
+    app.put("/api/ticket/:id",
+    controller.update
+    );
 
     //getting a single ticket
     app.get("/api/ticket/:id",
@@ -45,8 +45,8 @@ module.exports = function(app) {
     controller.getAllMessages
     );
 
-    //  app.post("/api/ticket/assignUsers",
-    //  controller.assignUsers
-    //  );
+    app.post("/api/ticket/assignDeveloper",
+    controller.assignDeveloper
+    );
   
   };

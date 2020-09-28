@@ -178,7 +178,7 @@ export default class CreateTicket extends Component {
       this.state.type.label,
       this.state.currentUser.email,
     ).then(() => {
-      this.props.history.push("/admin/myTickets");
+      this.props.history.push("/myTickets");
       window.location.reload();
     })
    
@@ -204,12 +204,12 @@ export default class CreateTicket extends Component {
                 <div className="row horizantal-line pb-4">
                 <div className="col-sm-5 pr-5">
                   <div className="form-group">
-                    <label htmlFor="project-name" className="col-form-label">Title</label>
+                    <label htmlFor="title" className="col-form-label">Title</label>
                     <input 
                       type="text" 
                       className="form-control" 
-                      id="project-name" 
-                      name="project-name" 
+                      id="title" 
+                      name="title" 
                       value={this.state.title}
                       onChange={this.onChangeTitle} 
                       required />
@@ -225,10 +225,10 @@ export default class CreateTicket extends Component {
                     <p className="pt-4">Ticket Priority</p>
                     <Select
                     options={[
-                      { value: null, label: 'None' },
-                      { value: 'low', label: 'Low' },
-                      { value: 'medium', label: 'Medium' },
-                      { value: 'high', label: 'High' }
+                      { value: 'None', label: 'None' },
+                      { value: 'Low', label: 'Low' },
+                      { value: 'Medium', label: 'Medium' },
+                      { value: 'High', label: 'High' }
                     ]}
                     onChange={(newValue) => this.onChangePriority(newValue)}
                     onSubmit={() => console.log('onSubmit')}
@@ -237,11 +237,11 @@ export default class CreateTicket extends Component {
                     <p className="pt-4">Ticket Type</p>
                     <Select
                     options={[
-                      { value: null, label: 'None' },
-                      { value: 'bugs/errors', label: 'Bugs/Errors' },
-                      { value: 'feature-requests', label: 'Feature Requests' },
-                      { value: 'training/document-requests', label: 'Training/Document Requests' },
-                      { value: 'other-comments', label: 'Other Comments' }
+                      { value: 'None', label: 'None' },
+                      { value: 'Bugs/Errors', label: 'Bugs/Errors' },
+                      { value: 'Feature Requests', label: 'Feature Requests' },
+                      { value: 'Training/Document Requests', label: 'Training/Document Requests' },
+                      { value: 'Other Comments', label: 'Other Comments' }
                     ]}
                     onChange={(newValue) => this.onChangeType(newValue)}
                     onSubmit={() => console.log('onSubmit')}
@@ -270,10 +270,10 @@ export default class CreateTicket extends Component {
                     <p className="pt-4">Ticket Status</p>
                     <Select
                     options={[
-                      { value: 'open', label: 'Open' },
-                      { value: 'in-progress', label: 'In progress' },
-                      { value: 'additional-info-required', label: 'Additional Info Required' },
-                      { value: 'closed', label: 'Closed' }
+                      { value: 'Open', label: 'Open' },
+                      { value: 'In progress', label: 'In progress' },
+                      { value: 'Additional Info Required', label: 'Additional Info Required' },
+                      { value: 'Closed', label: 'Closed' }
                     ]}
                     onChange={(newValue) => this.onChangeStatus(newValue)}
                     onSubmit={() => console.log('onSubmit')}

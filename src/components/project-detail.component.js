@@ -23,7 +23,7 @@ const Ticket = props => (
     <td className="pl-0">{props.ticket.developer}</td>
     <td className="pl-0">{props.ticket.status}</td>
     <td className="td-3 pl-0">
-      <Link to="#">More Details</Link>
+      <Link to={"/TicketDetails/"+props.ticket.id}>More Details</Link>
     </td>
   </tr>
 )

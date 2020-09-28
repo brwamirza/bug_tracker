@@ -152,30 +152,26 @@ exports.getAllMessages = (req, res) => {
     });
 };
 
-//assining new users to project
-exports.assignUsers = (req,res) => {
-  project.findOne({
+//assining new users to ticket
+exports.assignDeveloper = (req,res) => {
+  Ticket.findOne({
     where:{
-      id: req.body.projectId
+      id: req.body.ticketId
     }
-  }).then( project => {
-      User.findAll({
+  }).then( ticket => {
+      User.findOne({
         where: {
-          id : {
-            [Op.or]: req.body.oldUsers
-          }
+          username : req.body.oldDeveloper
         }
-      }).then( oldUsers => {
-        project.removeUsers(oldUsers)
+      }).then( oldDeveloper => {
+        ticket.removeUsers(oldDeveloper)
       }).then( () => {
-          User.findAll({
+          User.findOne({
             where: {
-              id : {
-                [Op.or]: req.body.newUsers
-              }
+              username : req.body.newDeveloper
             }
-          }).then( newUsers => {
-            project.addUsers(newUsers);
+          }).then( newDeveloper => {
+            ticket.addUsers(newDeveloper);
           }).then( () => {
             res.send({
               message: "users assigned successfully."
@@ -187,21 +183,21 @@ exports.assignUsers = (req,res) => {
   });
 }
 
-// Update a Tutorial by the id in the request
+// Update a Ticket by the id in the request
 exports.update = (req, res) => {
   const id = req.params.id;
 
-  Project.update(req.body, {
+  Ticket.update(req.body, {
     where: { id: id }
   })
     .then(num => {
       if (num == 1) {
         res.send({
-          message: "Project was updated successfully."
+          message: "Ticket was updated successfully."
         });
       } else {
         res.send({
-          message: `Cannot update Project with id=${id}. Maybe Tutorial was not found or req.body is empty!`
+          message: `Cannot update Ticket with id=${id}. Maybe Ticket was not found or req.body is empty!`
         });
       }
     })
@@ -222,11 +218,11 @@ exports.delete = (req, res) => {
     .then(num => {
       if (num == 1) {
         res.send({
-          message: "Project was deleted successfully!"
+          message: "Ticket was deleted successfully!"
         });
       } else {
         res.send({
-          message: `Cannot delete Project with id=${id}. Maybe Tutorial was not found!`
+          message: `Cannot delete Ticket with id=${id}. Maybe Ticket was not found!`
         });
       }
     })

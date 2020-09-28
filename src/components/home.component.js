@@ -15,6 +15,7 @@ import ProjectDetail from './project-detail.component';
 import EditAssignedUsers from './edit-assigned-users.component';
 import CreateTicket from './create-ticket.component';
 import TicketDetails from './ticket-details.component';
+import EditTicket from './edit-ticket.component';
 
 
 export default class Home extends Component {
@@ -57,6 +58,7 @@ componentDidMount(){
             <Route exact path={`/EditAssignedUsers/:id`} component={EditAssignedUsers}/>
             <Route exact path={`/CreateTicket/`} component={CreateTicket}/>
             <Route exact path={`/TicketDetails/:id`} component={TicketDetails}/>
+            <Route exact path={`/EditTicket/:id`} component={EditTicket}/>
            </div>
         </div>
       </div>

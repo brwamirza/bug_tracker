@@ -18,7 +18,7 @@ const Ticket = props => (
     <td className="pl-0">{props.ticket.status}</td>
     <td className="pl-0">{props.ticket.type}</td>
     <td className="td-3 pl-0">
-      <Link to="#">Edit/Assign</Link> | <Link to={"/TicketDetails/"+props.id}>Details</Link>
+      <Link to={"/EditTicket/"+props.id}>Edit/Assign</Link> | <Link to={"/TicketDetails/"+props.id}>Details</Link>
     </td>
   </tr>
 )

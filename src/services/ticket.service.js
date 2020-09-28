@@ -42,19 +42,19 @@ class TicketService {
   }
 
   assignDeveloper(ticketId,newDeveloper,oldDeveloper) {
-    return axios.post(API_URL + "/assignUsers", {
+    return axios.post(API_URL + "/assignDeveloper", {
         ticketId,
         newDeveloper,
         oldDeveloper
     })
   }
 
-  updateTicket(id,title,description,projectId,developerId,priority,status,type) {
+  updateTicket(id,title,description,project,developer,priority,status,type) {
     return axios.put(API_URL + "/"+id, {
         title,
         description,
-        projectId,
-        developerId,
+        project,
+        developer,
         priority,
         status,
         type
