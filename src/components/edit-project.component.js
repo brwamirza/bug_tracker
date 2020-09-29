@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import '../css/edit-assigned-users.css';
+import '../css/edit-project.css';
 import "@material/drawer";
 import "@material/list";
 import AuthService from "../services/auth.service";
@@ -17,12 +17,14 @@ var defaultManager =[];
 var defaultSubmitter =[];
 var defaultDeveloper =[];
 
-export default class EditAssignedUsers extends Component {
+export default class EditProject extends Component {
   constructor(props) {
     super(props);
     this.onChangeSelectedSubmitter = this.onChangeSelectedSubmitter.bind(this);
     this.refreshPage = this.refreshPage.bind(this);
     this.onChangeSelectedDeveloper = this.onChangeSelectedDeveloper.bind(this);
+    this.onChangeProjectName = this.onChangeProjectName.bind(this);
+    this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeSelectedManager = this.onChangeSelectedManager.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -35,7 +37,9 @@ export default class EditAssignedUsers extends Component {
       managerList: [],
       selectedSubmitter:"",
       selectedDeveloper:"",
-      selectedManager:""
+      selectedManager:"",
+      description: "",
+      projectName: ""
     };
   }
 
@@ -43,7 +47,9 @@ export default class EditAssignedUsers extends Component {
     ProjectService.getOneProject(this.props.match.params.id).then(
       response => {
         this.setState({
-          project: response.data
+          project: response.data,
+          description: response.data.description,
+          projectName: response.data.name
         });
 
         submitterList.length = 0;
@@ -175,6 +181,18 @@ export default class EditAssignedUsers extends Component {
     });
     console.log(this.state.selectedDeveloper);
   }
+
+  onChangeDescription(e) {
+    this.setState({
+      description: e.target.value
+    });
+  }
+
+  onChangeProjectName(e) {
+    this.setState({
+      projectName: e.target.value
+    });
+  }
   
   onChangeSelectedManager(manager) {
     this.setState({
@@ -199,8 +217,13 @@ export default class EditAssignedUsers extends Component {
       this.props.match.params.id,
       this.state.selectedSubmitter.label,
       this.state.selectedDeveloper.label,
-      this.state.selectedManager.label
-    );
+      this.state.selectedManager.label,
+      this.state.projectName,
+      this.state.description
+    ).then(() => {
+      this.props.history.push("/myTickets");
+      window.location.reload();
+    });
   }
 
   renderValue = (value) => {
@@ -210,7 +233,7 @@ export default class EditAssignedUsers extends Component {
 
   render() {
     return (
-     <div id="edit-assigned-users">
+     <div id="edit-project">
          <div className="box">
             <div className="header-1 ">
             <h5 className=" header-1-text">Edit Assigned Users</h5>          
@@ -223,7 +246,14 @@ export default class EditAssignedUsers extends Component {
                 <div className="row horizantal-line pb-4">
                 <div className="col-sm-5 pr-5">
                   <p>Project Name</p>
-                   <h6>{this.state.project.name}</h6>
+                   <input 
+                       type="text" 
+                       className="form-control" 
+                       id="name" 
+                       name="name" 
+                       value={this.state.projectName}
+                       onChange={this.onChangeProjectName} 
+                       required />
 
                     <p className="pt-4">Project Manager</p>
                     <Select
@@ -246,7 +276,14 @@ export default class EditAssignedUsers extends Component {
 
                 <div className=" pl-5 col-sm-5">
                     <p>Project Description</p>
-                    <h6>{this.state.project.description}</h6>
+                    <textarea 
+                        className="form-control" 
+                        id="description" 
+                        name ="description"
+                        value={this.state.description}
+                        onChange={this.onChangeDescription} 
+                        required>
+                    </textarea>
 
                     <p className="pt-4">Developer</p>
                     <Select

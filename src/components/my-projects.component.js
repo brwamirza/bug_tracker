@@ -13,7 +13,7 @@ const Project = props => (
     <td>{props.project.name}</td>
     <td>{props.project.description}</td>
     <td className="td-3">
-      <Link to="#">Manage Users</Link> | <Link to={"/ProjectDetail/"+props.id}>Details</Link>
+      <Link to={"/EditProject/"+props.id}>Manage Users</Link> | <Link to={"/ProjectDetail/"+props.id}>Details</Link>
     </td>
   </tr>
 )

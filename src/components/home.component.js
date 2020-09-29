@@ -12,7 +12,7 @@ import ManageProjectUsers from './manage-project-users.component';
 import MyProjects from './my-projects.component';
 import MyTickets from './my-tickets.component';
 import ProjectDetail from './project-detail.component';
-import EditAssignedUsers from './edit-assigned-users.component';
+import EditProject from './edit-project.component';
 import CreateTicket from './create-ticket.component';
 import TicketDetails from './ticket-details.component';
 import EditTicket from './edit-ticket.component';
@@ -55,7 +55,7 @@ componentDidMount(){
             <Route exact path={`/MyProjects`} component={MyProjects}/>
             <Route exact path={`/MyTickets`} component={MyTickets}/>
             <Route exact path={`/ProjectDetail/:id`} component={ProjectDetail}/>
-            <Route exact path={`/EditAssignedUsers/:id`} component={EditAssignedUsers}/>
+            <Route exact path={`/EditProject/:id`} component={EditProject}/>
             <Route exact path={`/CreateTicket/`} component={CreateTicket}/>
             <Route exact path={`/TicketDetails/:id`} component={TicketDetails}/>
             <Route exact path={`/EditTicket/:id`} component={EditTicket}/>

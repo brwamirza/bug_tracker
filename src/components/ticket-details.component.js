@@ -87,7 +87,7 @@ handleSubmit(e) {
                 <p className=" header-1-p ">
                     <Link className="pr-1" style={{color:"#000"}} to="/MyTickets">Back to List</Link>
                     |
-                    <Link className="pl-1" style={{color:"#000"}} to="#">Edit</Link>
+                    <Link className="pl-1" style={{color:"#000"}} to={"/EditTicket/"+this.props.match.params.id}>Edit</Link>
                 </p>            
             </div>
             <div className="box-1" style={{zIndex: "8!important"}}>

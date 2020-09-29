@@ -48,11 +48,13 @@ class ProjectService {
     })
   }
   
-  updateProject(id,submitter,developer,manager) {
+  updateProject(id,submitter,developer,manager,name,description) {
     return axios.put(API_URL + "/"+id, {
       submitter,
       developer,
-      manager
+      manager,
+      name,
+      description
     })
   }
   // for deleting a single project
