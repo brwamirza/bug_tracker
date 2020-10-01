@@ -18,3 +18,17 @@
     color: #444444;
     padding-top: 5px;
 }
+
+@media (min-width: 1080px){
+    #dashboard .col-lg-6 {
+        flex: 0 0 50%!important;
+        max-width: 50%!important;
+    }
+}
+
+@media (max-width: 1079px){
+    #dashboard .col-xs-12 {
+        flex: 0 0 100%!important;
+        max-width: 100%!important;
+    }
+}

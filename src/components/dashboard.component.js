@@ -39,13 +39,13 @@ const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
   const {
     cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle,
-    fill, payload, percent, value,
+    fill, payload, percent, value
   } = props;
   const sin = Math.sin(-RADIAN * midAngle);
   const cos = Math.cos(-RADIAN * midAngle);
   const sx = cx + (outerRadius + 10) * cos;
   const sy = cy + (outerRadius + 10) * sin;
-  const mx = cx + (outerRadius + 30) * cos;
+  const mx = cx + (outerRadius + 8) * cos;
   const my = cy + (outerRadius + 30) * sin;
   const ex = mx + (cos >= 0 ? 1 : -1) * 22;
   const ey = my;
@@ -95,7 +95,9 @@ export default class Dashboard extends Component {
       currentUser: AuthService.getCurrentUser(),
       tickets: [],
       projectName: "",
-      description: ""
+      description: "",
+      innerRadius: 75,
+      outerRadius: 95
     };
   }
 
@@ -232,7 +234,39 @@ export default class Dashboard extends Component {
       }
     ).catch((error) => {
       console.log(error);
-   })}
+   })
+
+   //to check screen size
+   window.addEventListener("resize", this.resize.bind(this));
+    this.resize();
+  }
+
+  resize() {
+    // if(window.innerWidth <= 375){
+    //   this.setState({
+    //     innerRadius: 35,
+    //     outerRadius: 55
+    //   });
+    // }
+    if(window.innerWidth > 1199){
+      this.setState({
+        innerRadius: 75,
+        outerRadius: 95
+      });
+    }
+    if(window.innerWidth <= 1150){
+      this.setState({
+        innerRadius: 55,
+        outerRadius: 75
+      });
+    }
+  //1080
+  //lg 991
+  }
+
+  componentWillUnmount() {
+      window.removeEventListener("resize", this.resize.bind(this));
+  }
 
   onPieEnter = (data, index) => {
     this.setState({
@@ -244,7 +278,7 @@ export default class Dashboard extends Component {
     return (
      <div id="dashboard">
        <div className="row pt-3">
-        <div className="col-sm-12 col-md-6">
+        <div className="col-xs-12 col-lg-6">
           <div className="box">
             <div className="chart-label">
               <strong>Tickets by Priority</strong>
@@ -279,8 +313,8 @@ export default class Dashboard extends Component {
                     activeIndex={this.state.activeIndex}
                     activeShape={renderActiveShape}
                     data={this.state.ticketTypeData}
-                    innerRadius={75}
-                    outerRadius={95}
+                    innerRadius={this.state.innerRadius}
+                    outerRadius={this.state.outerRadius}
                     fill="#8884d8"
                     dataKey="tickets"
                     onMouseEnter={this.onPieEnter}
@@ -298,7 +332,7 @@ export default class Dashboard extends Component {
        </div>
 
        <div className="row pt-3 pb-5">
-        <div className="col-sm-12 col-md-6 pb-3">
+        <div className="col-xs-12 col-lg-6 pb-3">
           <div className="box">
             <div className="chart-label">
               <strong>Tickets by Status</strong>
