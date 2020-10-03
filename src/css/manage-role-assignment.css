@@ -2,9 +2,9 @@
     padding-top: 40px;
     padding-left: 24px;
     overflow-y: auto;
-    min-height: 100vh;
+    max-height: 100vh;
     padding-bottom: 70px;
-    overflow-x: hidden;
+    max-width: 100%;
 }
 
 #manage-role-assignment .text--light {
@@ -43,7 +43,6 @@
     flex-direction: column;   
     justify-content: center;  
     border-radius: 3px;
-    z-index: 2;
     position: relative;
 }
 
@@ -121,4 +120,22 @@ select {
     color: #fff;
     background-color: #2e5984;
     border-color: #2e5984;
+}
+
+ @media (max-width: 1199px){
+    #manage-role-assignment .box-1{
+        margin-left: 0;
+        margin-right:0;
+    }
+    #manage-role-assignment{
+        padding-left: 0px;
+    }
+    #manage-role-assignment .text--light{
+        padding-left: 10px;
+    }
+} 
+
+#manage-role-assignment .row {
+    margin-right: 0px!important; 
+    margin-left: 0px!important;
 }

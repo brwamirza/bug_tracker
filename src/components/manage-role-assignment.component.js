@@ -41,6 +41,7 @@ export default class ManageRoleAssignment extends Component {
   }
 
  componentDidMount(){
+
   UserService.getAllMembers(this.state.currentUser.email).then(
     response => {
       this.setState({

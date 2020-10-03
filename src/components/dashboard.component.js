@@ -242,12 +242,6 @@ export default class Dashboard extends Component {
   }
 
   resize() {
-    // if(window.innerWidth <= 375){
-    //   this.setState({
-    //     innerRadius: 35,
-    //     outerRadius: 55
-    //   });
-    // }
     if(window.innerWidth > 1199){
       this.setState({
         innerRadius: 75,
@@ -256,12 +250,28 @@ export default class Dashboard extends Component {
     }
     if(window.innerWidth <= 1150){
       this.setState({
+        innerRadius: 60,
+        outerRadius: 80
+      });
+    }
+    if(window.innerWidth <= 670){
+      this.setState({
         innerRadius: 55,
         outerRadius: 75
       });
     }
-  //1080
-  //lg 991
+    // if(window.innerWidth <= 430){
+    //   this.setState({
+    //     innerRadius: 45,
+    //     outerRadius: 65
+    //   });
+    // }
+    if(window.innerWidth <= 350){
+      this.setState({
+        innerRadius: 35,
+        outerRadius: 55
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -284,8 +294,8 @@ export default class Dashboard extends Component {
               <strong>Tickets by Priority</strong>
             </div>
             <div style={{padding:"10px"}}>
-            <ResponsiveContainer  height={300} style={{padding:"10px"}}>
-              <BarChart  data={this.state.ticketPriorityData}>
+            <ResponsiveContainer  height={300} style={{paddingTop:"10px"}}>
+              <BarChart  data={this.state.ticketPriorityData} className="bar-container">
                 <XAxis dataKey="priority" />
                 <YAxis />
                 <Tooltip />
@@ -301,7 +311,7 @@ export default class Dashboard extends Component {
           </div>
          
         </div>
-        <div className="col-xs-12 col-lg-6">
+        <div className="col-xs-12 col-lg-6 pie-chart">
           <div className="box">
             <div className="chart-label">
               <strong>Tickets by Type</strong>
@@ -337,9 +347,9 @@ export default class Dashboard extends Component {
             <div className="chart-label">
               <strong>Tickets by Status</strong>
             </div>
-            <div style={{padding:"10px"}}>
+            <div style={{paddingTop:"10px"}}>
               <ResponsiveContainer  height={300}>
-                <BarChart  data={this.state.ticketStatusData}>
+                <BarChart  data={this.state.ticketStatusData} className="bar-container">
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="status" />
                   <YAxis />

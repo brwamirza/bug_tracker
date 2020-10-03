@@ -31,4 +31,39 @@
         flex: 0 0 100%!important;
         max-width: 100%!important;
     }
+
+    #dashboard .pie-chart {
+        padding-top: 15px;
+    }
+    
+}
+
+
+@media (max-width: 1150px){
+    .recharts-wrapper{
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 670px){
+    .recharts-wrapper{
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 430px){
+    .recharts-wrapper{
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 350px){
+    .recharts-wrapper{
+        font-size: 7px;
+    }
+}
+
+.bar-container{
+    position: relative;
+    left: -25px;
 }

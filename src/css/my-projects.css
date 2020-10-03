@@ -95,3 +95,18 @@
     -moz-box-shadow: 0px 0px 5px 4px rgba(0,0,0,0.04);
     box-shadow: 0px 0px 5px 4px rgba(0,0,0,0.04);
 } */
+
+@media (max-width: 1199px){
+    #my-projects .box-1{
+        margin-left: 0;
+        margin-right:0;
+    }
+    #my-projects{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    #my-projects td , #my-projects th{
+        padding-left: 0;
+        padding-right: 0;
+    }
+}

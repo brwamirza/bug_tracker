@@ -1,19 +1,10 @@
-import {_} from 'lodash';
-import {zip} from 'lodash';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/manage-project-users.css';
 import "@material/drawer";
 import "@material/list";
-import Drawer from "./drawer.component"
 import AuthService from "../services/auth.service";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ProjectService from "../services/project.service";
-
-
-// var submitterList = [];
-// var developerList = [];
-// var managerList = [];
 
 const Project = props => (
   <tr>
@@ -31,7 +22,6 @@ export default class ManageProjectUsers extends Component {
   constructor(props) {
     super(props);
 
-
     this.state = {
       currentUser: AuthService.getCurrentUser(),
       projects: []
@@ -44,27 +34,6 @@ export default class ManageProjectUsers extends Component {
       this.setState({
         projects: response.data
       });
-    //   this.state.projects.map((value,index) => {
-    //     var i = 0;
-    //     var size = Object.keys(value.users).length;
-    //     for( i=0;i<size;i++){
-    //     if(value.users[i].role === "submitter"){
-    //       submitterList.push({
-    //        username: value.users[i].username
-    //       })
-    //     }
-    //     if(value.users[i].role === "developer"){
-    //       developerList.push(
-    //         value.users[i].username
-    //       )
-    //     }
-    //     if(value.users[i].role === "project-manager"){
-    //       managerList.push(
-    //         value.users[i].username
-    //       )
-    //     }
-    //   }
-    // })
     }
   ).catch((error) => {
     console.log(error);

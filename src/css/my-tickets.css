@@ -140,3 +140,42 @@
     -moz-box-shadow: 0px 0px 5px 4px rgba(0,0,0,0.04);
     box-shadow: 0px 0px 5px 4px rgba(0,0,0,0.04);
 } */
+
+@media (max-width: 1199px){
+    #my-tickets .box-1{
+        margin-left: 0;
+        margin-right:0;
+    }
+    #my-tickets{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    #my-tickets td , #my-tickets th{
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 850px){
+    #my-tickets td , #my-tickets th{
+        padding-left: 0;
+        padding-right: 0;
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 500px){
+    #my-tickets td , #my-tickets th{
+        padding-left: 0;
+        padding-right: 0;
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 380px){
+    #my-tickets td , #my-tickets th{
+        padding-left: 0;
+        padding-right: 0;
+        font-size: 7px;
+    }
+}
