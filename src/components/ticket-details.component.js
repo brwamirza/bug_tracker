@@ -81,7 +81,7 @@ handleSubmit(e) {
     return (
      <div id="ticket-detail">
        <div className="row">
-          <div className="col-md-6">
+          <div className="col-12 col-lg-6">
             <div className="header-1 pt-4">
                 <h5 className=" header-1-text ">Ticket Details</h5>
                 <p className=" header-1-p ">
@@ -126,7 +126,7 @@ handleSubmit(e) {
               </div>
             </div>
          </div>
-         <div className="col-md-6 pt-2" id="comment-section">
+         <div className="col-12 col-lg-6 pt-2" id="comment-section">
             <div>
              <form onSubmit={this.handleSubmit}>
                <div className="form-group">

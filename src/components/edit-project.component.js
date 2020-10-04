@@ -221,22 +221,17 @@ export default class EditProject extends Component {
       this.state.projectName,
       this.state.description
     ).then(() => {
-      this.props.history.push("/myTickets");
+      this.props.history.push("/MyProjects");
       window.location.reload();
     });
   }
-
-  renderValue = (value) => {
-    return value;
-}
-
 
   render() {
     return (
      <div id="edit-project">
          <div className="box">
             <div className="header-1 ">
-            <h5 className=" header-1-text">Edit Assigned Users</h5>          
+            <h5 className=" header-1-text">Edit Project</h5>          
             </div>
             <div className="box-1" style={{zIndex: "8!important"}}>
             <div className="box-inner">
@@ -244,7 +239,7 @@ export default class EditProject extends Component {
             <form onSubmit={this.handleSubmit}>
 
                 <div className="row horizantal-line pb-4">
-                <div className="col-sm-5 pr-5">
+                <div className="col-12 col-md-5 pr-5 left-part">
                   <p>Project Name</p>
                    <input 
                        type="text" 
@@ -274,7 +269,7 @@ export default class EditProject extends Component {
                     />
                 </div>
 
-                <div className=" pl-5 col-sm-5">
+                <div className="pl-5 col-12 col-md-5 right-part">
                     <p>Project Description</p>
                     <textarea 
                         className="form-control" 
@@ -302,7 +297,7 @@ export default class EditProject extends Component {
                 <Link className="pr-1 header-1-p" style={{color:"#fff"}} to="/ManageProjectUsers">Back to List</Link>
 
                 </div>
-                <input type="submit" className="btn btn-primary mt-4" value="UPDATE PROJECT" onClick={this.refreshPage}/>
+                <input type="submit" className="btn btn-primary mt-4" value="UPDATE PROJECT"/>
               </div>
 
               </form>

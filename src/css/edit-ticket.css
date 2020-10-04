@@ -129,3 +129,30 @@
     text-align: left!important; 
     width: 50vw;
 }
+
+@media (max-width: 1070px){
+    #edit-ticket .left-part{
+        padding-right:30px!important;
+    }
+    #edit-ticket .right-part{
+        padding-left: 30px!important;
+    }
+} 
+@media (max-width: 767px){
+    #edit-ticket .left-part{
+        padding-right:0!important;
+        padding-left: 0!important;
+    }
+    #edit-ticket .right-part{
+        padding-left: 0!important;
+        padding-right:0!important;
+        padding-top: 22px;
+    }
+} 
+@media (max-width: 599px){
+    #edit-ticket .box{
+        padding-right:0!important;
+        padding-left: 0!important;
+        width: initial;
+    }
+} 

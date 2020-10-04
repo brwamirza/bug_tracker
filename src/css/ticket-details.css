@@ -2,7 +2,7 @@
     padding-top: 40px;
     padding-left: 24px;
     padding-right: 24px;
-    overflow: auto;
+    overflow-y: auto;
     max-height: 100vh;
 }
 
@@ -83,21 +83,18 @@
 }
 
 #ticket-detail .th-header-1{
-    width: 300px;
     color: #9e9e9e;
     padding-left: 0;
     padding-right: 0;
 }
 
 #ticket-detail .th-header-2{
-    width: 250px;
     color: #9e9e9e;
     padding-left: 0;
     padding-right: 0;
 }
 
 #ticket-detail #comment-section .th-header-1{
-    width: 130px;
     color: #9e9e9e;
     padding-left: 0;
     padding-right: 0;
@@ -110,25 +107,18 @@
 }
 
 #ticket-detail .th-header-3{
-    width: 250px;
     color: #9e9e9e;
     padding-left: 0;
     padding-right: 0;
 }
 
 #ticket-detail .th-header-4{
-    width: 400px;
     color: #9e9e9e;
     padding-left: 0;
     padding-right: 0;
 }
 
-#ticket-detail .td-3{
-    width: 200px;
-}
-
 #ticket-detail .td-header-1{
-    width: 195px;
     padding-left: 0;
     padding-right: 0;
 }
@@ -153,3 +143,8 @@
     width: 100%;
     table-layout: fixed;
   }
+@media (max-width: 991px){
+    #ticket-detail{
+        padding-bottom:70px!important;
+    }
+} 

@@ -11,11 +11,7 @@ import TicketService from "../services/ticket.service";
 import Select from 'react-select'
 
 
-const submitterList = [];
 const developerList = [];
-const managerList = [];
-var defaultManager =[];
-var defaultSubmitter =[];
 var defaultDeveloper =[];
 var defaultProject = [];
 var defaultPriority = [];
@@ -222,7 +218,7 @@ export default class EditTicket extends Component {
       this.state.status.label,
       this.state.type.label
     ).then(() => {
-      this.props.history.push("/myTickets");
+      this.props.history.push("/MyTickets");
       window.location.reload();
     });
   }
@@ -241,7 +237,7 @@ export default class EditTicket extends Component {
             <form onSubmit={this.handleSubmit}>
 
                 <div className="row horizantal-line pb-4">
-                <div className="col-sm-5 pr-5">
+                <div className="col-12 col-md-5 pr-5 left-part">
                   <p>Ticket Title</p>
                   <input 
                        type="text" 
@@ -285,7 +281,7 @@ export default class EditTicket extends Component {
                     />
                 </div>
 
-                <div className=" pl-5 col-sm-5">
+                <div className=" pl-5 col-12 col-md-5 right-part">
                     <p>Ticket Description</p>
                     <textarea 
                         className="form-control" 

@@ -88,7 +88,7 @@ export default class ProjectDetail extends Component {
     return (
      <div id="project-detail">
        <div className="row">
-          <div className="col-md-5">
+          <div className="col-12 col-lg-5">
               <div className="header-1 pt-4">
                 <h5 className=" header-1-text ">Project Details</h5>
                 <p className=" header-1-p ">
@@ -101,11 +101,11 @@ export default class ProjectDetail extends Component {
               <div className="box-inner">
                 <div className="pb-4 pt-5">
                   <div className=" row pt-5">
-                    <div className="col-sm-5">
+                    <div className="col-5 col-sm-5" style={{padding:"0"}}>
                       <p style={{color: "#9e9e9e"}}>Project Name</p>
                       <h6 className="pl-2">{this.state.project.name}</h6>
                     </div>
-                    <div className="col-sm-7">
+                    <div className="col-7 col-sm-7" style={{padding:"0"}}>
                       <p style={{color: "#9e9e9e"}}>Project Description</p>
                       <h6 className="pl-2">{this.state.project.description}</h6>
                     </div>
@@ -114,7 +114,7 @@ export default class ProjectDetail extends Component {
               </div>
             </div>
          </div>
-         <div className="col-md-7">
+         <div className="col-12 col-lg-7">
             <div>
               <div className="header-1 ">
                   <h5 className=" header-1-text ">Assigned Personnel</h5>
@@ -140,7 +140,7 @@ export default class ProjectDetail extends Component {
        </div>
       <div> 
 
-      <div>
+      <div className="ticket-section">
         <div className="header-1 ">
             <h5 className=" header-1-text ">Tickets for this Project</h5>
         </div>
