@@ -107,7 +107,6 @@ export default class Dashboard extends Component {
         this.setState({
           tickets: response.data
         });
-        console.log(this.state.tickets);
 
         lowCount = "0";
         mediumCount = "0";

@@ -143,11 +143,12 @@ export default class Signup extends Component {
                 <div className="form">
                     <h1 className="text--bold">Signup</h1>
                     <Form
+                      className="form-wrapper"
                       onSubmit={this.handleRegister}
                       ref={c => {
                         this.form = c;
                       }} >
-                      <div className="form-group">
+                      <div className="form-group pt-3">
                         <label htmlFor="username">Username</label>
                         <Input 
                           type="text" 
@@ -210,7 +211,7 @@ export default class Signup extends Component {
                       />
 
                     </Form>
-                    <Link to="/signin">Already have an account?</Link>
+                    <Link className="pt-2" to="/signin">Already have an account? Sign In</Link>
 
                 </div>
 

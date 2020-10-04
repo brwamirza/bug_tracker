@@ -4,8 +4,21 @@ import '../css/my-projects.css';
 import "@material/drawer";
 import "@material/list";
 import AuthService from "../services/auth.service";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ProjectService from "../services/project.service";
+
+const user = AuthService.getCurrentUser();
+
+var isSubmiitter = false;
+var isDeveloper = false;
+var isProjectManager = false;
+var isAdmin = false;
+
+if(user !== null) {
+  isSubmiitter = user.roles.includes("SUBMITTER");
+  isDeveloper = user.roles.includes("DEVELOPER");
+  isProjectManager = user.roles.includes("PROJECT-MANAGER");
+  isAdmin = user.roles.includes("ADMIN");
+}
 
 
 const Project = props => (
@@ -80,15 +93,15 @@ export default class MyProjects extends Component {
   render() {
     return (
          <div id="my-projects">
+           {(isAdmin || isProjectManager)  && (
 
-           {/* toggle modal button */}
             <button 
               type="button" 
               className="btn btn-primary" 
               data-toggle="modal"  
               data-target="#exampleModal"> 
               CREATE NEW PROJECT
-            </button>
+            </button>) }
 
             {/* start of modal  */}
             <div className="modal fade " id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -101,7 +101,8 @@ export default class Signin extends Component {
                 <div className="form">
                     <h1 className="text--bold">Login</h1>
                     <h2 className="text--bold">Welcome back!</h2>
-                    <Form
+                    <Form 
+                    className="form-wrapper pt-3"
                     onSubmit={this.handleLogin}
                     ref={c => {
                       this.form = c;
@@ -158,7 +159,7 @@ export default class Signin extends Component {
                         }}
                       />
                     </Form>
-                    <Link to="/signup">Don't have an account?</Link>
+                    <Link to="/signup">Don't have an account? Sign Up</Link>
 
                 </div>
 

@@ -81,9 +81,17 @@ h1 {
         min-height: 45vh;
         width: 100%;
     }
+
+    #signin .home__right {
+        padding-top: 30px;
+    }
 }
 
 #signin .btn-primary{
     background-color: #033f7a;
     border-color: #033f7a;
+}
+
+#signin .form-wrapper{
+    max-width: 220px;
 }

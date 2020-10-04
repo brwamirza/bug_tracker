@@ -35,7 +35,7 @@ h1 {
     align-items: center;
     -webkit-box-pack: center;
     justify-content: center;
-    background-color: rgb(88, 111, 250);
+    background-color: #033f7a;
     color: rgb(251, 251, 255);
 }
 
@@ -81,5 +81,17 @@ h1 {
         min-height: 45vh;
         width: 100%;
     }
+
+    #signup .home__right {
+        padding-top: 20px;
+    }
 }
 
+#signup .btn-primary{
+    background-color: #033f7a;
+    border-color: #033f7a;
+}
+
+#signup .form-wrapper{
+    max-width: 220px;
+}
