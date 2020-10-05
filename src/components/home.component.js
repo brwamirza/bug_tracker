@@ -28,9 +28,10 @@ export default class Home extends Component {
       username:""
     };
   }
+  
 componentDidMount(){
   var user = AuthService.getCurrentUser();
-  if(user.email === null){
+  if(user === null){
     this.props.history.push("/signin");
     window.location.reload();
   }
@@ -46,8 +47,9 @@ componentDidMount(){
     return (
       <div className="background">
         <div id="admin">
+          {(this.state.currentUser !== null) && (
            <Drawer username={this.state.currentUser.username} role={this.state.currentUser.roles} 
-           urlPrefix={this.props.match.url} />
+           urlPrefix={this.props.match.url} />)}
            <div >
             <Route exact path={`/Dashboard`} component={Dashboard}/>
             <Route exact path={`/ManageRoleAssignment`} component={ManageRoleAssignment}/>
@@ -60,6 +62,7 @@ componentDidMount(){
             <Route exact path={`/TicketDetails/:id`} component={TicketDetails}/>
             <Route exact path={`/EditTicket/:id`} component={EditTicket}/>
            </div>
+           
         </div>
       </div>
     );

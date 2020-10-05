@@ -19,5 +19,15 @@ module.exports = function(app) {
     controller.signup
   );
 
+  // app.put(
+  //   "/api/auth/verify",
+  //   controller.verifyEmail
+  // );
+
+  app.put(
+    "/api/auth/verify/:token",
+    controller.verifyEmail
+  )
+
   app.post("/api/auth/signin", controller.signin);
 };

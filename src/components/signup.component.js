@@ -8,6 +8,12 @@ import { isEmail } from "validator";
 
 import AuthService from "../services/auth.service";
 
+import Verifier from "email-verifier";
+import nodemailer from 'nodemailer';
+
+let verifier = new Verifier("at_5TQVMni9mGBWQ9YOhCc4uNIoHlgYo");
+
+   
 const required = value => {
   if (!value) {
     return (
@@ -95,34 +101,40 @@ export default class Signup extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
-      AuthService.register(
-        this.state.username,
-        this.state.email,
-        this.state.password,
-        this.state.role
-      ).then(
-        () => {
-          this.setState({
-            successful: true
-          });
-          this.props.history.push("/admin");
-          window.location.reload();
+       //verify email
+       verifier.verify(this.state.email, (err, data) => {
+        if (err) throw err;
+        console.log(data);
+        AuthService.register(
+          this.state.username,
+          this.state.email,
+          this.state.password,
+          this.state.role,
+          "false"
+        ).then( () =>
+        {
+            this.setState({
+              successful: true
+            });
+            this.props.history.push("/signin");
+            window.location.reload();
         },
-        error => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-
-          this.setState({
-            successful: false,
-            message: resMessage
-          });
-        }
-      );
-    }
+          error => {
+            const resMessage =
+              (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+              error.message ||
+              error.toString();
+  
+            this.setState({
+              successful: false,
+              message: resMessage
+            });
+          }
+        );
+       });        
+      }
   }
 
   render() {

@@ -7,7 +7,19 @@ import AuthService from "../services/auth.service";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import TicketService from "../services/ticket.service";
 
-const tickets = [];
+const user = AuthService.getCurrentUser();
+
+var isSubmiitter = false;
+var isDeveloper = false;
+var isProjectManager = false;
+var isAdmin = false;
+
+if(user !== null) {
+  isSubmiitter = user.roles.includes("SUBMITTER");
+  isDeveloper = user.roles.includes("DEVELOPER");
+  isProjectManager = user.roles.includes("PROJECT-MANAGER");
+  isAdmin = user.roles.includes("ADMIN");
+}
 
 const Ticket = props => (
   <tr>
@@ -59,12 +71,14 @@ export default class MyTickets extends Component {
          <div id="my-tickets">
 
            {/* toggle modal button */}
+           {(isSubmiitter || isAdmin) && (
             <Link 
-              type="button" 
-              to="/CreateTicket"
-              className="btn btn-primary"> 
-              CREATE NEW TICKET
+            type="button" 
+            to="/CreateTicket"
+            className="btn btn-primary"> 
+            CREATE NEW TICKET
             </Link>
+           )}
 
             <div className="header-1 ">
                 <h5 className=" header-1-text ">My Tickets</h5>

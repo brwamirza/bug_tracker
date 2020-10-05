@@ -25,12 +25,13 @@ class AuthService {
   }
 
   //register user
-  register(username, email, password, role) {
+  register(username, email, password, role, verified) {
     return axios.post(API_URL + "signup", {
       username,
       email,
       password,
-      role
+      role,
+      verified
     }).then(response => {
       if (response.data.accessToken) {
         localStorage.setItem("user", JSON.stringify(response.data));
@@ -39,6 +40,11 @@ class AuthService {
       return response.data;
     });
   }
+
+  verifyEmail(token) {
+    return axios.put(API_URL + `verify/${token}`);
+  }
+
 
   //get user data from local storage
   getCurrentUser() {

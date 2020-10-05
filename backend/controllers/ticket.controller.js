@@ -35,17 +35,17 @@ exports.addTicket = (req, res) => {
               User.findAll({
                 where: {
                   username : {
-                    [Op.or]: [req.body.submitter,req.body.developer,project.manager]
+                    [Op.or]: [req.body.developer,project.manager]
                   }
                 }
               }).then(users => {
                   ticket.addUsers(users).then(() => {
-                    User.findOne({
+                    User.findAll({
                       where: {
-                        email: project.email
+                        email: [project.email, req.body.submitter]
                       }
-                    }).then(user => {
-                      ticket.addUsers(user).then(() => {
+                    }).then(users => {
+                      ticket.addUsers(users).then(() => {
                         res.send({ message: "ticket was added successfully!" });
                       });
                     });

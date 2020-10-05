@@ -28,6 +28,7 @@ db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.project = require("../models/project.model.js")(sequelize, Sequelize);
 db.ticket = require("../models/ticket.model.js")(sequelize, Sequelize);
 db.message = require("../models/message.model.js")(sequelize, Sequelize);
+db.token = require("../models/token.model.js")(sequelize, Sequelize);
 
 db.user.belongsToMany(db.project, {
   through: "user_projects",

@@ -36,20 +36,20 @@ exports.addProject = (req, res) => {
     });
 };
 
-// getting all project
 exports.getAllProject = (req,res) => {
- Project.findAll({
-   where: {
-     email: req.body.email
-   }
-  }).then(project => {
-    res.json(project)
-   })
-
-   .catch(err => {
-    res.status(500).send({ message: err.message });
-  });
-};
+  User.findOne({
+    where: {
+      email: req.body.email
+    }
+   }).then(user => {
+     user.getProjects().then(projects => {
+       res.json(projects);
+     });
+    })
+    .catch(err => {
+     res.status(500).send({ message: err.message });
+   });
+ };
 
 // getting all project
 exports.getAllProjectsWithUsers = (req,res) => {
