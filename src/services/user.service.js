@@ -34,21 +34,6 @@ class UserService {
      });
   }
 
-  getSubmitterBoard() {
-    return axios.get(API_URL2 + 'submitter', { headers: authHeader() });
-  }
-
-  getDeveloperBoard() {
-    return axios.get(API_URL2 + 'developer', { headers: authHeader() });
-  }
-
-  getProjectManagerBoard() {
-    return axios.get(API_URL2 + 'projectManager', { headers: authHeader() });
-  }
-
-  getAdminBoard() {
-    return axios.get(API_URL2 + 'admin', { headers: authHeader() });
-  }
 }
 
 export default new UserService();
