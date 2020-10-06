@@ -179,3 +179,9 @@ a:hover {
     flex-shrink: 0;
     user-select: none;
 }
+
+@media (max-width: 599px){
+    .list-item svg {
+        color: #000;
+    }
+}

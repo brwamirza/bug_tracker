@@ -206,7 +206,7 @@ function ResponsiveDrawer(props) {
            </div>
 
             {/* notification feed */}
-            <NotifyMe
+            {/* <NotifyMe
               data={[
                 {
                   "update":"70 new employees are shifted",
@@ -225,30 +225,16 @@ function ResponsiveDrawer(props) {
               showDate={false}
               size={22}
               color="#000"
-            />
+            /> */}
 
-           <div className=" dropdown">
-              <a 
-                className="nav-link dropdown-toggle" 
-                href="#" 
-                id="navbarDropdown" 
-                role="button" 
-                data-toggle="dropdown" 
-                aria-haspopup="true" 
-                aria-expanded="false">
-                  User Actions
-              </a>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="#">Profile</a>
-                <a className="dropdown-item" href="#">Settings</a>
-                <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="/signin" onClick={logOut}>Log Out</a>
-              </div>
+          
+              <div className="pr-3" >
+                
+                <a href="/signin" onClick={logOut}>Log Out</a>
             </div>
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
           <Drawer
             container={container}
