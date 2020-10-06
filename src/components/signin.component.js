@@ -86,7 +86,7 @@ export default class Signin extends Component {
   render() {
     return (
      <div id="signin">
-        <img className="home__shape" src={require("../circle_transparent.svg")}/>
+        <img className="home__shape" src={require("../circle_transparent.svg")} alt="transparent circle"/>
         <div className="home__left">
             <div className="home__text">
                 <h1 className="text--light">Track</h1>

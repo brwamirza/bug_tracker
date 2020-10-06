@@ -9,7 +9,6 @@ import { isEmail } from "validator";
 import AuthService from "../services/auth.service";
 
 import Verifier from "email-verifier";
-import nodemailer from 'nodemailer';
 
 let verifier = new Verifier("at_5TQVMni9mGBWQ9YOhCc4uNIoHlgYo");
 
@@ -140,7 +139,7 @@ export default class Signup extends Component {
   render() {
     return (
       <div id="signup">
-        <img className="home__shape" src={require("../circle_transparent.svg")}/>
+        <img className="home__shape" src={require("../circle_transparent.svg")} alt="circle transparent"/>
         <div className="home__left">
             <div className="home__text">
                 <h1 className="text--light">Track</h1>

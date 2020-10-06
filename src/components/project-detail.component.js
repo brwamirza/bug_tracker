@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 import '../css/project-detail.css';
 import "@material/drawer";
 import "@material/list";
-import Drawer from "./drawer.component"
 import AuthService from "../services/auth.service";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ProjectService from "../services/project.service";
 
 const User = props => (

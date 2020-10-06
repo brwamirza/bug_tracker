@@ -5,7 +5,6 @@ import "@material/drawer";
 import "@material/list";
 import TicketService from "../services/ticket.service";
 import AuthService from "../services/auth.service";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ProjectService from "../services/project.service";
 import UserService from "../services/user.service";
 import Select from 'react-select'

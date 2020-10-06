@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import '../css/admin.css';
 import "@material/drawer";
 import "@material/list";
 import Drawer from "./drawer.component"
 import AuthService from "../services/auth.service";
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Route} from 'react-router-dom';
 import Dashboard from './dashboard.component';
 import ManageRoleAssignment from './manage-role-assignment.component';
 import ManageProjectUsers from './manage-project-users.component';

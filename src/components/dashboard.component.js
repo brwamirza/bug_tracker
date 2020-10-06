@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import '../css/dashboard.css';
 import "@material/drawer";
 import "@material/list";
-import Drawer from "./drawer.component"
 import TicketService from "../services/ticket.service";
 import AuthService from "../services/auth.service";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { BarChart, Bar,  XAxis, YAxis, Tooltip, ResponsiveContainer,PieChart, Pie, Sector, Cell, CartesianGrid } from 'recharts';
 
 var lowCount = "0";
@@ -27,13 +24,6 @@ var otherCount = "0";
 const priorityChartColors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 const typeChartColors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042','#8884d8'];
 const statusChartColors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-
-const data2 = [
-  { name: 'Group A', value: 400 },
-  { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 },
-  { name: 'Group D', value: 200 },
-];
 
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;

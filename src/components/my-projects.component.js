@@ -8,14 +8,10 @@ import ProjectService from "../services/project.service";
 
 const user = AuthService.getCurrentUser();
 
-var isSubmiitter = false;
-var isDeveloper = false;
 var isProjectManager = false;
 var isAdmin = false;
 
 if(user !== null) {
-  isSubmiitter = user.roles.includes("SUBMITTER");
-  isDeveloper = user.roles.includes("DEVELOPER");
   isProjectManager = user.roles.includes("PROJECT-MANAGER");
   isAdmin = user.roles.includes("ADMIN");
 }

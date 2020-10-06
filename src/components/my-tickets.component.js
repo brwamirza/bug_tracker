@@ -4,20 +4,15 @@ import '../css/my-tickets.css';
 import "@material/drawer";
 import "@material/list";
 import AuthService from "../services/auth.service";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import TicketService from "../services/ticket.service";
 
 const user = AuthService.getCurrentUser();
 
 var isSubmiitter = false;
-var isDeveloper = false;
-var isProjectManager = false;
 var isAdmin = false;
 
 if(user !== null) {
   isSubmiitter = user.roles.includes("SUBMITTER");
-  isDeveloper = user.roles.includes("DEVELOPER");
-  isProjectManager = user.roles.includes("PROJECT-MANAGER");
   isAdmin = user.roles.includes("ADMIN");
 }
 

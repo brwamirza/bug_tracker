@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import '../css/manage-role-assignment.css';
 import "@material/drawer";
 import "@material/list";
-import Drawer from "./drawer.component"
 import AuthService from "../services/auth.service";
 import UserService from "../services/user.service";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Select from 'react-select'
 
 

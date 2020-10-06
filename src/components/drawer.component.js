@@ -5,12 +5,10 @@ import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -18,8 +16,6 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AuthService from "../services/auth.service";
 import UserService from "../services/user.service";
 import  '../css/drawer.css'
-import NotifyMe from 'react-notification-timeline';
-import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import DashboardIcon from '@material-ui/icons/Dashboard';
@@ -63,10 +59,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ListItemLink(props) {
-  return <ListItem button component="a" {...props} />;
-}
-
 function logOut() {
   AuthService.logout();
 }
@@ -77,10 +69,8 @@ function ResponsiveDrawer(props) {
   const theme = useTheme();
   const user = AuthService.getCurrentUser();
 
-  const [isSubmiitter, setIsSubmitter] = React.useState(user.roles.includes("SUBMITTER"));
-  const [isDeveloper, setIsDeveloper] = React.useState(user.roles.includes("DEVELOPER"));
-  const [isProjectManager, setIsProjectManager] = React.useState(user.roles.includes("PROJECT-MANAGER"));
-  const [isAdmin, setIsAdmin] = React.useState(user.roles.includes("ADMIN"));
+  const [isProjectManager] = React.useState(user.roles.includes("PROJECT-MANAGER"));
+  const [isAdmin] = React.useState(user.roles.includes("ADMIN"));
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [adminEmail, setAdminEmail] = React.useState("");
@@ -184,7 +174,7 @@ function ResponsiveDrawer(props) {
             Logged in as: <strong>{props.role}</strong>
           </Typography>
            <div className="dropdown nav-item-right pr-3">
-           <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Join a User
            </a>
 
