@@ -12,10 +12,12 @@ function App() {
   return (
     <Router>
     <Switch>
+
         <Route exact path="/confirm/:token" component={Confirm}/>
         <Route exact path="/signin" component={Signin}/>
         <Route exact path="/signup" component={Signup}/>
-        <Route path="/" component={Home}/>
+        <Route  path="/" component={Home}/>
+
     </Switch>
     </Router>
   );

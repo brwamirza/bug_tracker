@@ -4,7 +4,7 @@ import "@material/drawer";
 import "@material/list";
 import Drawer from "./drawer.component"
 import AuthService from "../services/auth.service";
-import { BrowserRouter as Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import Dashboard from './dashboard.component';
 import ManageRoleAssignment from './manage-role-assignment.component';
 import ManageProjectUsers from './manage-project-users.component';
@@ -49,7 +49,7 @@ componentDidMount(){
           {(this.state.currentUser !== null) && (
            <Drawer username={this.state.currentUser.username} role={this.state.currentUser.roles} 
            urlPrefix={this.props.match.url} />)}
-           <div >
+           <div>
             <Route exact path={`/Dashboard`} component={Dashboard}/>
             <Route exact path={`/ManageRoleAssignment`} component={ManageRoleAssignment}/>
             <Route exact path={`/ManageProjectUsers`} component={ManageProjectUsers}/>
@@ -59,7 +59,7 @@ componentDidMount(){
             <Route exact path={`/EditProject/:id`} component={EditProject}/>
             <Route exact path={`/CreateTicket/`} component={CreateTicket}/>
             <Route exact path={`/TicketDetails/:id`} component={TicketDetails}/>
-            <Route exact path={`/EditTicket/:id`} component={EditTicket}/>
+            <Route exact path={`/EditTicket/:id`} component={EditTicket}/>            
            </div>
            
         </div>
