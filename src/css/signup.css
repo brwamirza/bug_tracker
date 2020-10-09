@@ -95,3 +95,7 @@ h1 {
 #signup .form-wrapper{
     max-width: 220px;
 }
+
+#signup .link-style {
+    color:  #033f7a;
+}

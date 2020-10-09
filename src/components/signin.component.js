@@ -159,7 +159,8 @@ export default class Signin extends Component {
                         }}
                       />
                     </Form>
-                    <Link to="/signup">Don't have an account? Sign Up</Link>
+                    <p>Don't have an account?<Link to="/signup" className="link-style"> Sign Up</Link></p>
+                    <p>Sign in as a<Link to="/chooseDemoRole" className="link-style"> Demo User</Link></p>
 
                 </div>
 

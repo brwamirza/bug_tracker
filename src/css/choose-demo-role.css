@@ -1,0 +1,15 @@
+.choose-demo-role {
+    padding-top: 100px;
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+}
+
+.choose-demo-role .role-box {
+    justify-content: center;
+}
+
+.choose-demo-role .link-style {
+    color:  #033f7a;
+}

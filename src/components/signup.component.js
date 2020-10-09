@@ -197,7 +197,7 @@ export default class Signup extends Component {
                         />
                       </div>
                       <div className="d-flex justify-content-center">
-                        <button type="submit" className="btn btn-primary">Signup</button>
+                        <button type="submit" className="btn btn-primary btn-block">Signup</button>
                       </div>
 
                       {this.state.message && (
@@ -222,14 +222,13 @@ export default class Signup extends Component {
                       />
 
                     </Form>
-                    <Link className="pt-2" to="/signin">Already have an account? Sign In</Link>
+                    <p className="pt-3">Don't have an account?<Link to="/signin" className="link-style"> Sign In</Link></p>
+
+                    <p>Sign in as<Link to="/chooseDemoRole" className="link-style"> Demo User</Link></p>
 
                 </div>
-
             </div>
-
         </div>
-
     </div>
     );
   }

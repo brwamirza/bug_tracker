@@ -6,6 +6,7 @@ import Signin from './components/signin.component';
 import Signup from './components/signup.component';
 import Home from './components/home.component';
 import Confirm from './components/confirm.component';
+import ChooseDemoRole from './components/choose_demo_role.component';
 
 
 function App() {
@@ -16,7 +17,8 @@ function App() {
         <Route exact path="/confirm/:token" component={Confirm}/>
         <Route exact path="/signin" component={Signin}/>
         <Route exact path="/signup" component={Signup}/>
-        <Route  path="/" component={Home}/>
+        <Route exact path="/chooseDemoRole" component={ChooseDemoRole}/>
+        <Route path="/" component={Home}/>
 
     </Switch>
     </Router>

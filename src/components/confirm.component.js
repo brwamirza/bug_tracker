@@ -18,7 +18,7 @@ componentDidMount(){
   render() {
     return (
       <div className="background">
-          <h1>please wait</h1>
+          <h1 className="text-center" >please wait</h1>
       </div>
     );
   }

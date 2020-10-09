@@ -95,3 +95,7 @@ h1 {
 #signin .form-wrapper{
     max-width: 220px;
 }
+
+#signin .link-style {
+    color:  #033f7a;
+}
