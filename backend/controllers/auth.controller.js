@@ -39,7 +39,7 @@ exports.signup = (req, res) => {
             to: user.email,
             subject: 'Verify Email',
             // text: `http://${req.get('host')}/confirm/${token}`,
-            html: "Hello,<br> Please Click on the link to verify your email.<br><a href=" + `http://${req.get('host')}:3000/confirm/${token}` + ">Click here to verify</a>"
+            html: "Hello,<br> Please Click on the link to verify your email.<br><a href=" + `https://${req.get('host')}/confirm/${token}` + ">Click here to verify</a>"
         });
       }).then(() => {
         res.status(200).send({
