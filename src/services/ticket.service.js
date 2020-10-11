@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = "http://localhost:8080/api/ticket";
+const API_URL = "https://issuetracker3.herokuapp.com:8080/api/ticket";
 
 //project service
 class TicketService {
