@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { API_HOST } from "./constants";
 
-const API_URL = `https://issuetracker3.herokuapp.com:${API_HOST}/api/project`;
+const API_URL = `https://issuetracker3.herokuapp.com/api/project`;
 
 //project service
 class ProjectService {
