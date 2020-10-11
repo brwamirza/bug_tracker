@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://issuetracker3.herokuapp.com:8080/api/';
+const API_URL = `https://issuetracker3.herokuapp.com:${process.env.PORT}/api/`;
 
 //data service
 class UserService {
