@@ -8,7 +8,11 @@ const app = express();
 //   origin: "http://localhost:8080"
 // };
 
+const buildPath = path.join(__dirname, '..', 'build');
+
 app.use(cors());
+
+app.use(express.static(buildPath));
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
