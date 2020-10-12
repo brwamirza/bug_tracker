@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = `/api/project`;
+const API_URL = `https://issuetracker3-backend.herokuapp.com/api/project`;
 
 //project service
 class ProjectService {
