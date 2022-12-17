@@ -1,8 +1,6 @@
 This is the frontend part of the issue tracker website, 
 backend found here: https://github.com/brwamirza/bug_tracker-backend-
 
-#### website link: https://issuetracker3.netlify.app/signin
-
 ## Issue Tracker
 Issue tracker website helps you to keep track of issues you have in your projects, the website is made using the following:
 * React.js
